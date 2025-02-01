@@ -1,0 +1,82 @@
+@import "../../../styles/responsive.scss";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+
+  @include sm {
+    padding: 16px;
+  }
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @include sm {
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  @include md {
+    max-width: 600px;
+  }
+
+  @include lg {
+    max-width: 700px;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  // Use logical properties for RTL support
+  inset-inline-end: 16px; // This will be right in LTR and left in RTL
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: color 0.2s ease;
+
+  [dir="rtl"] & {
+    // Specific styles for RTL
+    left: 16px;
+    right: auto;
+  }
+
+  &:hover {
+    color: #000;
+  }
+
+  @include sm {
+    top: 12px;
+    [dir="rtl"] & {
+      left: 12px;
+      right: auto;
+    }
+    [dir="ltr"] & {
+      right: 12px;
+      left: auto;
+    }
+  }
+}

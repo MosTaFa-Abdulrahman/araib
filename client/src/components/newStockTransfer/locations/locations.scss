@@ -1,0 +1,126 @@
+@import "../../../styles/responsive.scss";
+
+.locations {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-right: 20px;
+
+  @include respond-to(md) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  &__select {
+    position: relative;
+
+    &-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid rgba(76, 14, 95, 0.3);
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+
+      &:hover,
+      &:focus {
+        border-color: #4c0e5f;
+      }
+
+      &:focus-within {
+        box-shadow: 0 0 0 2px rgba(76, 14, 95, 0.1);
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid rgba(76, 14, 95, 0.3);
+    border-radius: 4px;
+    margin-top: 4px;
+    box-shadow: 0 2px 4px rgba(76, 14, 95, 0.1);
+    z-index: 10;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid rgba(76, 14, 95, 0.3);
+    gap: 8px;
+
+    &-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      padding: 4px;
+    }
+  }
+
+  &__options {
+    max-height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(76, 14, 95, 0.05);
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
+      accent-color: #4c0e5f;
+    }
+  }
+
+  &__no-results {
+    padding: 12px;
+    text-align: center;
+    color: rgba(76, 14, 95, 0.7);
+  }
+}

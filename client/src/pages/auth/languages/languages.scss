@@ -1,0 +1,18 @@
+.headerLanguage {
+  .language-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    gap: 6px;
+    border: none;
+    cursor: pointer;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+    p {
+    }
+  }
+}

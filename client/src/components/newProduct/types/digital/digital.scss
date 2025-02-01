@@ -1,0 +1,93 @@
+@import "../../../../styles/responsive.scss";
+
+.digital {
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px;
+    border-top: 1px solid #d9d9d9;
+    margin-top: 24px;
+    background: #fff;
+
+    button {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      transition: all 0.2s;
+      cursor: pointer;
+
+      &.cancel-btn {
+        color: gray;
+        background: transparent;
+        border: none;
+
+        &:hover {
+          color: rgb(61, 60, 60);
+          background-color: rgb(210, 210, 210);
+          transition: 1s ease;
+          border-radius: 5px;
+        }
+      }
+
+      &.save-new-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: transparent;
+        border: 1px solid #4c0e5f;
+        border-radius: 4px;
+        outline: none;
+        color: #4c0e5f;
+
+        &:hover {
+          color: #722988;
+          transition: 0.5 ease;
+        }
+      }
+
+      &.save-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #4c0e5f;
+        color: white;
+        border: 1px solid #4c0e5f;
+        border-radius: 4px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          background-color: #621779;
+          border-color: #7f3496;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    padding: 12px;
+
+    .product-details {
+      padding: 16px;
+    }
+
+    .action-buttons {
+      padding: 12px;
+
+      button {
+        padding: 6px 12px;
+        font-size: 13px;
+      }
+    }
+  }
+}

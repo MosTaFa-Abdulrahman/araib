@@ -1,0 +1,34 @@
+.floating-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; // Behind the content
+  overflow: hidden;
+  background: linear-gradient(180deg, #001f3f, #005f99);
+  // background: linear-gradient(180deg, #325c87, #005f99);
+}
+
+.ball {
+  position: absolute;
+  border-radius: 50%; // Makes the ball round
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.4); // Glowing shadow
+  filter: blur(5px); // Softens the ball edges
+
+  &.ball1 {
+    width: 150px; // Size of the first ball
+    height: 150px;
+    background: radial-gradient(circle, #ff6b6b, #ff8c42); // Gradient fill
+    top: 20%;
+    left: 10%;
+  }
+
+  &.ball2 {
+    width: 200px; // Size of the second ball
+    height: 200px;
+    background: radial-gradient(circle, #42aaff, #426dff); // Gradient fill
+    bottom: 30%;
+    right: 20%;
+  }
+}

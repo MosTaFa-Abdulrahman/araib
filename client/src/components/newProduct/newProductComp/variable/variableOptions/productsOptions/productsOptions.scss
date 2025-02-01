@@ -1,0 +1,328 @@
+// productsOptions.scss
+@import "../../../../../../styles/responsive.scss";
+
+.products-options {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  @include respond-to(sm) {
+    padding: 16px;
+  }
+
+  .color-section {
+    margin-bottom: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .color-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background-color: #f9fafb;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      .color-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .color-tag {
+          padding: 4px 12px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 500;
+          text-transform: capitalize;
+        }
+      }
+
+      .expand-button {
+        color: #6b7280;
+        transition: transform 0.2s ease;
+        padding: 4px;
+        border-radius: 4px;
+
+        &:hover {
+          color: #374151;
+          background-color: #e5e7eb;
+        }
+      }
+    }
+  }
+
+  .variant-item {
+    padding: 16px;
+    border-top: 1px solid #e5e7eb;
+    background-color: white;
+
+    @include respond-to(sm) {
+      padding: 12px;
+    }
+
+    .variant-grid {
+      display: flex;
+      gap: 20px;
+
+      @include respond-to(md) {
+        flex-direction: column;
+      }
+    }
+
+    .image-upload-container {
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+
+      .hidden-input {
+        display: none;
+      }
+
+      .image-placeholder {
+        width: 100%;
+        height: 100%;
+        border: 2px dashed #d1d5db;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #6b7280;
+        transition: all 0.2s ease;
+        background-color: #f9fafb;
+
+        &:hover {
+          border-color: #2563eb;
+          color: #2563eb;
+          background-color: #f3f4f6;
+        }
+      }
+
+      .image-preview {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .remove-image {
+          position: absolute;
+          top: 4px;
+          right: 4px;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 4px;
+          padding: 4px;
+          color: #ef4444;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            background: white;
+            color: #dc2626;
+          }
+        }
+      }
+    }
+
+    .fields-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+
+      @include respond-to(lg) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include respond-to(sm) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-group {
+      .field-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #374151;
+
+        .required::after {
+          content: "*";
+          color: #ef4444;
+          margin-left: 2px;
+        }
+      }
+
+      .input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        background-color: #fff;
+
+        &:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .sku-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input {
+          padding-right: 36px;
+        }
+
+        .refresh-button {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 4px;
+          border-radius: 4px;
+          border: none;
+          outline: none;
+          background-color: white;
+          color: blue;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 8px;
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        position: relative;
+
+        input[type="checkbox"] {
+          width: 16px;
+          height: 16px;
+          cursor: pointer;
+          accent-color: #2563eb;
+
+          &:checked {
+            background-color: #2563eb;
+            border-color: #2563eb;
+          }
+        }
+
+        span {
+          font-size: 14px;
+          color: #374151;
+        }
+      }
+    }
+
+    .more-details {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+
+      .more-details-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #1890ff;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// RTL Support
+[dir="rtl"] {
+  .products-options {
+    .field-group {
+      .sku-input {
+        .refresh-button {
+          right: auto;
+          left: 8px;
+        }
+
+        input {
+          padding-right: 12px;
+          padding-left: 36px;
+        }
+      }
+    }
+  }
+}

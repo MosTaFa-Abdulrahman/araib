@@ -1,0 +1,144 @@
+@import "../../../styles/responsive.scss";
+
+.newProduct {
+  // height: calc(100vh - 60px);
+  // padding: 20px;
+  // width: 100%;
+  // max-width: 1200px;
+  // margin: 0 auto;
+  // overflow-y: auto;
+  padding: 20px;
+  height: calc(100vh - 60px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 60px;
+
+  .productType {
+    margin-bottom: 24px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    &__header {
+      margin-bottom: 16px;
+
+      h3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        color: #111;
+
+        .required {
+          color: #ff4d4f;
+          margin-right: 4px;
+        }
+
+        svg {
+          color: #666;
+          cursor: help;
+        }
+      }
+
+      p {
+        color: #666;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+    }
+
+    &__options {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 24px;
+
+      @include respond-to(lg) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include respond-to(md) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__option {
+      position: relative;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+
+      &:hover {
+        border-color: #e6f4ff;
+      }
+
+      &--selected {
+        background: #e6f4ff;
+        border-color: #1890ff;
+      }
+
+      .option-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        position: relative;
+
+        span {
+          font-size: 15px;
+          color: #333;
+        }
+
+        svg {
+          color: #666;
+          cursor: help;
+          position: relative;
+
+          &:hover + .tooltip {
+            opacity: 1;
+            visibility: visible;
+            top: -40px;
+          }
+        }
+
+        .tooltip {
+          position: absolute;
+          top: -45px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #1a1a1a;
+          color: white;
+          padding: 8px 12px;
+          border-radius: 4px;
+          font-size: 13px;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+          z-index: 10;
+          pointer-events: none;
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 8px;
+            height: 8px;
+            background: #1a1a1a;
+          }
+        }
+      }
+    }
+
+    &__content {
+      margin-top: 24px;
+    }
+  }
+}

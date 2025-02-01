@@ -1,0 +1,136 @@
+@import "../../../../styles/responsive.scss";
+
+.rejection-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.rejection-modal {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @include respond-from(md) {
+    width: 500px;
+  }
+
+  .rejection-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #666;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  .rejection-modal-content {
+    .radio-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      cursor: pointer;
+
+      input[type="radio"] {
+        margin-right: 12px;
+        cursor: pointer;
+        accent-color: #4c0e5f;
+      }
+
+      .radio-label {
+        font-size: 16px;
+        color: #333;
+      }
+    }
+
+    .custom-reason-input {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-top: 8px;
+      resize: vertical;
+      font-family: inherit;
+
+      &:focus {
+        outline: none;
+        border-color: #008080;
+      }
+    }
+  }
+
+  .rejection-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+
+    button {
+      padding: 8px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+
+      &.back-button {
+        background: transparent;
+        border: 1px solid #ddd;
+        color: #666;
+
+        &:hover {
+          background: #f5f5f5;
+        }
+      }
+
+      &.reject-button {
+        background: #dc3545;
+        border: none;
+        color: white;
+
+        &:hover {
+          background: darken(#dc3545, 5%);
+        }
+
+        &:disabled {
+          background: #f5f5f5;
+          color: #999;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+@include sm {
+  .rejection-modal {
+    padding: 16px;
+    margin: 16px;
+  }
+}

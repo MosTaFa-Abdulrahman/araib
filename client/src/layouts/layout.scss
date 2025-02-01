@@ -1,0 +1,35 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    transition: margin 0.3s ease;
+    // overflow: hidden;
+    overflow: auto;
+    height: 100vh;
+
+    &.expanded {
+      margin-left: 300px; /* Default for LTR */
+      margin-right: unset;
+
+      [dir="rtl"] & {
+        margin-right: 300px; /* Adjust for RTL */
+        margin-left: unset;
+      }
+    }
+
+    &.collapsed {
+      margin-left: 0; /* No margin when sidebar is hidden in LTR */
+      margin-right: unset;
+
+      [dir="rtl"] & {
+        margin-right: 0; /* No margin when sidebar is hidden in RTL */
+        margin-left: unset;
+      }
+    }
+  }
+}

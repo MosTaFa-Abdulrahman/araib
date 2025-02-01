@@ -1,0 +1,161 @@
+@import "../../../../../styles/responsive.scss";
+
+.track-container {
+  margin: 15px 0px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  @include respond-to(sm) {
+    padding: 1rem;
+  }
+
+  input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.track-header {
+  margin-bottom: 1.5rem;
+}
+
+.track-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+
+  .track-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  label.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.info-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .info-icon {
+    color: #6b7280;
+    cursor: help;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 10;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      background: #1f2937;
+    }
+  }
+}
+
+.track-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-left: 2rem;
+
+  @include respond-to(sm) {
+    margin-left: 0;
+  }
+}
+
+.tracking-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tracking-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f9fafb;
+
+  &:hover {
+    border-color: #f6fef9;
+    background: #e8f2fc;
+    color: white;
+  }
+
+  &.selected {
+    border-color: #1890ff;
+    background: #e6f4ff;
+  }
+
+  .tracking-icon {
+    color: #374151;
+  }
+
+  .tracking-label {
+    font-weight: 500;
+    color: #111827;
+  }
+}
+
+.radio-button {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  .radio-inner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.2s ease;
+
+    &.selected {
+      background: #1890ff;
+    }
+  }
+}
+
+.tracking-card.selected .radio-button {
+  border-color: #e6f4ff;
+}

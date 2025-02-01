@@ -1,0 +1,437 @@
+{
+  "Create Account": "إنشاء حساب",
+  "Username": "اسم المستخدم",
+  "Email Address": "عنوان البريد الإلكتروني",
+  "Password": "كلمة المرور",
+  "Please complete the password requirements before signing up.": "يرجى استكمال متطلبات كلمة المرور قبل التسجيل.",
+  "Registered successfully!": "تم التسجيل بنجاح!",
+  "An error occurred during registration.": "حدث خطأ أثناء التسجيل.",
+  "Sign Up": "سجل",
+  "Already have an account?": "هل لديك حساب بالفعل؟",
+  "Login": "تسجيل الدخول",
+
+  "Welcome Back": "أهلاً بعودتك",
+  "Sign In": "تسجيل الدخول",
+  "Forgot Password?": "هل نسيت كلمة المرور؟",
+  "Don't have an account?": "ليس لديك حساب؟",
+  "Register": "تسجيل",
+  "Welcome Back {username} 😍": "أهلاً بعودتك {username} 😍",
+
+  "Forgot Password": "نسيت كلمة المرور",
+  "Enter your email address and we'll send you a link to reset your password.": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+  "Send Reset Link": "إرسال رابط إعادة التعيين",
+  "Failed to send reset link.": "فشل في إرسال رابط إعادة التعيين.",
+  "If an account exists for {email}, you will receive a password reset link shortly.": "إذا كان هناك حساب مرتبط بـ {email}، ستتلقى رابط إعادة تعيين كلمة المرور قريبًا.",
+  "Back to Login": "العودة إلى تسجيل الدخول",
+
+  "Verify Your Email": "تحقق من بريدك الإلكتروني",
+  "Enter the 6-digit code sent to your email address.": "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني.",
+  "Invalid verification code. Please try again.": "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.",
+  "Verify Email": "تحقق من البريد الإلكتروني",
+  "Email verified successfully!": "تم التحقق من البريد الإلكتروني بنجاح!",
+  "An unexpected error occurred.": "حدث خطأ غير متوقع.",
+
+  "January": "يناير",
+  "February": "فبراير",
+  "March": "مارس",
+  "April": "أبريل",
+  "May": "مايو",
+  "June": "يونيو",
+  "July": "يوليو",
+  "August": "أغسطس",
+  "September": "سبتمبر",
+  "October": "أكتوبر",
+  "November": "نوفمبر",
+  "December": "ديسمبر",
+
+  "At least 6 characters": "على الأقل 6 أحرف",
+  "Contains uppercase letter": "يحتوي على حرف كبير",
+  "Contains lowercase letter": "يحتوي على حرف صغير",
+  "Contains a number": "يحتوي على رقم",
+  "Contains special character": "يحتوي على رمز خاص",
+  "Very Weak": "ضعيف جدًا",
+  "Weak": "ضعيف",
+  "Fair": "متوسط",
+  "Good": "جيد",
+  "Strong": "قوي",
+  "Password Strength": "قوة كلمة المرور",
+
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "Passwords do not match": "كلمتا المرور غير متطابقتين",
+  "Password reset successfully, redirecting to login page...": "تم إعادة تعيين كلمة المرور بنجاح، جارٍ إعادة التوجيه إلى صفحة تسجيل الدخول...",
+  "Error resetting password": "حدث خطأ أثناء إعادة تعيين كلمة المرور",
+  "New Password": "كلمة المرور الجديدة",
+  "Confirm New Password": "تأكيد كلمة المرور الجديدة",
+  "Set New Password": "تعيين كلمة مرور جديدة",
+
+  "Dashboard": "لوحة التحكم",
+  "Logged out successfully!": "تم تسجيل الخروج بنجاح!",
+  "Logging Out...": "جارٍ تسجيل الخروج...",
+  "Logout": "تسجيل الخروج",
+
+  "Home": "الرئيسية",
+  "Sales & Customers": "المبيعات والعملاء",
+  "Point of Sale": "نقاط البيع",
+  "Cash Management": "إدارة صناديق البيع",
+  "Sale Invoices": "فواتير المبيعات",
+  "eCommerce Orders": "طلبات المتجر الالكتروني",
+  "Customers": "العملاء",
+  "Sale Settings": "إعدادات البيع",
+  "Products & Inventory": "المنتجات والمخزون",
+  "Products": "المنتجات",
+  "Stock Count": "جرد مخزون",
+  "Stock Transfer": "تحويل مخزون",
+  "Remove Stock": "اخراج المخزون",
+  "Purchases & Suppliers": "المشتريات والموردين",
+  "Purchase Invoice": "فواتير المشتريات",
+  "Return Invoice": "فواتير مردود المشتريات",
+  "Suppliers": "الموردين",
+  "Supplier Payments": "مدفوعات الموردين",
+  "Applications": "التطبيقات",
+  "Available Apps": "التطبيقات المتاحة",
+  "Reports": "التقارير",
+  "Settings": "الإعدادات",
+  "ARAIB": "عرايب",
+
+  "Create Product": "إنشاء منتج",
+  "Not Found": "غير موجود",
+
+  "Simple Product": "منتج من نوع واحد",
+  "A single, standalone product with no sizes or colors.": "منتج منفرد بدون أحجام أو ألوان.",
+  "Variable Product": "منتج متعدد الانواع",
+  "Product with multiple variations like size or color": "منتج يحتوي على متغيرات مثل الحجم أو اللون",
+  "Composite Product": "منتج مجمع",
+  "A product made up of multiple other products": "منتج مكون من عدة منتجات أخرى",
+  "Digital Product": "منتج رقمي",
+  "Downloadable or virtual products": "منتجات قابلة للتحميل أو افتراضية",
+  "Product Type": "نوع المنتج",
+  "You can't edit this choice after saving the product": "لا يمكنك تعديل هذا الخيار بعد حفظ المنتج",
+
+  "Product Details": "تفاصيل المنتج",
+  "Adding the main information makes it easier for you to search for the product on the platform": "إضافة المعلومات الرئيسية يجعل من السهل البحث عن المنتج على المنصة",
+  "Simple Product Name": "اسم المنتج البسيط",
+  "SKU": "رمز المنتج (SKU)",
+  "Auto-Generate SKU": "توليد رمز المنتج تلقائياً",
+  "The serial number (SKU) makes it easier for you to find the product and link your inventory to your online store": "رقم المنتج (SKU) يجعل من السهل العثور على المنتج وربط المخزون بمتجرك الإلكتروني",
+  "SKU number cannot be as the same Barcode for another product": "رقم المنتج (SKU) لا يمكن أن يكون نفس رمز الباركود لمنتج آخر",
+  "Barcode": "رمز الباركود",
+  "Description": "الوصف",
+  "Sellable": "قابل للبيع",
+  "Uncheck if don't want to sell this product": "قم بإلغاء التحديد إذا كنت لا ترغب في بيع هذا المنتج",
+  "Purchasable": "قابل للشراء",
+  "Uncheck if don't want to purchase this product": "قم بإلغاء التحديد إذا كنت لا ترغب في شراء هذا المنتج",
+
+  "This product is sold in pack": "يتم بيع هذا المنتج في عبوات",
+  "Enable this option if you want to sell this product in packages": "قم بتمكين هذا الخيار إذا كنت تريد بيع هذا المنتج في عبوات",
+  "Packs Sizes": "أحجام العبوات",
+  "Packs will be generated with all the added sizes, then you can edit them": "سيتم إنشاء العبوات بجميع الأحجام المضافة، ثم يمكنك تعديلها",
+  "Press Enter to add Pack New Sizes": "اضغط على Enter لإضافة أحجام عبوات جديدة",
+  "Pack Name": "اسم العبوة",
+  "Pack Size": "حجم العبوة",
+
+  "Track this product": "تتبع هذا المنتج",
+  "Enable inventory tracking for this product.": "قم بتمكين تتبع المخزون لهذا المنتج.",
+  "You can add tracking information for your product from the product page after saving it": "يمكنك إضافة معلومات التتبع لمنتجك من صفحة المنتج بعد حفظه.",
+  "Batch number": "رقم الدفعة",
+  "Serial number": "الرقم التسلسلي",
+
+  "Stock and Pricing Details": "تفاصيل المخزون والتسعير",
+  "Configure stock and pricing details for your product": "قم بتكوين تفاصيل المخزون والتسعير لمنتجك",
+  "Product / Packs": "المنتجات / العبوات",
+  "Initial Cost": "التكلفة الأولية",
+  "Disable stock management": "تعطيل إدارة المخزون",
+  "Weighted scale product": "منتج قابل للوزن",
+  "Initial Quantity": "الكمية الأولية",
+  "Retail Price": "سعر التجزئة",
+  "Wholesale Price": "سعر الجملة",
+  "Buy Price": "سعر الشراء",
+  "Tax Type": "نوع الضريبة",
+  "VAT": "ضريبة القيمة المضافة",
+  "Not Subject to Tax": "غير خاضع للضريبة",
+  "Buy Price, Retail...": "سعر الشراء، التجزئة...",
+  "to all locations": "لجميع المواقع",
+  " (kg)": " (كجم)",
+  "This field accepts up to 2 digits after the decimal point. The entered price will be reflected in the POS and reports.": "يقبل هذا الحقل حتى رقمين بعد العلامة العشرية. سيتم عرض السعر المُدخل في نقاط البيع والتقارير.",
+  "Max To Sell": "ماكس للبيع",
+  "Variable Product Name": "اسم المنتج المتعدد",
+
+  "Product Options": "خيارات المنتج",
+  "Add product variations like color, size, etc.": "إضافة تنويعات المنتجات مثل اللون، الحجم، إلخ.",
+  "Enter value": "أدخل القيمة",
+  "Remove value": "إزالة القيمة",
+  "Remove option": "إزالة الخيار",
+  "Enter option name": "أدخل اسم الخيار",
+  "Add option": "إضافة خيار",
+  "Product Options Section": "قسم خيارات المنتج",
+  "Add Option Tooltip": "إضافة خيارات مثل اللون أو الحجم لمنتجك.",
+  "Package Options": "خيارات الحزم",
+  "Create product packages with different sizes": "إنشاء حزم منتجات بأحجام مختلفة",
+  "Enable Package Creation": "تمكين إنشاء الحزم",
+  "Check to enable creating packages for these variants": "حدد لتفعيل إنشاء الحزم لهذه المتغيرات",
+  "Enter pack size": "أدخل حجم الحزمة",
+  "Press Enter to add pack size": "اضغط على Enter لإضافة حجم الحزمة",
+  "Current Pack Sizes": "أحجام الحزم الحالية",
+  "Pack Image": "صورة الحزمة",
+  "Package name": "اسم الحزمة",
+  "Package SKU identifier": "معرف رمز المنتج للحزمة",
+  "Regenerate SKU": "إعادة توليد رمز المنتج",
+  "Package barcode": "باركود الحزمة",
+  "Number of items in package": "عدد العناصر في الحزمة",
+  "Mark if the package is available for sale": "حدد إذا كانت الحزمة متاحة للبيع",
+  "Mark if the package can be purchased": "حدد إذا كانت الحزمة قابلة للشراء",
+  "Product": "المنتج",
+  "Other": "أخرى",
+  "Product variant": "متغير المنتج",
+  "Composite Product Name": "اسم المنتج المجمع",
+  "Variant Name": "اسم المتغير",
+  "Enter the variant name": "أدخل اسم المتغير",
+  "Product SKU identifier": "معرف رمز المنتج",
+  "Enter product barcode": "أدخل الباركود الخاص بالمنتج",
+  "Uncheck this option if you only want to sell the product in a composite product.": "قم بإلغاء تحديد هذا الخيار إذا كنت ترغب في بيع المنتج فقط كجزء من منتج مركب.",
+  "Details": "تفاصيل",
+  "All": "الكل",
+  "Variants": "المنتجات",
+  "Packs": "العبوات",
+  "Variants or Packs": "المنتجات والعبوات",
+  "Copy": "نسخ",
+  "Compositing Products": "دمج المنتجات",
+  "Combine multiple items into one product": "دمج عناصر متعددة في منتج واحد",
+  "Search for products": "ابحث عن المنتجات",
+  "No product added": "لم يتم إضافة أي منتج",
+  "Digital Product Name": "اسم المنج الرقمي",
+  "Digital Product Type": "نوع المنتج الرقمي",
+  "Select the type of digital product.": "حدد نوع المنتج الرقمي.",
+  "E-Product": "منتج إلكتروني",
+  "e.g. Courses, E-Books": "مثل الدورات، الكتب الإلكترونية",
+  "E-Card": "بطاقة إلكترونية",
+  "e.g. iTunes, Google Play": "مثل iTunes، Google Play",
+  "Product URL": "رابط المنتج",
+  "E-Card number": "رقم البطاقة الإلكترونية",
+  "Code": "الرمز",
+  "Status": "الحالة",
+  "Action": "الإجراء",
+  "New": "جديد",
+  "Delete code": "حذف الرمز",
+  "Showing 1 to {{codesLength}} of {{codesLength}} entries": "عرض 1 إلى {{codesLength}} من {{codesLength}} إدخالات",
+  "Available Quantity: {{codesLength}}": "الكمية المتاحة: {{codesLength}}",
+  "Stock and Pricing": "المخزون والتسعير",
+  "Configure pricing details for your product": "قم بتكوين تفاصيل التسعير لمنتجك",
+  "Retail & Wholesale Price": "سعر التجزئة والجملة",
+  "All Fields": "جميع الحقول",
+  "Set the retail price including tax. This will be displayed in POS and reports": "قم بتعيين سعر التجزئة شامل الضريبة. سيتم عرضه في نقاط البيع والتقارير",
+  "Configure wholesale pricing with tax included": "قم بتكوين تسعير الجملة شاملاً الضريبة",
+  "Enter the purchase price for inventory management": "أدخل سعر الشراء لإدارة المخزون",
+  "Select the applicable tax category": "اختر فئة الضريبة المناسبة",
+  "Copied Success 🤩!": "تم النسخ بنجاح 🤩!",
+
+  "Classification": "التصنيف",
+  "Category": "الفئة",
+  "Supplier": "المورد",
+  "Brand": "العلامة التجارية",
+  "Add Brand": "إضافة علامة تجارية",
+  "Add new category": "إضافة فئة جديدة",
+  "Add Supplier": "إضافة مورد",
+  "Brand Name": "اسم العلامة التجارية",
+  "Category Name": "اسم الفئة",
+  "Supplier Code": "رمز المورد",
+  "Supplier Name": "اسم المورد",
+  "Email": "البريد الإلكتروني",
+  "Phone Number": "رقم الهاتف",
+  "More Details": "المزيد من التفاصيل",
+  "Less Details": "تفاصيل أقل",
+  "VAT Number": "رقم ضريبة القيمة المضافة",
+  "Building No.": "رقم المبنى",
+  "Street Name": "اسم الشارع",
+  "Add to main category": "إضافة إلى الفئة الرئيسية",
+  "Choose Category": "اختر الفئة",
+  "Fruits": "فواكه",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "Save Brand": "حفظ العلامة التجارية",
+  "Save Category": "حفظ الفئة",
+  "Save and New": "حفظ واضافة جديد",
+  "Categorizing your products allows you to access products faster and see reports for each category.": "تصنيف منتجاتك يتيح لك الوصول إلى المنتجات بشكل أسرع ورؤية التقارير لكل فئة.",
+
+  "Shipping Details": "تفاصيل الشحن",
+  "Enter shipping information, including weight and dimensions.": "أدخل معلومات الشحن، بما في ذلك الوزن والأبعاد.",
+  "Weight (kg)": "الوزن (كجم)",
+  "Length (cm)": "الطول (سم)",
+  "Width (cm)": "العرض (سم)",
+  "Height (cm)": "الارتفاع (سم)",
+
+  "Uncheck this option if this is a service, for example.": "قم بإلغاء تحديد هذا الخيار إذا كان المنتج عبارة عن خدمة، على سبيل المثال.",
+  "Weighted product allows you to buy and sell the product with decimals. Adjust weight settings from the settings page.": "يسمح لك المنتج القابل للوزن بالشراء والبيع بالكسور العشرية. قم بضبط إعدادات الوزن من صفحة الإعدادات.",
+  "Copy all numbers to other branches.": "انسخ جميع الأرقام إلى الفروع الأخرى.",
+  "This field accepts up to 2 digits after the decimal point. The entered quantity will be reflected in the POS and reports.": "يقبل هذا الحقل حتى رقمين بعد العلامة العشرية. سيتم عرض الكمية المدخلة في نقاط البيع والتقارير.",
+
+  "Search or Scan Products...": "البحث باسم المنتج أو الرمز التعريفي SKU",
+  "Export": "تصدير",
+  "Import": "استيراد",
+  "New Product": "منتج جديد",
+  "Batch Lists": "قائمة الدفعات",
+  "Serial Lists": "قائمة الأرقام المتسلسلة",
+  "Import Products": "استيراد المنتجات",
+  "Import Batch Lists": "استيراد قائمة الدفعات",
+  "Import Serial Lists": "استيراد قائمة الأرقام المتسلسلة",
+  "Update Products": "تحديث المنتجات",
+  "ID": "المعرف",
+  "Product Name": "اسم المنتج",
+  "Main Product": "المنتج الأساسي",
+  "Tracked": "متتبع",
+  "Available Quantity": "الكمية المتاحة",
+
+  "Search by Invoice No., Supplier Name or Supplier Invoice No.": "البحث حسب رقم الفاتورة أو اسم المورد أو رقم فاتورة المورد.",
+  "Export All": "تصدير الكل",
+
+  "Products Qty, the average product cost and the latest buying price are updated after completing the purchase Invoice": "يتم تحديث كمية المنتجات ومتوسط ​​تكلفة المنتج وآخر سعر شراء بعد إكمال فاتورة الشراء",
+  "Type Product Name or SKU": "اكتب اسم المنتج أو SKU",
+  "Add Product": "إضافة منتج",
+  "Search for products that you would like to include in your purchase Invoice": "ابحث عن المنتجات التي ترغب في تضمينها في فاتورة الشراء",
+  "Product Name / SKU": "اسم المنتج / SKU",
+  "New QTY": "الكمية الجديدة",
+  "New Cost": "تكلفة جديدة",
+  "Tax Exclusive": "غير شامل الضريبة",
+  "Tax Inclusive": "شامل الضريبة",
+  "Tax Code": "رمز الضريبة",
+  "Enter Quantity": "أدخل الكمية",
+  "Enter Cost": "أدخل التكلفة",
+  "Select a method": "اختر طريقة طريقة الدفع",
+  "Cash": "نقدي",
+  "Credit Card": "بطاقة ائتمانية",
+  "Initial Qty and initial cost will be counted from the purchase invoice info": "سيتم احتساب الكمية الأولية والتكلفة الأولية من معلومات فاتورة الشراء",
+  "Enter product name": "أدخل اسم المنتج",
+  "Product Name Required": "يجب ادخال اسم المنتج",
+  "Enter SKU": "ادخل SKU",
+  "Add": "اضافة",
+  "Enter the serial numbers": "أدخل الأرقام التسلسلية",
+  "Enter the batch numbers": "أدخل أرقام الدفعة",
+  "Batch Id": "معرف الدفعة",
+  "Batch qty": "كمية الدفعة",
+  "Expiration Date": "تاريخ انتهاء الصلاحية",
+  "Issue Date": "تاريخ الإصدار",
+  "Press Enter To save and add new number": "اضغط على Enter لحفظ وإضافة رقم جديد",
+  "Back": "عودة",
+  "Purchase Invoice Details": "تفاصيل فاتورة الشراء",
+  "Location": "الموقع",
+  "Supplier Invoice Number": "رقم فاتورة المورد",
+  "Enter invoice number": "أدخل رقم الفاتورة",
+  "Notes": "ملاحظات",
+  "Enter notes": "أدخل الملاحظات",
+  "15 digits, starting and ending with 3, Ex:301121971500003": "15 رقمًا، تبدأ وتنتهي بالرقم 3، مثال:301121971500003",
+  "Building Number": "رقم المبنى",
+  "4 Numbers representing a residential or commercial building": "4 أرقام تمثل مبنى سكني أو تجاري",
+  "The name of the street on which the main entrance to the building is located": "اسم الشارع الذي يقع عليه المدخل الرئيسي للمبنى",
+  "Country": "دولة",
+  "State": "ولاية",
+  "City": "المدينة",
+  "Attachments": "المرفقات",
+  "Drag and drop files here": "سحب وإسقاط الملفات هنا",
+  "Browse Files": "تصفح الملفات",
+  "File size is limited to 20 MB": "حجم الملف يقتصر على 20 ميغابايت",
+  "Supported file formats are": "تنسيقات الملفات المدعومة هي",
+  "Retail price": "سعر التجزئة",
+  "Save Draft": "حفظ المسودة",
+  "(Available in stock)": "(متوفر في المخزون)",
+  "Expected Qty": "الكمية المتوقعة",
+  "(Total will be available)": "(المجموع سيكون متاحا)",
+  "(Tax Exclusive)": "(غير خاضع للضريبة)",
+  "Total Cost": "التكلفة الإجمالية",
+  "Tax Amount": "مبلغ الضريبة",
+  "(Tax Inclusive)": "(شامل الضريبة)",
+  "Available Qty": "الكمية المتوفرة",
+  "Add Discount": "إضافة خصم",
+  "Percentage": "نسبة مئوية",
+  "Specific Amount": "مبلغ محدد",
+  "Total Tax": "إجمالي الضريبة",
+  "Discount Amount": "مبلغ الخصم",
+  "Total (Tax Inclusive)": "الإجمالي (شامل الضريبة)",
+  "Paid": "مدفوع",
+  "paymentType": "نوع الدفع",
+  "Will be paid later": "سيتم الدفع لاحقا",
+  "Payment Method": "طريقة الدفع",
+  "Paid Amount": "المبلغ المدفوع",
+  "Credit Amount": "مبلغ الائتمان",
+  "Payment Due Date": "تاريخ استحقاق الدفع",
+  "Products Delivery Date": "تاريخ تسليم المنتجات",
+  "New Purchase Invoice": "فاتورة شراء جديدة",
+  "Purchase Invoices": "فواتير المشتريات",
+  "Return Invoices": "فواتير مردود المشتريات",
+  "New Return Inventory": "ارجاع مخزون",
+  "Return Invoice Details": "تفاصيل فاتورة الإرجاع",
+  "Search by Invoice No., Supplier Name or Location Name. 😍": "البحث برقم الفاتورة أو اسم المورد أو اسم الموقع. 😍",
+  "partially-paid": "مدفوع جزئيا",
+  "fully-paid": "مدفوع بالكامل",
+  "not-paid": "غير مدفوع",
+  "draft": "مسوده",
+  "completed": "مكتمل",
+  "Average Cost": "متوسط سعر التكلفة",
+  "Sub Total": "الاجمالي",
+  "Total": "الاجمالي",
+  "Return Invoice Number": "رقم فاتورة المرتجع",
+  "Invoice PO Number": "رقم فاتورة الشراء",
+  "Print Invoice": "طباعة الفاتورة",
+  "Pay Credit Amount": "دفع المبلغ المستحق للمورد",
+  "Payment Methods": "طرق الدفع",
+  "Debit": "مدين",
+  "Invoice Number": "رقم الفاتورة",
+  "Payment Status": "حالة الدفع",
+  "Invoice Credit": "الفاتورة الاجل",
+  "(After Payment)": "بعد الدفع",
+  "Amount exceeds credit limit": "المبلغ يتجاوز الحد الائتماني",
+  "Total Paid": "الاجمالي",
+  "Total credit before payment": "اجمالي المبلغ قبل الدفع",
+  "Total credit after payment": "اجمالي المبلغ بعد الدفع",
+  "The invoice covers debit on amount": "الفاتورة تغطى المبلغ المستحق من المورد على",
+  "Total Credit": "إجمالي الفاتورة",
+  "Total Debit": "المبلغ المستحق علي المورد",
+  "Debit For Invoice": "المبلغ المستحق من المورد",
+  "Not Paid Creditor": "الدائن غير المدفوع",
+  "(Before Payment)": "قبل الدفع",
+  "Amount": "الكمية",
+  "Enter Notes...": "ادخل ملاحظاتك من فضلك...",
+  "Pay Now": "ادفع الان",
+  "Debit Amount": "المبلغ المدين",
+  "Receive Debit": "فواتير المخزون المسترجع",
+  "Recieve Debit Amount": "استلام مبلغ مستحق من العميل",
+  "The invoice covers credit on amount": "تغطي الفاتورة الائتمان على المبلغ",
+  "Credit For Invoice": "الائتمان للفاتورة",
+  "You do not have any Purchase Invoices": "ليس لديك أي فواتير شراء",
+  "You have not added any Products Yet": "لم تقم بإضافة أي منتجات بعد",
+  "Requested Date": "تاريخ الانشاء",
+  "Receiving Date": "تاريخ الاستلام",
+  "Source Location": "مصدر المخزون",
+  "Destination Location": "وجهة المخزون",
+  "Sent Stock": "الكمية المرسلة",
+  "Received QTY": "الكمية المستلمة",
+  "Rejected Stock": "الكمية المرفوضة",
+  "Product Cost:": "تكلفة المنتج",
+  "Product Price:": "سعر المنتج",
+  "Total Qty Cost:": "إجمالي تكلفة الكميات",
+  "Total Qty Price:": "إجمالي سعر الكميات",
+  "Total Sent:": "اجمالي المرسل",
+  "Total Received:": "اجمالي المستلم",
+  "Total Rejected:": "اجمالي المرفوض",
+  "Rejected Cost:": "تكلفة المرفوض",
+  "Rejected": "مرفوض",
+  "Accepted": "مقبول كليا",
+  "pending": "قيد الانتظار",
+  "partially-accepted": "مقبول جزئيا",
+  "rejected": "مرفوض",
+  "accepted": "مقبول كليا",
+  "Partially Accepted": "مقبول جزئيا",
+  "Draft": "مسوده",
+  "Batch ID": "رقم الدفعة",
+  "Serial Number ID": "رقم التسلسلي",
+  "Batch Numbers": "رقم الدفعة",
+  "Serial Numbers": "الرقم التسلسلي",
+  "Close": "اغلاق",
+  "Search by Invoice No., Destination Name or Source Name.": "البحث برقم الفاتورة او اسم المصدر او اسم وجهة المخزون",
+  "Transfer Stock": "نقل مخزون جديد",
+  "Request Stock": "طلب مبدئي للمخزون",
+  "Recieve All": "استلام الكل",
+  "Recieve Some": "استلام جزئي",
+  "Reject All": "رفض الكل",
+  "Waiting Receive": "قيد الانتظار",
+  "": "",
+  "": ""
+}
