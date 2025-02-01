@@ -1,8 +1,14 @@
 import "./getStockTransferById.scss";
 import { useState } from "react";
-import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  Printer,
+  UndoDot,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import EyeTooltip from "../../../components/global/eyeTooltip/EyeTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 import { formatDate } from "../../../components/global/formatDate";
@@ -13,6 +19,7 @@ import { transferInvoiceById } from "../../../dummyData";
 function GetStockTransferById() {
   const { t } = useTranslation();
   const { invoiceNumber } = useParams();
+  const navigate = useNavigate();
 
   const [openDestination, setOpenDestination] = useState(false);
   const [expandedRows, setExpandedRows] = useState({});
@@ -63,6 +70,26 @@ function GetStockTransferById() {
   };
 
   const totals = calculateTotals();
+
+  // ***************** ((Actions Buttons)) ******************** //
+  // Handle Print
+  const handlePrint = () => {
+    try {
+      console.log(`Printed successfully 😍`);
+    } catch (error) {
+      console.log(`${error.message} 😥`);
+    }
+  };
+
+  // Handle Back
+  const handleBack = () => {
+    try {
+      navigate(-1);
+      console.log(`Backed Success 😍`);
+    } catch (error) {
+      console.log(`${error.message} 😥`);
+    }
+  };
 
   return (
     <div className="getStockTransferById">
@@ -255,6 +282,18 @@ function GetStockTransferById() {
         onClose={() => setModalOpen(false)}
         product={selectedProduct}
       />
+
+      {/* Buttons */}
+      <div className="action-buttons">
+        <button className="cancel-btn" onClick={handleBack}>
+          <UndoDot size={16} />
+          {t("Back")}
+        </button>
+        <button className="save-btn" onClick={handlePrint}>
+          <Printer size={16} />
+          {t("Print")}
+        </button>
+      </div>
     </div>
   );
 }

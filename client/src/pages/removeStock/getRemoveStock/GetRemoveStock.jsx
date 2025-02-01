@@ -33,7 +33,7 @@ function GetRemoveStock() {
       width: 180,
       renderCell: (params) => (
         <NavLink
-          to={`/invoices/return-stocks/${params.value}/view`}
+          to={`/invoices/remove-stock/${params.value}/view`}
           className="invoice-link"
         >
           {params.value}

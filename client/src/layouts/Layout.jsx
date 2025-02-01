@@ -36,6 +36,7 @@ import SendStockTransfer from "../pages/stockTransfer/sendStockTransfer/SendStoc
 // Remove Stock
 import GetRemoveStock from "../pages/removeStock/getRemoveStock/GetRemoveStock";
 import NewRemoveStock from "../pages/removeStock/newRemoveStock/NewRemoveStock";
+import GetRemoveStockById from "../pages/removeStock/getRemoveStockById/GetRemoveStockById";
 
 function Layout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -116,6 +117,10 @@ function Layout() {
     {
       path: "/invoices/remove-stock/new",
       title: "New Remove Stock",
+    },
+    {
+      path: "/invoices/remove-stock/:invoiceNumber/view",
+      title: "Remove Stock Details",
     },
   ];
 
@@ -220,6 +225,10 @@ function Layout() {
           <Route
             path="/invoices/remove-stock/new"
             element={<NewRemoveStock />}
+          />
+          <Route
+            path="/invoices/remove-stock/:invoiceNumber/view"
+            element={<GetRemoveStockById />}
           />
 
           {/* NotFound Page */}
