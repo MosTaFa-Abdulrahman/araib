@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen }) => {
           label: t("Stock Transfer"),
           path: "/invoices/transfer-stock",
         },
-        { label: t("Remove Stock"), path: "/products/remove-stock" },
+        { label: t("Remove Stock"), path: "/invoices/remove-stock" },
       ],
     },
     {

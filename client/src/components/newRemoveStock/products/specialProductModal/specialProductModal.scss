@@ -1,0 +1,360 @@
+@import "../../../../styles/responsive.scss";
+
+.specialProductModal {
+  .modalHeader {
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  .modalBody {
+    .productInfo {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+
+      .name {
+        font-weight: 500;
+        font-size: 16px;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .sku {
+        color: #666;
+        font-size: 14px;
+      }
+    }
+
+    .formGrid {
+      .batchForm,
+      .serialForm {
+        .inputRow,
+        .serialRow {
+          display: grid;
+          grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+          gap: 16px;
+          margin-bottom: 20px;
+          align-items: flex-start;
+          position: relative;
+
+          .inputGroup {
+            label {
+              display: block;
+              margin-bottom: 8px;
+              font-size: 14px;
+              color: #333;
+
+              .required {
+                color: #dc3545;
+                margin-right: 4px;
+              }
+            }
+
+            select,
+            input {
+              width: 100%;
+              padding: 8px 12px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              font-size: 14px;
+              background-color: white;
+              transition: all 0.3s ease;
+
+              &:focus {
+                outline: none;
+                border-color: #0066cc;
+                box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+              }
+
+              &.error {
+                border-color: #dc3545;
+                &:focus {
+                  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
+                }
+              }
+
+              &.disabledInput {
+                background-color: #f8f9fa;
+                cursor: not-allowed;
+              }
+
+              &:disabled {
+                background-color: #f8f9fa;
+                cursor: not-allowed;
+              }
+            }
+
+            .errorText {
+              color: #dc3545;
+              font-size: 12px;
+              margin-top: 4px;
+              display: block;
+            }
+
+            // DatePicker styles
+            .MuiFormControl-root {
+              width: 100%;
+
+              .MuiOutlinedInput-root {
+                background-color: #f8f9fa;
+
+                .MuiOutlinedInput-input {
+                  padding: 8px 12px;
+                  height: auto;
+                  font-size: 14px;
+                  color: #666;
+                  cursor: not-allowed;
+                }
+
+                fieldset {
+                  border-color: #ddd;
+                }
+              }
+            }
+          }
+
+          .addButton {
+            background-color: #0066cc;
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: #0052a3;
+              transform: translateY(-1px);
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+          }
+
+          .deleteButton {
+            background: none;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+            color: #dc3545;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: rgba(220, 53, 69, 0.1);
+              border-radius: 4px;
+              transform: scale(0);
+              transition: transform 0.3s ease;
+            }
+
+            &:hover {
+              color: #dc3545;
+
+              &::before {
+                transform: scale(1);
+              }
+
+              svg {
+                transform: rotate(90deg);
+              }
+            }
+
+            svg {
+              transition: transform 0.3s ease;
+            }
+          }
+        }
+
+        .itemsList {
+          margin-top: 20px;
+          border-top: 1px solid #ddd;
+          padding-top: 20px;
+
+          .itemRow {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+            gap: 16px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            align-items: center;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: #f1f3f5;
+            }
+
+            span {
+              font-size: 14px;
+              color: #333;
+            }
+
+            button {
+              background: none;
+              border: none;
+              width: 32px;
+              height: 32px;
+              border-radius: 4px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #dc3545;
+              transition: all 0.3s ease;
+              position: relative;
+              overflow: hidden;
+
+              &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(220, 53, 69, 0.1);
+                border-radius: 4px;
+                transform: scale(0);
+                transition: transform 0.3s ease;
+              }
+
+              &:hover {
+                color: #dc3545;
+
+                &::before {
+                  transform: scale(1);
+                }
+
+                svg {
+                  transform: rotate(90deg);
+                }
+              }
+
+              svg {
+                transition: transform 0.3s ease;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+
+    button {
+      padding: 8px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.cancelBtn {
+        background: none;
+        border: 1px solid #ddd;
+        color: #666;
+
+        &:hover {
+          background-color: #f8f9fa;
+          border-color: #999;
+        }
+      }
+
+      &.saveBtn {
+        background-color: #0066cc;
+        border: none;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background-color: #0052a3;
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+          transform: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 1200px) {
+  .specialProductModal {
+    .modalBody {
+      .formGrid {
+        .batchForm,
+        .serialForm {
+          .inputRow,
+          .serialRow {
+            grid-template-columns: 1fr 1fr;
+
+            .addButton,
+            .deleteButton {
+              margin-top: 0;
+            }
+          }
+
+          .itemsList .itemRow {
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .specialProductModal {
+    .modalBody {
+      .formGrid {
+        .batchForm,
+        .serialForm {
+          .inputRow,
+          .serialRow {
+            grid-template-columns: 1fr;
+          }
+
+          .itemsList .itemRow {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+      }
+    }
+  }
+}
