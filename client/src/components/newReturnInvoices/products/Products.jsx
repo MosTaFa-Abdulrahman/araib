@@ -13,7 +13,7 @@ import InfoTooltip from "../../global/infoTooltip/InfoTooltip";
 import MinusTooltip from "../../global/minusTooltip/MinusTooltip";
 import { useTranslation } from "react-i18next";
 
-// Modal (Batch + Serial)
+// Modal (Batch + Serial + Ecard)
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 
 // Date Time
@@ -626,7 +626,22 @@ function Products({ selectedLocation, purchaseOrderItems }) {
       (loc) => loc.code === locationCode
     )?.id;
 
-    let trackingData;
+    // Special handling for eCard products
+    const originalProduct = mockSearchProductss.find(
+      (p) => p.id === product.id
+    );
+    if (originalProduct?.Product?.type === "ecard") {
+      setSelectedProduct({
+        ...originalProduct, // Pass the complete product data including Ecards
+        returnedQty: product.returnedQty,
+        isEcard: true,
+      });
+      setSpecialModalOpen(true);
+      return;
+    }
+
+    // Rest of the existing logic for batch/serial products
+    let trackingData = null;
     let existingTrackingItems = [];
 
     // First try to find in PO items
@@ -634,8 +649,6 @@ function Products({ selectedLocation, purchaseOrderItems }) {
       const poItem = purchaseOrderItems.find((p) => p.id === product.id);
       if (poItem) {
         trackingData = formatTrackingData(poItem, selectedLocationId);
-
-        // Create pre-filled items
         existingTrackingItems =
           poItem.stockOrderTrackedItems?.map((track) => ({
             serialNumber: track.trackNumber,
@@ -643,11 +656,6 @@ function Products({ selectedLocation, purchaseOrderItems }) {
             expirationDate: new Date(track.expiryDate),
             issueDate: new Date(track.issueDate),
           })) || [];
-
-        setSpecialItems((prev) => ({
-          ...prev,
-          [product.id]: existingTrackingItems,
-        }));
       }
     }
 
@@ -666,7 +674,7 @@ function Products({ selectedLocation, purchaseOrderItems }) {
 
     setSelectedProduct({
       ...product,
-      ...trackingData,
+      ...(trackingData || {}),
       existingTrackingItems,
     });
     setSpecialModalOpen(true);
@@ -681,12 +689,15 @@ function Products({ selectedLocation, purchaseOrderItems }) {
       [selectedProduct.id]: items,
     });
 
-    const totalQty = items.reduce((sum, item) => {
-      if (selectedProduct.trackType === "batch") {
-        return sum + Number(item.quantity || 0);
-      }
-      return sum + 1;
-    }, 0);
+    // For eCards, each item represents one card
+    const totalQty = selectedProduct.isEcard
+      ? items.length
+      : items.reduce((sum, item) => {
+          if (selectedProduct.trackType === "batch") {
+            return sum + Number(item.quantity || 0);
+          }
+          return sum + 1;
+        }, 0);
 
     updateProductDetails(selectedProduct.id, totalQty);
   };

@@ -18,72 +18,90 @@ function SpecialProductModal({
   returnedQuantity = 0,
 }) {
   const { t } = useTranslation();
-  const [items, setItems] = useState(
-    product?.existingTrackingItems || existingItems
-  );
+  const [items, setItems] = useState(existingItems);
   const [errors, setErrors] = useState({});
   const [currentItem, setCurrentItem] = useState({
     serialNumber: "",
-    quantity: product?.trackType === "serial" ? 1 : "",
+    quantity: 1,
     expirationDate: null,
     issueDate: null,
   });
   const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
+    setItems(existingItems);
+  }, [existingItems]);
+
+  // Reset form when modal closes
+  useEffect(() => {
     if (!isOpen) {
       setCurrentItem({
         serialNumber: "",
-        quantity: product?.trackType === "serial" ? 1 : "",
+        quantity: 1,
         expirationDate: null,
         issueDate: null,
       });
       setErrors({});
       setEditIndex(-1);
-    } else if (product?.existingTrackingItems?.length > 0) {
-      setItems(product.existingTrackingItems);
-    } else {
-      setItems(existingItems);
     }
+    setItems(existingItems);
   }, [isOpen, product, existingItems]);
 
-  useEffect(() => {
-    setItems(existingItems);
-  }, [existingItems]);
+  // Get modal title based on product type
+  const getModalTitle = () => {
+    if (!product) return "";
+    if (product.isEcard) return t("E-Card Numbers");
+    if (product.trackType === "serial") return t("Serial Numbers");
+    if (product.trackType === "batch") return t("Batch Numbers");
+    return t("Product Details");
+  };
+
+  // Get Available eCards
+  const getAvailableEcards = () => {
+    if (!product?.isEcard || !product?.Ecards) return [];
+
+    const selectedCodes = items
+      .map((item) => item.serialNumber)
+      .filter(Boolean);
+
+    return product.Ecards.filter(
+      (card) => !card.isSold && !selectedCodes.includes(card.code)
+    ).map((card) => ({
+      value: card.code,
+      label: card.code,
+    }));
+  };
 
   // Get BatchOrSerialNumbers
   const getBatchOrSerialNumbers = () => {
-    if (!product || !product.ProductVariantToStockLocations?.length) return [];
+    if (!product?.ProductVariantToStockLocations?.length) return [];
 
     const location = product.ProductVariantToStockLocations[0];
     if (!location?.VariantToTracks?.length) return [];
 
-    return location.VariantToTracks.map((track) => ({
-      value: track.trackNo,
-      label: `${track.trackNo} (${track.quantity} available)`,
-      quantity: track.quantity,
-      expiryDate: track.expiryDate,
-      issueDate: track.issueDate,
-    }));
+    return location.VariantToTracks.filter((track) => track.quantity > 0) // Only show available tracks
+      .map((track) => ({
+        value: track.trackNo,
+        label: `${track.trackNo} (${track.quantity} available)`,
+        quantity: track.quantity,
+        expiryDate: track.expiryDate,
+        issueDate: track.issueDate,
+      }));
   };
 
   // Handle Input Changes
   const handleInputChange = (field, value) => {
-    if (field === "quantity" && product?.trackType === "serial") return;
-
     setCurrentItem((prev) => {
       const newItem = { ...prev, [field]: value };
 
-      if (field === "serialNumber" && !product?.Product?.type === "ecard") {
+      if (field === "serialNumber") {
         const selected = getBatchOrSerialNumbers().find(
           (item) => item.value === value
         );
         if (selected) {
           newItem.expirationDate = new Date(selected.expiryDate);
           newItem.issueDate = new Date(selected.issueDate);
-          if (product?.trackType === "serial") {
-            newItem.quantity = 1;
-          }
+          newItem.quantity = product?.trackType === "serial" ? 1 : "";
         }
       }
       return newItem;
@@ -116,7 +134,7 @@ function SpecialProductModal({
     setItems([...items, currentItem]);
     setCurrentItem({
       serialNumber: "",
-      quantity: product?.trackType === "serial" ? 1 : "",
+      quantity: 1,
       expirationDate: null,
       issueDate: null,
     });
@@ -124,8 +142,8 @@ function SpecialProductModal({
 
   // Handle Save
   const handleSave = () => {
-    const totalQuantity = items.reduce((sum, item) => {
-      if (product?.Product?.type === "ecard") {
+    const totalQty = items.reduce((sum, item) => {
+      if (product?.isEcard) {
         return sum + 1;
       }
       return product?.trackType === "batch"
@@ -133,7 +151,7 @@ function SpecialProductModal({
         : sum + 1;
     }, 0);
 
-    if (totalQuantity !== returnedQuantity) {
+    if (totalQty !== returnedQuantity) {
       setErrors({
         quantity: t("Total quantity must match required quantity"),
       });
@@ -148,13 +166,7 @@ function SpecialProductModal({
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="specialProductModal">
         <div className="modalHeader">
-          <h2>
-            {product?.Product?.type === "ecard"
-              ? t("eCard Codes")
-              : product?.trackType === "serial"
-              ? t("Serial Numbers")
-              : t("Batch Numbers")}
-          </h2>
+          <h2>{getModalTitle()}</h2>
         </div>
 
         <div className="modalBody">
@@ -169,7 +181,7 @@ function SpecialProductModal({
           </div>
 
           <div className="formGrid">
-            {product?.Product?.type === "ecard" ? (
+            {product?.isEcard ? (
               <div className="serialForm">
                 {Array(returnedQuantity)
                   .fill(null)
@@ -178,10 +190,9 @@ function SpecialProductModal({
                       <div className="inputGroup">
                         <label>
                           <span className="required">*</span>
-                          {t("eCard Code")} #{index + 1}
+                          {t("eCard Number")} #{index + 1}
                         </label>
-                        <input
-                          type="text"
+                        <select
                           value={items[index]?.serialNumber || ""}
                           onChange={(e) => {
                             const newItems = [...items];
@@ -191,15 +202,44 @@ function SpecialProductModal({
                             };
                             setItems(newItems);
                           }}
-                          placeholder={t("Enter eCard code")}
-                          className={errors.serialNumber ? "error" : ""}
-                        />
+                          className={
+                            errors.serialNumber && index === editIndex
+                              ? "error"
+                              : ""
+                          }
+                        >
+                          <option value="">{t("Select eCard")}</option>
+                          {getAvailableEcards().map((card) => (
+                            <option key={card.value} value={card.value}>
+                              {card.label}
+                            </option>
+                          ))}
+                        </select>
                         {errors.serialNumber && index === editIndex && (
                           <span className="errorText">
                             {errors.serialNumber}
                           </span>
                         )}
                       </div>
+
+                      <div className="inputGroup">
+                        <label>{t("Quantity")}</label>
+                        <input
+                          type="number"
+                          value="1"
+                          disabled
+                          className="disabledInput"
+                        />
+                      </div>
+
+                      <div className="selectedCode">
+                        {items[index]?.serialNumber && (
+                          <span className="codeLabel">
+                            {t("Selected")}: {items[index].serialNumber}
+                          </span>
+                        )}
+                      </div>
+
                       <button
                         className="deleteButton"
                         onClick={() => {
@@ -256,6 +296,12 @@ function SpecialProductModal({
                       }
                       className={errors.quantity ? "error" : ""}
                       placeholder="Enter quantity"
+                      min="1"
+                      max={
+                        getBatchOrSerialNumbers().find(
+                          (item) => item.value === currentItem.serialNumber
+                        )?.quantity || 999999
+                      }
                     />
                     {errors.quantity && (
                       <span className="errorText">{errors.quantity}</span>
@@ -286,7 +332,13 @@ function SpecialProductModal({
                     </LocalizationProvider>
                   </div>
 
-                  <button className="addButton" onClick={handleAdd}>
+                  <button
+                    className="addButton"
+                    onClick={handleAdd}
+                    disabled={
+                      !currentItem.serialNumber || !currentItem.quantity
+                    }
+                  >
                     <Plus size={16} />
                   </button>
                 </div>
@@ -350,10 +402,7 @@ function SpecialProductModal({
                       </div>
 
                       <div className="inputGroup">
-                        <label>
-                          <span className="required">*</span>
-                          {t("Serial Quantity")}
-                        </label>
+                        <label>{t("Quantity")}</label>
                         <input
                           type="number"
                           value="1"
@@ -361,6 +410,14 @@ function SpecialProductModal({
                           className="disabledInput"
                         />
                       </div>
+
+                      {/* <div className="selectedCode">
+                        {items[index]?.serialNumber && (
+                          <span className="codeLabel">
+                            {t("Selected")}: {items[index].serialNumber}
+                          </span>
+                        )}
+                      </div> */}
 
                       <div className="inputGroup">
                         <label>{t("Expiration Date")}</label>
