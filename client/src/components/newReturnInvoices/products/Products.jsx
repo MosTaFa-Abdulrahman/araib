@@ -735,9 +735,14 @@ function Products({ selectedLocation, purchaseOrderItems }) {
     });
   };
 
+  // ************************* ((Rendered)) ************************** //
   // Handle RenderReturnQuantity
   const renderReturnQuantity = (product) => {
-    if (product.trackType) {
+    // Check if this is a special product (either ecard type or has trackType)
+    const isSpecialProduct =
+      product?.Product?.type == "ecard" || product.trackType;
+
+    if (isSpecialProduct) {
       const items = specialItems[product.id] || [];
       const hasItems = items.length > 0;
       const totalQty = hasItems
@@ -745,7 +750,7 @@ function Products({ selectedLocation, purchaseOrderItems }) {
             if (product.trackType === "batch") {
               return sum + Number(item.quantity || 0);
             }
-            return sum + 1;
+            return sum + 1; // For both serial and ecard, count each item as 1
           }, 0)
         : 0;
 
@@ -756,7 +761,9 @@ function Products({ selectedLocation, purchaseOrderItems }) {
             <button
               className="editButton"
               onClick={() => handleSpecialProduct(product)}
-              title={`Edit ${product.trackType} Details`}
+              title={`Edit ${
+                product.Product?.type === "ecard" ? "eCard" : product.trackType
+              } Details`}
             >
               <Edit2 size={16} />
             </button>
@@ -768,14 +775,16 @@ function Products({ selectedLocation, purchaseOrderItems }) {
         <div className="returnQuantityContainer">
           <input
             type="number"
-            value={product?.returnedQty || ""}
+            value={product.returnedQty || ""}
             onChange={(e) => updateProductDetails(product.id, e.target.value)}
             className="qtyInput"
             placeholder={t("Enter Returned Quantity")}
             required
           />
           <MinusTooltip
-            title={`Add ${product.trackType} Details`}
+            title={`Add ${
+              product.Product?.type === "ecard" ? "eCard" : product.trackType
+            } Details`}
             onClick={() => handleSpecialProduct(product)}
             disabled={!selectedLocation || !product.returnedQty}
           />

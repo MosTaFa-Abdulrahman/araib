@@ -9,16 +9,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-const SpecialProductModal = ({
+function SpecialProductModal({
   isOpen,
   onClose,
   product,
   onSave,
   existingItems = [],
   returnedQuantity = 0,
-}) => {
+}) {
   const { t } = useTranslation();
-  // const [items, setItems] = useState(existingItems);
   const [items, setItems] = useState(
     product?.existingTrackingItems || existingItems
   );
@@ -42,7 +41,6 @@ const SpecialProductModal = ({
       setErrors({});
       setEditIndex(-1);
     } else if (product?.existingTrackingItems?.length > 0) {
-      // If we have pre-filled items from PO, use them
       setItems(product.existingTrackingItems);
     } else {
       setItems(existingItems);
@@ -53,12 +51,11 @@ const SpecialProductModal = ({
     setItems(existingItems);
   }, [existingItems]);
 
+  // Get BatchOrSerialNumbers
   const getBatchOrSerialNumbers = () => {
     if (!product || !product.ProductVariantToStockLocations?.length) return [];
 
-    // Get the first location since we've already filtered for the correct one
     const location = product.ProductVariantToStockLocations[0];
-
     if (!location?.VariantToTracks?.length) return [];
 
     return location.VariantToTracks.map((track) => ({
@@ -70,13 +67,14 @@ const SpecialProductModal = ({
     }));
   };
 
+  // Handle Input Changes
   const handleInputChange = (field, value) => {
     if (field === "quantity" && product?.trackType === "serial") return;
 
     setCurrentItem((prev) => {
       const newItem = { ...prev, [field]: value };
 
-      if (field === "serialNumber") {
+      if (field === "serialNumber" && !product?.Product?.type === "ecard") {
         const selected = getBatchOrSerialNumbers().find(
           (item) => item.value === value
         );
@@ -94,6 +92,7 @@ const SpecialProductModal = ({
     setErrors((prev) => ({ ...prev, [field]: null }));
   };
 
+  // Handle Add
   const handleAdd = () => {
     if (!currentItem.serialNumber) {
       setErrors({ serialNumber: t("This field is required") });
@@ -123,8 +122,12 @@ const SpecialProductModal = ({
     });
   };
 
+  // Handle Save
   const handleSave = () => {
     const totalQuantity = items.reduce((sum, item) => {
+      if (product?.Product?.type === "ecard") {
+        return sum + 1;
+      }
       return product?.trackType === "batch"
         ? sum + Number(item.quantity || 0)
         : sum + 1;
@@ -146,9 +149,11 @@ const SpecialProductModal = ({
       <div className="specialProductModal">
         <div className="modalHeader">
           <h2>
-            {product?.trackType === "serial"
-              ? "Serial Numbers"
-              : "Batch Numbers"}
+            {product?.Product?.type === "ecard"
+              ? t("eCard Codes")
+              : product?.trackType === "serial"
+              ? t("Serial Numbers")
+              : t("Batch Numbers")}
           </h2>
         </div>
 
@@ -164,7 +169,54 @@ const SpecialProductModal = ({
           </div>
 
           <div className="formGrid">
-            {product?.trackType === "batch" ? (
+            {product?.Product?.type === "ecard" ? (
+              <div className="serialForm">
+                {Array(returnedQuantity)
+                  .fill(null)
+                  .map((_, index) => (
+                    <div key={index} className="serialRow">
+                      <div className="inputGroup">
+                        <label>
+                          <span className="required">*</span>
+                          {t("eCard Code")} #{index + 1}
+                        </label>
+                        <input
+                          type="text"
+                          value={items[index]?.serialNumber || ""}
+                          onChange={(e) => {
+                            const newItems = [...items];
+                            newItems[index] = {
+                              serialNumber: e.target.value,
+                              quantity: 1,
+                            };
+                            setItems(newItems);
+                          }}
+                          placeholder={t("Enter eCard code")}
+                          className={errors.serialNumber ? "error" : ""}
+                        />
+                        {errors.serialNumber && index === editIndex && (
+                          <span className="errorText">
+                            {errors.serialNumber}
+                          </span>
+                        )}
+                      </div>
+                      <button
+                        className="deleteButton"
+                        onClick={() => {
+                          const newItems = [...items];
+                          newItems[index] = {
+                            serialNumber: "",
+                            quantity: 1,
+                          };
+                          setItems(newItems);
+                        }}
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            ) : product?.trackType === "batch" ? (
               <div className="batchForm">
                 <div className="inputRow">
                   <div className="inputGroup">
@@ -370,7 +422,8 @@ const SpecialProductModal = ({
                   (sum, item) => sum + Number(item.quantity || 0),
                   0
                 ) !== returnedQuantity) ||
-              (product?.trackType === "serial" &&
+              ((product?.trackType === "serial" ||
+                product?.Product?.type === "ecard") &&
                 items.some((item) => !item.serialNumber))
             }
           >
@@ -380,6 +433,6 @@ const SpecialProductModal = ({
       </div>
     </Modal>
   );
-};
+}
 
 export default SpecialProductModal;

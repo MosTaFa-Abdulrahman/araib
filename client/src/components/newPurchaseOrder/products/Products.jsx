@@ -365,13 +365,22 @@ function Products({ selectedLocation, onDataChange }) {
     };
     setSpecialItems(updatedSpecialItems);
 
-    // Calculate total quantity
-    const totalQty = items.reduce((sum, item) => {
-      if (selectedProduct.trackType === "batch") {
-        return sum + Number(item.quantity || 0);
-      }
-      return sum + 1;
-    }, 0);
+    // Calculate total quantity based on product type
+    let totalQty = 0;
+
+    if (selectedProduct.Product?.type === "ecard") {
+      // For ecards, each item counts as 1
+      totalQty = items.length;
+    } else if (selectedProduct.trackType === "batch") {
+      // For batch products, sum up the quantities
+      totalQty = items.reduce(
+        (sum, item) => sum + Number(item.quantity || 0),
+        0
+      );
+    } else {
+      // For serial products, each item counts as 1
+      totalQty = items.length;
+    }
 
     // Update product details with new quantity
     updateProductDetails(
@@ -429,8 +438,56 @@ function Products({ selectedLocation, onDataChange }) {
     });
   };
 
+  //  *********************** (Rendered) ******************************* //
   //  Handle Render SpecialProductQuantity
   const renderSpecialProductQuantity = (product) => {
+    // Check if product is an ecard type
+    if (product.Product?.type === "ecard") {
+      // Check if this ecard has been added to specialItems
+      const hasSpecialItems = specialItems[product.id]?.length > 0;
+
+      if (hasSpecialItems) {
+        const totalQty = specialItems[product.id].length;
+        return (
+          <div className="specialProductQty">
+            <span>{totalQty}</span>
+            <button
+              className="editButton"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSpecialProduct(product);
+              }}
+              title="Edit eCard Details"
+              type="button"
+            >
+              <Edit2 size={16} />
+            </button>
+          </div>
+        );
+      }
+
+      // Show PlusTooltip if no items have been added yet
+      return (
+        <div className={!selectedLocation ? "disabled-tooltip" : ""}>
+          <PlusTooltip
+            title={
+              selectedLocation
+                ? "Add eCard Details"
+                : t("Please select location first")
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              if (selectedLocation) {
+                handleSpecialProduct(product);
+              }
+            }}
+            disabled={!selectedLocation}
+          />
+        </div>
+      );
+    }
+
+    // Handle existing batch/serial logic
     const items = specialItems[product.id] || [];
     const hasItems = items.length > 0;
     const totalQty = hasItems
@@ -449,7 +506,7 @@ function Products({ selectedLocation, onDataChange }) {
           <button
             className="editButton"
             onClick={(e) => {
-              e.preventDefault(); // Prevent form submission
+              e.preventDefault();
               handleSpecialProduct(product);
             }}
             title={`Edit ${product.trackType} Details`}
@@ -470,7 +527,7 @@ function Products({ selectedLocation, onDataChange }) {
               : t("Please select location first")
           }
           onClick={(e) => {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
             if (selectedLocation) {
               handleSpecialProduct(product);
             }
@@ -612,7 +669,8 @@ function Products({ selectedLocation, onDataChange }) {
                       </div>
                     </td>
                     <td>
-                      {product.trackType ? (
+                      {product.trackType ||
+                      product.Product?.type === "ecard" ? (
                         renderSpecialProductQuantity(product)
                       ) : (
                         <input

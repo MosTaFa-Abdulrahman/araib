@@ -50,11 +50,15 @@ function SpecialProductModal({
     const newErrors = {};
     const trimmedSerialNumber = currentItem.serialNumber?.trim();
 
-    // Check if serial/batch number is provided
+    // Check if serial/batch/ecard number is provided
     if (!trimmedSerialNumber) {
       newErrors.serialNumber = t(
         `${
-          product?.trackType === "serial" ? "Serial" : "Batch"
+          product?.Product?.type === "ecard"
+            ? "eCard"
+            : product?.trackType === "serial"
+            ? "Serial"
+            : "Batch"
         } number is required`
       );
     }
@@ -69,7 +73,11 @@ function SpecialProductModal({
     if (isDuplicate) {
       newErrors.serialNumber = t(
         `This ${
-          product?.trackType === "serial" ? "serial" : "batch"
+          product?.Product?.type === "ecard"
+            ? "eCard"
+            : product?.trackType === "serial"
+            ? "serial"
+            : "batch"
         } number already exists`
       );
     }
@@ -158,11 +166,13 @@ function SpecialProductModal({
       <div className="specialProductModal">
         <div className="modalHeader">
           <h2>
-            {t(
-              product?.trackType === "serial"
-                ? "Enter the serial numbers"
-                : "Enter the batch numbers"
-            )}
+            {product?.Product?.type === "ecard"
+              ? t("Enter eCard codes")
+              : t(
+                  product?.trackType === "serial"
+                    ? t("Enter the serial numbers")
+                    : t("Enter the batch numbers")
+                )}
           </h2>
         </div>
 
@@ -177,14 +187,18 @@ function SpecialProductModal({
               <div className="inputWrapper">
                 <label>
                   <span className="required">*</span>
-                  {product?.trackType === "serial"
+                  {product?.Product?.type === "ecard"
+                    ? t("eCard Code")
+                    : product?.trackType === "serial"
                     ? t("Serial number")
                     : t("Batch Id")}
                 </label>
                 <input
                   type="text"
                   placeholder={
-                    product?.trackType === "serial"
+                    product?.Product?.type === "ecard"
+                      ? t("eCard Code")
+                      : product?.trackType === "serial"
                       ? t("Serial number")
                       : t("Batch Id")
                   }
@@ -224,45 +238,54 @@ function SpecialProductModal({
                 </div>
               )}
 
-              <div className="inputWrapper">
-                <label>{t("Expiration Date")}</label>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    value={currentItem.expirationDate}
-                    onChange={(date) =>
-                      handleInputChange("expirationDate", date)
-                    }
-                    format="dd/MM/yyyy"
-                    className="datePicker"
-                    slotProps={{
-                      textField: {
-                        placeholder: t("Expiration Date"),
-                        size: "small",
-                        onKeyDown: handleKeyPress,
-                      },
-                    }}
-                  />
-                </LocalizationProvider>
-              </div>
+              {/* Date Time for ((Batch + Serial)) */}
+              {product?.Product?.type === "ecard" ? (
+                ""
+              ) : (
+                <>
+                  <div className="inputWrapper">
+                    <label>{t("Expiration Date")}</label>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        value={currentItem.expirationDate}
+                        onChange={(date) =>
+                          handleInputChange("expirationDate", date)
+                        }
+                        format="dd/MM/yyyy"
+                        className="datePicker"
+                        slotProps={{
+                          textField: {
+                            placeholder: t("Expiration Date"),
+                            size: "small",
+                            onKeyDown: handleKeyPress,
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+                  </div>
 
-              <div className="inputWrapper">
-                <label>{t("Issue Date")}</label>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    value={currentItem.issueDate}
-                    onChange={(date) => handleInputChange("issueDate", date)}
-                    format="dd/MM/yyyy"
-                    className="datePicker"
-                    slotProps={{
-                      textField: {
-                        placeholder: t("Issue Date"),
-                        size: "small",
-                        onKeyDown: handleKeyPress,
-                      },
-                    }}
-                  />
-                </LocalizationProvider>
-              </div>
+                  <div className="inputWrapper">
+                    <label>{t("Issue Date")}</label>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        value={currentItem.issueDate}
+                        onChange={(date) =>
+                          handleInputChange("issueDate", date)
+                        }
+                        format="dd/MM/yyyy"
+                        className="datePicker"
+                        slotProps={{
+                          textField: {
+                            placeholder: t("Issue Date"),
+                            size: "small",
+                            onKeyDown: handleKeyPress,
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                </>
+              )}
 
               <button
                 type="button"
