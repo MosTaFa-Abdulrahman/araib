@@ -1156,7 +1156,7 @@ function Products({ selectedLocation, purchaseOrderItems }) {
         </div>
       )}
 
-      {/* Modal For (Batch + Serial) */}
+      {/* Modal For (Batch + Serial + Ecard) */}
       <SpecialProductModal
         isOpen={specialModalOpen}
         onClose={() => {

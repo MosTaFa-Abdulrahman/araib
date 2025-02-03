@@ -58,7 +58,6 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
 
     if (term.trim()) {
       const destinationProducts = productsByDestination[destination] || [];
-      // Add null checks for name and sku
       const filtered = mockSearchProductss.filter(
         (product) =>
           !destinationProducts.find((p) => p.id === product.id) &&
@@ -106,7 +105,9 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
               : Math.max(0, Math.min(Number(value), sourceStock));
 
           if (
-            (product.trackType === "batch" || product.trackType === "serial") &&
+            (product.trackType === "batch" ||
+              product.trackType === "serial" ||
+              product.Product?.type === "ecard") &&
             product.transferQty !== parsedValue.toString()
           ) {
             setSpecialProductItems((prevItems) => {
@@ -224,7 +225,6 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
     return products.reduce(
       (acc, product) => {
         const transferQty = parseFloat(product.transferQty || 0);
-        // Add null checks for nested properties
         const productCost =
           product.ProductVariantToStockLocations?.[0]?.cost || 0;
 
@@ -289,7 +289,7 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
     );
   };
 
-  // ************************* /////////
+  // ************************* ((Renderd)) **************************** //
   // Render Product Details
   const renderProductDetails = (product, sourceData, destinationData) => {
     // Calculate composite product cost
@@ -298,7 +298,6 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
         product.type === "composite" &&
         product.VariantToComposites?.length > 0
       ) {
-        // Sum up (rate * cost) for each component
         return product.VariantToComposites.reduce((acc, composite) => {
           const componentCost =
             composite.ProductVariant?.ProductVariantToStockLocations?.[0]
@@ -311,6 +310,26 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
     };
 
     const productCost = calculateCompositeCost();
+
+    if (product.Product?.type === "ecard" && specialProductItems[product.id]) {
+      return (
+        <div className="products__special-items">
+          <h5>E-Card Numbers</h5>
+          {specialProductItems[product.id].map((item, index) => (
+            <div key={index} className="products__special-item">
+              <span>
+                {item.serialNumber} (Qty: {item.quantity})
+              </span>
+              <Edit2
+                size={16}
+                className="edit-icon"
+                onClick={() => handleSpecialProductClick(product, true)}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
 
     return (
       <div className="products__details">
@@ -332,7 +351,6 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
                 <tbody>
                   {product.VariantToComposites.map((composite) => {
                     const containedProduct = composite.ProductVariant;
-                    // Get stock quantities for source and destination
                     const sourceStock =
                       containedProduct?.ProductVariantToStockLocations?.find(
                         (loc) =>
@@ -345,7 +363,6 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
                           destinationData?.stockLocationId
                       )?.quantity || 0;
 
-                    // Calculate costs
                     const componentCost =
                       containedProduct?.ProductVariantToStockLocations?.[0]
                         ?.cost || 0;
@@ -417,12 +434,13 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
           </div>
         </div>
 
-        {specialProductItems[product.id] && (
+        {specialProductItems[product.id] && product.trackType !== "ecard" && (
           <div className="products__special-items">
             <h5>Special Items</h5>
             {specialProductItems[product.id].map((item, index) => (
               <div key={index} className="products__special-item">
                 <span>
+                  {/* Continuing from where your code left off */}
                   {item.serialNumber} ({item.quantity})
                   {item.expirationDate &&
                     ` - Expires: ${item.expirationDate.toLocaleDateString()}`}
@@ -527,10 +545,15 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
                               </span>
                             </div>
                             {(product.trackType === "batch" ||
-                              product.trackType === "serial") &&
+                              product.trackType === "serial" ||
+                              product.Product?.type === "ecard") &&
                               (!specialProductItems[product.id] ? (
                                 <PlusTooltip
-                                  title={`Add ${product.trackType} numbers`}
+                                  title={
+                                    product.Product?.type === "ecard"
+                                      ? "Add E-Card numbers"
+                                      : `Add ${product.trackType} numbers`
+                                  }
                                   onClick={() =>
                                     handleSpecialProductClick(product)
                                   }
@@ -625,7 +648,7 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
     );
   };
 
-  // Render Not Select Any Destinations 🙄
+  // Render Not Select Any Destinations
   if (!selectedDestinations.length) {
     return (
       <div className="products">
@@ -643,7 +666,7 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
 
   return (
     <div className="products">
-      {selectedDestinations.map((destination) => (
+      {selectedDestinations?.map((destination) => (
         <div key={destination} className="products__location">
           <div
             className="products__location-header"
@@ -669,7 +692,7 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
         </div>
       ))}
 
-      {/* Modal For ((Batch + Serial)) */}
+      {/* Modal For ((Batch + Serial + ECard)) */}
       <SpecialProductModal
         isOpen={showModal}
         onClose={() => {

@@ -18,7 +18,7 @@ import PlusTooltip from "../../global/plusTooltip/PlusTooltip";
 import Modal from "../../global/modal/Modal";
 import { useTranslation } from "react-i18next";
 
-// Modal (Batch + Serial)
+// Modal (Batch + Serial + Ecard)
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 
 // Date Time
@@ -1134,7 +1134,7 @@ function Products({ selectedLocation, onDataChange }) {
         </div>
       </Modal>
 
-      {/* Modal For (Batch + Serial) */}
+      {/* Modal For (Batch + Serial + Ecard) */}
       <SpecialProductModal
         isOpen={specialModalOpen}
         onClose={() => {

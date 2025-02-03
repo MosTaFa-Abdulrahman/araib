@@ -13,7 +13,7 @@ import InfoTooltip from "../../global/infoTooltip/InfoTooltip";
 import MinusTooltip from "../../global/minusTooltip/MinusTooltip";
 import { useTranslation } from "react-i18next";
 
-// Modal (Batch + Serial)
+// Modal (Batch + Serial + E-Card)
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 
 // Mock Data
@@ -101,6 +101,13 @@ function Products({ selectedLocation }) {
 
   // Format tracking data
   const formatTrackingData = (item, selectedLocationId) => {
+    if (item.Product?.type === "ecard") {
+      return {
+        ...item,
+        Ecards: item.Ecards?.filter((card) => !card.isSold) || [],
+      };
+    }
+
     if (item.ProductVariantToStockLocations) {
       const locationData = item.ProductVariantToStockLocations.find(
         (loc) => loc.stockLocationId === selectedLocationId
@@ -442,6 +449,8 @@ function Products({ selectedLocation }) {
     )?.id;
 
     const searchItem = mockSearchProductss.find((p) => p.id === product.id);
+
+    // Handle both tracking types and e-cards
     const trackingData = formatTrackingData(searchItem, selectedLocationId);
 
     if (!trackingData) {
@@ -507,7 +516,8 @@ function Products({ selectedLocation }) {
   // *************** ((Render)) ****************** //
   // Render Return Quantity
   const renderReturnQuantity = (product) => {
-    if (product.trackType) {
+    // Handle both serial/batch tracking and e-cards
+    if (product.trackType || product.Product?.type === "ecard") {
       const items = specialItems[product.id] || [];
       const hasItems = items.length > 0;
       const totalQty = hasItems
@@ -526,7 +536,11 @@ function Products({ selectedLocation }) {
             <button
               className="editButton"
               onClick={() => handleSpecialProduct(product)}
-              title={`Edit ${product.trackType} Details`}
+              title={
+                product?.Product?.type == "ecard"
+                  ? "Edit E-Card Numbers"
+                  : `Edit ${product.trackType} Details`
+              }
             >
               <Edit2 size={16} />
             </button>
@@ -545,7 +559,11 @@ function Products({ selectedLocation }) {
             required
           />
           <MinusTooltip
-            title={`Add ${product.trackType} Details`}
+            title={
+              product?.Product?.type == "ecard"
+                ? "Add E-Card Numbers"
+                : `Add ${product.trackType} Details`
+            }
             onClick={() => handleSpecialProduct(product)}
             disabled={!selectedLocation || !product.returnedQty}
           />
@@ -825,7 +843,7 @@ function Products({ selectedLocation }) {
         </div>
       )}
 
-      {/* Modal For (Batch + Serial) */}
+      {/* Modal For (Batch + Serial + E-Card) */}
       <SpecialProductModal
         isOpen={specialModalOpen}
         onClose={() => {
