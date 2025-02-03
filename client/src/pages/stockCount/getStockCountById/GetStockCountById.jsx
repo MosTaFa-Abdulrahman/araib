@@ -46,7 +46,7 @@ function GetStockCountById() {
     {
       field: "name",
       headerName: "Product Name / SKU",
-      width: 300,
+      width: 305,
       renderCell: (params) => (
         <div>
           <div>{params.row.name}</div>
