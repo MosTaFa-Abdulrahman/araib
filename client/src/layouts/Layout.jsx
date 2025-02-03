@@ -37,6 +37,10 @@ import SendStockTransfer from "../pages/stockTransfer/sendStockTransfer/SendStoc
 import GetRemoveStock from "../pages/removeStock/getRemoveStock/GetRemoveStock";
 import NewRemoveStock from "../pages/removeStock/newRemoveStock/NewRemoveStock";
 import GetRemoveStockById from "../pages/removeStock/getRemoveStockById/GetRemoveStockById";
+// Stock Count
+import GetStockCount from "../pages/stockCount/getStockCount/GetStockCount";
+import NewStockCount from "../pages/stockCount/newStockCount/NewStockCount";
+import GetStockCountById from "../pages/stockCount/getStockCountById/GetStockCountById";
 
 function Layout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -121,6 +125,19 @@ function Layout() {
     {
       path: "/invoices/remove-stock/:invoiceNumber/view",
       title: "Remove Stock Details",
+    },
+    // Stock Count
+    {
+      path: "/invoices/stock-count",
+      title: "Stock Count",
+    },
+    {
+      path: "/invoices/stock-count/new",
+      title: "New Stock Count",
+    },
+    {
+      path: "/invoices/stock-count/:invoiceId/view",
+      title: "Stock Count Details",
     },
   ];
 
@@ -229,6 +246,13 @@ function Layout() {
           <Route
             path="/invoices/remove-stock/:invoiceNumber/view"
             element={<GetRemoveStockById />}
+          />
+          {/* Stock Count */}
+          <Route path="/invoices/stock-count" element={<GetStockCount />} />
+          <Route path="/invoices/stock-count/new" element={<NewStockCount />} />
+          <Route
+            path="/invoices/stock-count/:invoiceId/view"
+            element={<GetStockCountById />}
           />
 
           {/* NotFound Page */}

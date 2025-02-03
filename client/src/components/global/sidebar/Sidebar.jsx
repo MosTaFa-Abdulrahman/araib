@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen }) => {
       label: t("Products & Inventory"),
       submenu: [
         { label: t("Products"), path: "/inventory/products" },
-        { label: t("Stock Count"), path: "/products/stock-count" },
+        { label: t("Stock Count"), path: "/invoices/stock-count" },
         {
           label: t("Stock Transfer"),
           path: "/invoices/transfer-stock",

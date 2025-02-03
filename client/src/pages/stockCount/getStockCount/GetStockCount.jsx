@@ -1,27 +1,16 @@
-import "./getReturnInvoices.scss";
-import { useState, useEffect, useRef } from "react";
-import {
-  Eye,
-  Printer,
-  MoreHorizontal,
-  PenLine,
-  Search,
-  Upload,
-  CircleDollarSign,
-  Plus,
-} from "lucide-react";
+import "./getStockCount.scss";
+import { useState } from "react";
+import { Printer, Search, Upload, Plus } from "lucide-react";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-// /invoices/suppliers/56062/payments/receive-debit
-
 // DummyData
-import { Return_Invoices } from "../../../dummyData";
+import { Count_Invoices } from "../../../dummyData";
 
-function GetReturnInvoices() {
+function GetStockCount() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
@@ -29,88 +18,12 @@ function GetReturnInvoices() {
 
   // Action Buttons Component
   const ActionButtons = ({ params }) => {
-    const menuRef = useRef(null);
-    const status = params.row.paymentStatus;
-    const [activeMenu, setActiveMenu] = useState(null);
-
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (menuRef.current && !menuRef.current.contains(event.target)) {
-          setActiveMenu(null);
-        }
-      };
-
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const handleMenuClick = (e, id) => {
-      e.stopPropagation();
-      if (status !== "Draft") {
-        setActiveMenu(activeMenu === id ? null : id);
-      }
-    };
-
-    const handleActionClick = (action) => {
-      setActiveMenu(null);
-      console.log(`${action} clicked for invoice ${params.row.invoiceNumber}`);
-    };
-
-    if (status === "Fully Paid") {
-      return (
-        <div className="action-buttons">
-          <Eye className="icon" size={20} />
-          <Printer className="icon" size={20} />
-        </div>
-      );
-    } else if (status === "Draft") {
-      return (
-        <div className="action-buttons">
-          <PenLine className="icon" size={20} />
-          <MoreHorizontal className="icon disabled" size={20} />
-        </div>
-      );
-    } else {
-      const menuId = `menu-${params.row.id}`;
-      return (
-        <div className={`action-buttons ${isRTL ? "rtl" : ""}`}>
-          <Eye className="icon" size={20} />
-          <div className="menu-container" ref={menuRef}>
-            <MoreHorizontal
-              className="icon"
-              size={20}
-              onClick={(e) => handleMenuClick(e, menuId)}
-            />
-            {activeMenu === menuId && (
-              <div className={`submenu ${isRTL ? "rtl" : ""}`}>
-                <NavLink
-                  to={`/invoices/suppliers/${params?.row?.supplierId}/payments/receive-debit?invoiceNumber=${params?.row?.invoiceNumber}`}
-                  className="removeLine"
-                >
-                  <button
-                    className="submenu-item"
-                    onClick={() => handleActionClick("Pay")}
-                  >
-                    {!isRTL && <CircleDollarSign size={14} />}
-                    <span>{t("Pay")}</span>
-                    {isRTL && <CircleDollarSign size={14} />}
-                  </button>
-                </NavLink>
-                <button
-                  className="submenu-item"
-                  onClick={() => handleActionClick("Print")}
-                >
-                  {!isRTL && <Printer size={14} />}
-                  <span>{t("Print")}</span>
-                  {isRTL && <Printer size={14} />}
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    }
+    const isDraft = params.row.status === "Draft";
+    return (
+      <div className={`action-buttons ${isRTL ? "rtl" : ""}`}>
+        <Printer className={`icon ${isDraft ? "disabled" : ""}`} size={20} />
+      </div>
+    );
   };
 
   // Columns
@@ -118,22 +31,29 @@ function GetReturnInvoices() {
     {
       field: "invoiceNumber",
       headerName: isRTL ? "رقم الفاتورة" : "Invoice Number",
-      width: 150,
+      width: 180,
       renderCell: (params) => (
         <NavLink
-          to={`/invoices/return-stocks/${params.value}/view`}
+          to={`/invoices/stock-count/${params.row.id}/view`}
           className="invoice-link"
         >
           {params.value}
         </NavLink>
       ),
+
       align: isRTL ? "right" : "left",
       pinned: isRTL ? "right" : "left",
     },
     {
+      field: "name",
+      headerName: isRTL ? "اسم الحساب" : "Count Name",
+      width: 200,
+      align: isRTL ? "right" : "left",
+    },
+    {
       field: "issueDate",
       headerName: isRTL ? "تاريخ الإصدار" : "Issue Date",
-      width: 150,
+      width: 130,
       align: isRTL ? "right" : "left",
       renderCell: (params) => {
         if (isRTL) {
@@ -147,62 +67,39 @@ function GetReturnInvoices() {
       },
     },
     {
-      field: "supplierName",
-      headerName: isRTL ? "المورد" : "Supplier",
-      width: 120,
-      align: isRTL ? "right" : "left",
-    },
-    {
       field: "stockLocationName",
       headerName: isRTL ? "الموقع" : "Location",
-      width: 120,
+      width: 180,
       align: isRTL ? "right" : "left",
     },
     {
-      field: "orderType",
-      headerName: isRTL ? "نوع الفاتورة" : "Invoice Type",
-      width: 130,
+      field: "totalCost",
+      headerName: isRTL ? "اجمالي التكلفة" : "Total Cost",
+      width: 180,
       align: isRTL ? "right" : "left",
     },
     {
       field: "status",
-      headerName: isRTL ? "نوع الفاتورة" : "Status",
-      width: 130,
-      align: isRTL ? "right" : "left",
-    },
-
-    {
-      field: "paymentStatus",
-      headerName: isRTL ? "حالة الدفع" : "Payment Status",
-      width: 130,
+      headerName: isRTL ? "نوع الفاتورة" : "Count Status",
+      width: 120,
       align: isRTL ? "right" : "left",
       renderCell: (params) => (
-        <div
-          className={`status-chip ${params.value
-            .toLowerCase()
-            .replace(" ", "-")}`}
-        >
+        <div className={`status-chip ${params?.value.toLowerCase()}`}>
           {params.value}
         </div>
       ),
     },
-
     {
-      field: "notes",
-      headerName: isRTL ? "الملاحظة" : "Notes",
-      width: 130,
+      field: "userName",
+      headerName: isRTL ? "تم بواسطة" : "Created By",
+      width: 180,
       align: isRTL ? "right" : "left",
-      // renderCell: (params) => {
-      //   if (params.value) {
-      //     return params.value.slice(0, 12);
-      //   }
-      //   return "";
-      // },
     },
+
     {
       field: "actions",
       headerName: isRTL ? "الإجراءات" : "Actions",
-      width: 100,
+      width: 70,
       sortable: false,
       filterable: false,
       renderCell: (params) => <ActionButtons params={params} />,
@@ -213,7 +110,7 @@ function GetReturnInvoices() {
 
   //  Handle Export
   const handleExport = () => {
-    const csvContent = Return_Invoices.map((row) =>
+    const csvContent = Count_Invoices.map((row) =>
       Object.values(row)
         .filter((value) => typeof value !== "object")
         .join(",")
@@ -222,16 +119,15 @@ function GetReturnInvoices() {
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "return_invoices.csv";
+    link.download = "count_invoices.csv";
     link.click();
   };
 
   // Handle Search
-  const filteredRows = Return_Invoices.filter((row) => {
+  const filteredRows = Count_Invoices.filter((row) => {
     const searchStr = searchText.toLowerCase();
     return (
       row.invoiceNumber.toLowerCase().includes(searchStr) ||
-      row.supplierName.toLowerCase().includes(searchStr) ||
       row.stockLocationName.toLowerCase().includes(searchStr)
     );
   });
@@ -299,16 +195,14 @@ function GetReturnInvoices() {
   };
 
   return (
-    <div className={`return-order-container ${isRTL ? "rtl" : ""}`}>
+    <div className={`getStockCount ${isRTL ? "rtl" : ""}`}>
       {/* Header */}
       <div className="header-section">
         <div className="search-box">
           <Search size={20} className="search-icon" />
           <input
             type="text"
-            placeholder={t(
-              "Search by Invoice No., Supplier Name or Location Name. 😍"
-            )}
+            placeholder={t("Search by Invoice No., Location Name. 😍")}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
@@ -318,10 +212,10 @@ function GetReturnInvoices() {
             <Upload size={18} />
             {t("Export All")}
           </button>
-          <NavLink to="/invoices/return-stocks/new" className="removeLine">
+          <NavLink to="/invoices/stock-count/new" className="removeLine">
             <button className="new-invoice-btn">
               <Plus size={20} />
-              {t("Return Invoice")}
+              {t("Stock Count")}
             </button>
           </NavLink>
         </div>
@@ -384,4 +278,4 @@ function GetReturnInvoices() {
   );
 }
 
-export default GetReturnInvoices;
+export default GetStockCount;
