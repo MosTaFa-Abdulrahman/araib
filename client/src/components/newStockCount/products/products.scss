@@ -1,0 +1,175 @@
+@import "../../../styles/responsive.scss";
+
+.products-container {
+  padding: 20px;
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .search-container {
+      width: 90%;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      gap: 5px;
+      border: 1px solid rgb(176, 176, 176);
+      border-radius: 10px;
+      &:hover {
+        border: 1px solid #4c0e5f;
+        transition: 0.5s ease;
+      }
+
+      .search-icon {
+        color: gray;
+      }
+
+      .search-input {
+        width: 60%;
+        padding: 7px;
+        border: none;
+        outline: none;
+        border-radius: 6px;
+      }
+    }
+
+    .scanIcon {
+      color: #4c0e5f;
+      cursor: pointer;
+      &:hover {
+        color: #6d1489;
+        transition: 0.5s ease;
+      }
+    }
+  }
+
+  .filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+      font-size: 14px;
+      min-width: 150px;
+
+      &:focus {
+        outline: none;
+        border-color: #4c0e5f;
+      }
+    }
+
+    .reset-btn {
+      padding: 8px 16px;
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #4c0e5f;
+
+      &:hover {
+        background-color: rgba(76, 14, 95, 0.1);
+      }
+    }
+  }
+
+  .grid-paper {
+    .data-grid {
+      border: none;
+
+      .MuiDataGrid-columnHeaders {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .MuiDataGrid-cell {
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .name-cell {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .product-name {
+          font-weight: 500;
+          color: #4c0e5f;
+        }
+
+        .product-sku {
+          color: #666;
+          font-size: 12px;
+        }
+      }
+
+      .edit-btn {
+        background: none;
+        border: none;
+        padding: 6px;
+        color: #4c0e5f;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(25, 118, 210, 0.1);
+        }
+      }
+
+      .count-input {
+        width: 80px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+
+        &:focus {
+          outline: none;
+          border-color: #4c0e5f;
+        }
+
+        &:disabled {
+          background-color: #f8f9fa;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+@include sm {
+  .products-container {
+    padding: 16px;
+
+    .filter-container {
+      .filter-select {
+        min-width: 100%;
+      }
+    }
+  }
+}
+
+@include md {
+  .products-container {
+    .filter-container {
+      .filter-select {
+        min-width: calc(50% - 5px);
+      }
+    }
+  }
+}
+
+@include lg {
+  .products-container {
+    .filter-container {
+      .filter-select {
+        min-width: 150px;
+      }
+    }
+  }
+}

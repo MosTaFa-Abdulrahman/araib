@@ -46,7 +46,7 @@ function GetStockCountById() {
     {
       field: "name",
       headerName: "Product Name / SKU",
-      width: 307,
+      width: 309,
       renderCell: (params) => (
         <div>
           <div>{params.row.name}</div>
@@ -221,7 +221,7 @@ function GetStockCountById() {
             columns={columns}
             rowHeight={64}
             headerHeight={48}
-            disableColumnMenu
+            // disableColumnMenu
             getRowHeight={() => "auto"}
             initialState={{
               pagination: {
