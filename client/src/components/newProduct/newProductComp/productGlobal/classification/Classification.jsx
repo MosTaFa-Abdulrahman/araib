@@ -1,6 +1,6 @@
 import "./classification.scss";
 import { useState } from "react";
-import { ChevronDown, Plus, X, ChevronUp } from "lucide-react";
+import { ChevronDown, Plus, X, ChevronUp, Loader } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../../../context/ThemeContext";
@@ -89,7 +89,7 @@ const AddBrandModal = ({ isOpen, onClose, onSave }) => {
     if (!name.trim()) return;
 
     try {
-      await createBrand({ name }).unwrap();
+      await createBrand({ name, createdBy: "mostafa2001" }).unwrap();
       onSave(name);
       setName("");
       setTouched(false);
@@ -165,7 +165,7 @@ const AddBrandModal = ({ isOpen, onClose, onSave }) => {
           onClick={handleCreate}
           disabled={isLoading || !name.trim()}
         >
-          {isLoading ? t("Saving...") : t("Save Brand")}
+          {isLoading ? <Loader className="spinner" /> : t("Save Brand")}
         </button>
       </div>
     </Modal>
