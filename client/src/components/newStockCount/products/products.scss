@@ -6,10 +6,11 @@
   .search-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     margin-bottom: 20px;
+    gap: 20px;
     .search-container {
-      width: 90%;
+      width: 44%;
       display: flex;
       align-items: center;
       padding: 5px;
@@ -98,7 +99,6 @@
 
         .product-name {
           font-weight: 500;
-          color: #4c0e5f;
         }
 
         .product-sku {

@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import PlusTooltip from "../../global/plusTooltip/PlusTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
+import ScanModal from "./scanModal/ScanModal";
 
 // RTKQ
 import { mockSearchProductss } from "../../../dummyData";
@@ -15,6 +16,8 @@ function Products({ selectedLocation, onDataChange }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
+  // BarCode Component
+  const [isScanModalOpen, setIsScanModalOpen] = useState(false);
 
   useEffect(() => {
     if (selectedLocation?.id) {
@@ -188,6 +191,18 @@ function Products({ selectedLocation, onDataChange }) {
     onDataChange({ selectedProducts: [] });
   };
 
+  // Handle Scanned Products
+  const handleScannedProducts = (scannedProducts) => {
+    scannedProducts.forEach((scannedProduct) => {
+      const existingRow = rows.find((row) => row.sku === scannedProduct.sku);
+      if (existingRow) {
+        handleCountChange(existingRow.id, {
+          counted: (existingRow.counted || 0) + scannedProduct.count,
+        });
+      }
+    });
+  };
+
   // Columns
   const columns = [
     {
@@ -295,7 +310,17 @@ function Products({ selectedLocation, onDataChange }) {
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
-        <ScanBarcode size={20} className="scanIcon" />
+        <ScanBarcode
+          size={25}
+          className="scanIcon"
+          onClick={() => setIsScanModalOpen(true)}
+        />
+        <ScanModal
+          isOpen={isScanModalOpen}
+          onClose={() => setIsScanModalOpen(false)}
+          onAddToCount={handleScannedProducts}
+          mockSearchProductss={mockSearchProductss}
+        />
       </div>
 
       {/* Filters */}
