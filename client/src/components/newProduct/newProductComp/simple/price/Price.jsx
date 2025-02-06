@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { ChevronDown, Copy } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+
+// RTKQ
 import toast from "react-hot-toast";
 
 function Price({
@@ -54,7 +56,7 @@ function Price({
       });
     });
     setPriceData(initialData);
-  }, [productDetails, packageDetails]);
+  }, [productDetails, packageDetails, locations]);
 
   // Reset values when stock is disabled
   useEffect(() => {
@@ -71,7 +73,7 @@ function Price({
       });
       setPriceData(updatedData);
     }
-  }, [stockDisabled]);
+  }, [stockDisabled, locations, priceData]);
 
   // Handle field change for items
   const handleFieldChange = (location, itemId, field, value) => {

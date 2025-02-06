@@ -1,12 +1,14 @@
 import "./minusTooltip.scss";
-import { CircleMinus } from "lucide-react";
 import { useState } from "react";
+import { CircleMinus } from "lucide-react";
+import { useTheme } from "../../../context/ThemeContext";
 
 function MinusTooltip({ title, onClick }) {
+  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <span className="minus-tooltip">
+    <span className={`minus-tooltip ${theme}`}>
       <CircleMinus
         className="minus-icon"
         onMouseEnter={() => setIsVisible(true)}

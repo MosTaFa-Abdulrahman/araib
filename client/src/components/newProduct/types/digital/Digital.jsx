@@ -2,6 +2,7 @@ import "./digital.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 // New Product Components
 import Details from "../../newProductComp/productGlobal/details/Details";
@@ -14,6 +15,7 @@ import toast from "react-hot-toast";
 
 function Digital() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [productDetails, setProductDetails] = useState({
     productName: "",
@@ -47,7 +49,7 @@ function Digital() {
   };
 
   return (
-    <div className="digital">
+    <div className={`digital ${theme}`}>
       {/* Product Details */}
       <Details
         productDetails={productDetails}

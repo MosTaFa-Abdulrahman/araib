@@ -15,11 +15,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
+// Themes
+import { useTheme } from "../../../context/ThemeContext";
+import ThemeToggle from "../themeToggle/ThemeToggle";
+
 const Sidebar = ({ isOpen }) => {
   const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
   const [activeSubmenu, setActiveSubmenu] = useState(null);
 
-  const isRTL = i18n.language === "ar"; // Check if the current language is Arabic
+  // Theme
+  const { theme } = useTheme();
 
   const menuItems = [
     {
@@ -85,7 +91,7 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <div
-      className={`sidebar ${isOpen ? "open" : "closed"}`}
+      className={`sidebar ${isOpen ? "open" : "closed"} ${theme}`}
       style={{ [isRTL ? "right" : "left"]: 0 }}
     >
       <div className="sidebar-content">
@@ -156,6 +162,9 @@ const Sidebar = ({ isOpen }) => {
             </div>
           ))}
         </nav>
+
+        {/* Theme */}
+        <ThemeToggle />
       </div>
     </div>
   );

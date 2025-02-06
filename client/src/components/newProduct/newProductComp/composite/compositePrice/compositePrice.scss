@@ -1,189 +1,194 @@
 @import "../../../../../styles/responsive.scss";
+@import "../../../../../styles/themes";
 
 .compositePrice {
-  background: #fff;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-  .headerCompPrice {
-    display: flex;
-    align-items: center;
+  @include themed() {
+    border-radius: 8px;
+    padding: 24px;
     margin-bottom: 24px;
-    gap: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
-    h2 {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0;
-    }
-  }
-
-  .cost-field {
-    margin-bottom: 24px;
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .cost-input {
-      width: 100%;
-      max-width: 200px;
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      background-color: #f5f5f5;
-      cursor: not-allowed;
-
-      &:disabled {
-        opacity: 0.7;
-      }
-    }
-  }
-
-  .location-section {
-    border: 1px solid #eee;
-    border-radius: 6px;
-    margin-bottom: 16px;
-  }
-
-  .location-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #f9f9f9;
-    border-bottom: 1px solid #eee;
-
-    .location-toggle {
-      cursor: pointer;
-      padding: 4px;
-      margin-right: 8px;
+    .headerCompPrice {
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
+      margin-bottom: 24px;
+      gap: 8px;
 
-    .location-name {
-      font-weight: 500;
-      flex: 1;
-    }
-
-    .copy-section {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      @include respond-to(md) {
-        flex-wrap: wrap;
-        gap: 8px;
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
       }
     }
 
-    .copy-button {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      border: none;
-      outline: none;
-      background: #f9f9f9;
-      color: #1890ff;
-      cursor: pointer;
-    }
+    .cost-field {
+      margin-bottom: 24px;
 
-    .field-select {
-      padding: 6px 24px 6px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: white;
-      cursor: pointer;
-    }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
 
-    .to-all {
-      color: #666;
-      font-size: 14px;
-    }
-  }
-
-  .branch-section {
-    padding: 16px;
-  }
-
-  .branch-row {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 16px;
-
-    @include respond-to(md) {
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .branch-name {
-      width: 120px;
-      font-weight: 500;
-      padding-top: 32px; // Align with inputs due to labels
-
-      @include respond-to(md) {
+      .cost-input {
         width: 100%;
-        padding-top: 0;
+        max-width: 200px;
+        padding: 8px 12px;
+        border: 1px solid t("input-border");
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: not-allowed;
+
+        &:disabled {
+          opacity: 0.7;
+        }
       }
     }
 
-    .price-fields {
+    .location-section {
+      border: 1px solid t("border-color");
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .location-header {
       display: flex;
-      flex: 1;
-      gap: 16px;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid t("border-color");
 
-      @include respond-to(md) {
-        flex-wrap: wrap;
-        width: 100%;
-      }
-    }
-
-    .price-field {
-      flex: 1;
-      min-width: 120px;
-
-      @include respond-to(md) {
-        width: calc(50% - 8px);
+      .location-toggle {
+        cursor: pointer;
+        padding: 4px;
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .label-group {
+      .location-name {
+        font-weight: 500;
+        flex: 1;
+      }
+
+      .copy-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        @include respond-to(md) {
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+      }
+
+      .copy-button {
         display: flex;
         align-items: center;
         gap: 4px;
-        margin-bottom: 8px;
-
-        label {
-          font-size: 14px;
-          color: #666;
-        }
+        padding: 6px 12px;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        color: t("button-primary");
+        cursor: pointer;
       }
 
-      input,
-      select {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #ddd;
+      .field-select {
+        padding: 6px 24px 6px 12px;
+        border: 1px solid t("input-border");
         border-radius: 4px;
-        font-size: 14px;
+        cursor: pointer;
 
         &:focus {
-          outline: none;
-          border-color: #0088cc;
+          border-color: t("button-primary");
         }
       }
 
-      .tax-select {
-        cursor: pointer;
+      .to-all {
+        color: gray;
+        font-size: 14px;
+      }
+    }
+
+    .branch-section {
+      padding: 16px;
+    }
+
+    .branch-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 16px;
+
+      @include respond-to(md) {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .branch-name {
+        width: 120px;
+        font-weight: 500;
+        padding-top: 32px;
+
+        @include respond-to(md) {
+          width: 100%;
+          padding-top: 0;
+        }
+      }
+
+      .price-fields {
+        display: flex;
+        flex: 1;
+        gap: 16px;
+
+        @include respond-to(md) {
+          flex-wrap: wrap;
+          width: 100%;
+        }
+      }
+
+      .price-field {
+        flex: 1;
+        min-width: 120px;
+
+        @include respond-to(md) {
+          width: calc(50% - 8px);
+        }
+
+        .label-group {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-bottom: 8px;
+
+          label {
+            font-size: 14px;
+          }
+        }
+
+        input,
+        select {
+          width: 100%;
+          padding: 8px 12px;
+          border: 1px solid t("input-border");
+          border-radius: 4px;
+          font-size: 14px;
+          transition: all 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: t("button-primary");
+            box-shadow: 0 0 0 2px rgba(102, 67, 181, 0.1);
+          }
+        }
+
+        .tax-select {
+          cursor: pointer;
+
+          &:hover {
+            border-color: t("button-primary");
+          }
+        }
       }
     }
   }

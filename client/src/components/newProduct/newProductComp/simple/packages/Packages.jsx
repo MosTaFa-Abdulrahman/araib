@@ -2,9 +2,11 @@ import "./packages.scss";
 import { useEffect, useState } from "react";
 import { X, RotateCw, Info, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function Packages({ productName, onPackagesChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [isSoldInPack, setIsSoldInPack] = useState(false);
   const [packSizes, setPackSizes] = useState([]);
@@ -103,7 +105,7 @@ function Packages({ productName, onPackagesChange }) {
   };
 
   return (
-    <div className="packages-section">
+    <div className={`packages-section ${theme}`}>
       <div className="package-header">
         <div className="sold-in-pack">
           <input

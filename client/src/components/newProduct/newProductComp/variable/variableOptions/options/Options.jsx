@@ -3,14 +3,17 @@ import { useState } from "react";
 import { X, Plus, Trash2 } from "lucide-react";
 import InfoTooltip from "../../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../../context/ThemeContext";
 
 function Options({ onOptionsChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [options, setOptions] = useState([]);
   const [currentOption, setCurrentOption] = useState("");
   const [currentValues, setCurrentValues] = useState({}); // Separate value for each option
 
+  // Handle Add Option
   const handleAddOption = () => {
     if (
       currentOption.trim() &&
@@ -26,6 +29,7 @@ function Options({ onOptionsChange }) {
     }
   };
 
+  // Handle Add Value for ((Option))
   const handleAddValue = (optionIndex) => {
     const option = options[optionIndex];
     const valueToAdd = currentValues[option.name]?.trim();
@@ -42,6 +46,7 @@ function Options({ onOptionsChange }) {
     }
   };
 
+  // Handle Remove ((Option))
   const handleRemoveOption = (optionIndex) => {
     const newOptions = options.filter((_, index) => index !== optionIndex);
     const newCurrentValues = { ...currentValues };
@@ -51,6 +56,7 @@ function Options({ onOptionsChange }) {
     onOptionsChange(newOptions);
   };
 
+  // Handle Remove ((Value))
   const handleRemoveValue = (optionIndex, valueIndex) => {
     const newOptions = [...options];
     newOptions[optionIndex].values = newOptions[optionIndex].values.filter(
@@ -60,6 +66,7 @@ function Options({ onOptionsChange }) {
     onOptionsChange(newOptions);
   };
 
+  // Handle Key Press ((Enter))
   const handleKeyPress = (e, type, optionIndex) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -71,6 +78,7 @@ function Options({ onOptionsChange }) {
     }
   };
 
+  // Handle Value Changes
   const handleValueChange = (optionName, value) => {
     setCurrentValues({
       ...currentValues,
@@ -79,7 +87,7 @@ function Options({ onOptionsChange }) {
   };
 
   return (
-    <div className="options-container">
+    <div className={`options-container ${theme}`}>
       <div className="header-options">
         <h2>{t("Product Options")}</h2>
         <InfoTooltip

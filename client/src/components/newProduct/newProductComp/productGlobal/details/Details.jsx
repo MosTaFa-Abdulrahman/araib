@@ -3,9 +3,11 @@ import { useState } from "react";
 import { X, RotateCw, Info, Image as ImageIcon } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function Details({ productDetails, onDetailsChange, title, type }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   // Image
   const [image, setImage] = useState(null);
@@ -16,6 +18,7 @@ function Details({ productDetails, onDetailsChange, title, type }) {
     purchasable: false,
   });
 
+  // Handle Generate SKU
   const generateSKU = () => {
     const randomNum = Math.floor(Math.random() * 100000000000);
     onDetailsChange({
@@ -24,6 +27,7 @@ function Details({ productDetails, onDetailsChange, title, type }) {
     });
   };
 
+  // Handle Inputs Changes
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     onDetailsChange({
@@ -32,6 +36,7 @@ function Details({ productDetails, onDetailsChange, title, type }) {
     });
   };
 
+  // Hnalde Upload Image
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -43,10 +48,12 @@ function Details({ productDetails, onDetailsChange, title, type }) {
     }
   };
 
+  // Handle Delete Image
   const handleDeleteImage = () => {
     setImage(null);
   };
 
+  // Handle Clear SKU
   const clearSKU = () => {
     onDetailsChange({
       ...productDetails,
@@ -54,6 +61,7 @@ function Details({ productDetails, onDetailsChange, title, type }) {
     });
   };
 
+  // Handle ToggleTooltip
   const toggleTooltip = (key, value) => {
     setTooltips((prev) => ({
       ...prev,
@@ -62,7 +70,7 @@ function Details({ productDetails, onDetailsChange, title, type }) {
   };
 
   return (
-    <div className="product-details">
+    <div className={`product-details ${theme}`}>
       <div className="headerDetails">
         <h2>{t("Product Details")}</h2>
         <InfoTooltip

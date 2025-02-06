@@ -1,9 +1,15 @@
 import "./classification.scss";
 import { useState } from "react";
 import { ChevronDown, Plus, X, ChevronUp } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
+// RTKQ
+import { useCreateBrandMutation } from "../../../../../store/brand/brandSlice";
+import toast from "react-hot-toast";
+
+// Dropdown
 const Dropdown = ({ label, options = [], onAdd, value, onChange }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +53,7 @@ const Dropdown = ({ label, options = [], onAdd, value, onChange }) => {
   );
 };
 
+// Modal
 const Modal = ({ isOpen, onClose, title, children }) => {
   const { t } = useTranslation();
   if (!isOpen) return null;
@@ -67,41 +74,105 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   );
 };
 
+// Brand
 const AddBrandModal = ({ isOpen, onClose, onSave }) => {
   const { t } = useTranslation();
-  const [brandName, setBrandName] = useState("");
+  const [name, setName] = useState("");
+  const [touched, setTouched] = useState(false);
 
-  const handleSave = () => {
-    onSave(brandName);
-    setBrandName("");
-    onClose();
+  // RTKQ
+  const [createBrand, { isLoading, isError, error }] = useCreateBrandMutation();
+
+  // Handle Create
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+
+    try {
+      await createBrand({ name }).unwrap();
+      onSave(name);
+      setName("");
+      setTouched(false);
+      onClose();
+      toast.success(`Created Success ${name} 🥰`);
+    } catch (error) {
+      console.error("Failed to create brand:", error);
+      toast.error(`Error Create Brand ${error.message} 😥`);
+    }
   };
 
+  const handleBlur = () => {
+    setTouched(true);
+  };
+
+  const showError = (touched && !name.trim()) || isError;
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add Brand">
+    <Modal isOpen={isOpen} onClose={onClose} title={t("Add Brand")}>
       <div className="modal__body">
-        <div className="form-group">
-          <label>{t("Brand Name")}</label>
+        <form className="form-group" onSubmit={handleCreate}>
+          <label className="required">{t("Brand Name")}</label>
           <input
             type="text"
-            value={brandName}
-            onChange={(e) => setBrandName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlur={handleBlur}
             placeholder={t("Brand Name")}
+            style={{
+              borderColor: showError ? "#ef4444" : "",
+              backgroundColor: showError ? "#fff5f5" : "",
+            }}
+            required
           />
-        </div>
+          {touched && !name.trim() && (
+            <div
+              className="error-message"
+              style={{
+                color: "#ef4444",
+                fontSize: "0.875rem",
+                marginTop: "0.5rem",
+              }}
+            >
+              {t("Brand name is required")}
+            </div>
+          )}
+          {isError && (
+            <div
+              className="error-message"
+              style={{
+                color: "#ef4444",
+                fontSize: "0.875rem",
+                marginTop: "0.5rem",
+              }}
+            >
+              {error?.data?.message || t("Error creating brand")}
+            </div>
+          )}
+        </form>
       </div>
       <div className="modal__footer">
-        <button className="button button--secondary" onClick={onClose}>
+        <button
+          type="button"
+          className="button button--secondary"
+          onClick={onClose}
+          disabled={isLoading}
+        >
           {t("Cancel")}
         </button>
-        <button className="button button--primary" onClick={handleSave}>
-          {t("Save Brand")}
+        <button
+          type="submit"
+          className="button button--primary"
+          onClick={handleCreate}
+          disabled={isLoading || !name.trim()}
+        >
+          {isLoading ? t("Saving...") : t("Save Brand")}
         </button>
       </div>
     </Modal>
   );
 };
 
+// Category
 const AddCategoryModal = ({ isOpen, onClose, onSave }) => {
   const { t } = useTranslation();
   const [categoryName, setCategoryName] = useState("");
@@ -167,6 +238,7 @@ const AddCategoryModal = ({ isOpen, onClose, onSave }) => {
   );
 };
 
+// Supplier
 const AddSupplierModal = ({ isOpen, onClose, onSave }) => {
   const { t } = useTranslation();
   const [showDetails, setShowDetails] = useState(true);
@@ -297,6 +369,8 @@ const AddSupplierModal = ({ isOpen, onClose, onSave }) => {
 
 function Classification() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSupplier, setSelectedSupplier] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -318,7 +392,7 @@ function Classification() {
   };
 
   return (
-    <div className="classification">
+    <div className={`classification ${theme}`}>
       <div className="classification__container">
         <div className="classification__header">
           <h2>{t("Classification")}</h2>

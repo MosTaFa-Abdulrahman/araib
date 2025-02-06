@@ -3,10 +3,14 @@ import { useState } from "react";
 import { Copy, ChevronDown, ChevronUp } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
+
+// RTKQ
 import toast from "react-hot-toast";
 
 function CompositePrice({ productDetails }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   // Define branches
   const [branches] = useState(["default", "Elbasha"]);
@@ -79,7 +83,7 @@ function CompositePrice({ productDetails }) {
   };
 
   return (
-    <div className="compositePrice">
+    <div className={`compositePrice ${theme}`}>
       <div className="headerCompPrice">
         <h2>{t("Stock and Pricing")}</h2>
         <InfoTooltip

@@ -1,12 +1,14 @@
 import "./shippingDetails.scss";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function ShippingDetails() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   return (
-    <div className="shipping-details">
+    <div className={`shipping-details ${theme}`}>
       <div className="shipping-details__container">
         <div className="shipping-details__header">
           <h2>{t("Shipping Details")}</h2>

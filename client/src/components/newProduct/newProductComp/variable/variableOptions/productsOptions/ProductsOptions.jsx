@@ -10,9 +10,14 @@ import {
 } from "lucide-react";
 import InfoTooltip from "../../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../../context/ThemeContext";
 
 function ProductsOptions({ productDetails, options, onVariantsChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
+  const [expandedSections, setExpandedSections] = useState({});
+  const [variants, setVariants] = useState([]);
 
   // Generate Combinations
   const generateCombinations = (arrays) => {
@@ -45,9 +50,6 @@ function ProductsOptions({ productDetails, options, onVariantsChange }) {
       image: null,
     }));
   };
-
-  const [expandedSections, setExpandedSections] = useState({});
-  const [variants, setVariants] = useState([]);
 
   // Generate SKU
   const generateSKU = () => {
@@ -131,7 +133,7 @@ function ProductsOptions({ productDetails, options, onVariantsChange }) {
   };
 
   return (
-    <div className="products-options">
+    <div className={`products-options ${theme}`}>
       {Object.entries(variantsByColor).map(([color, colorVariants]) => (
         <div key={color} className="color-section">
           <div className="color-header" onClick={() => toggleSection(color)}>

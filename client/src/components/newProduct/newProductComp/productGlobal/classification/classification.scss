@@ -1,16 +1,13 @@
 @import "../../../../../styles/responsive.scss";
+@import "../../../../../styles/themes.scss";
 
-$primary-color: #2563eb;
-$secondary-color: #6b7280;
 $border-color: #e5e7eb;
 $background-color: #f3f4f6;
 $text-color: #374151;
 $error-color: #ef4444;
 $white: #ffffff;
-$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-// Mixins
+// Layout mixins
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -28,10 +25,13 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 20px 0px;
 
   &__container {
-    background-color: $white;
+    transition: all 0.3s ease;
     border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: $shadow-sm;
+
+    @include themed() {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
   }
 
   &__header {
@@ -43,11 +43,9 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     h2 {
       font-size: 1rem;
       font-weight: 500;
-      color: $text-color;
     }
 
     svg {
-      color: $secondary-color;
       cursor: pointer;
     }
   }
@@ -65,43 +63,37 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 42px;
     padding: 0 1rem;
-    background-color: $white;
-    border: 1px solid $border-color;
     border-radius: 0.375rem;
     @include flex-between;
     cursor: pointer;
-    transition: border-color 0.2s;
+    transition: all 0.3s ease;
 
-    &:hover {
-      border-color: $primary-color;
+    @include themed() {
+      border: 1px solid t("input-border");
     }
 
     span {
-      color: $secondary-color;
       font-size: 0.875rem;
-    }
-
-    svg {
-      color: $secondary-color;
     }
   }
 
   &__add {
-    // position: absolute;
     position: static;
     right: 0;
     top: 0;
     height: 42px;
     width: 42px;
     @include flex-center;
-    color: $primary-color;
     cursor: pointer;
     background: none;
     border: none;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
 
-    &:hover {
-      color: darken($primary-color, 10%);
+    @include themed() {
+      color: t("button-primary");
+      &:hover {
+        color: t("button-hover");
+      }
     }
   }
 
@@ -110,11 +102,11 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: $white;
-    border: 1px solid $border-color;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
     border-radius: 0.375rem;
     margin-top: 0.25rem;
-    box-shadow: $shadow-md;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
     max-height: 200px;
     overflow-y: auto;
@@ -125,7 +117,7 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: $background-color;
+        background-color: #f3f4f6;
       }
     }
   }
@@ -186,14 +178,16 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   &__close {
     background: none;
     border: none;
-    color: $secondary-color;
-    cursor: pointer;
     padding: 0.25rem;
     @include flex-center;
-    transition: color 0.2s;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-    &:hover {
-      color: $text-color;
+    @include themed() {
+      color: t("text-secondary");
+      &:hover {
+        color: t("text-primary");
+      }
     }
   }
 }
@@ -212,7 +206,7 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     &.required {
       &::after {
         content: "*";
-        color: $error-color;
+        color: #ff4d4f;
         margin-left: 0.25rem;
       }
     }
@@ -223,20 +217,41 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 42px;
     padding: 0 1rem;
-    border: 1px solid $border-color;
-    border-radius: 0.375rem;
     font-size: 0.875rem;
-    color: $text-color;
-    transition: border-color 0.2s;
+    transition: all 0.3s ease;
+    border-radius: 0.375rem;
+    outline: none;
 
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
+    @include themed() {
+      border: 1px solid t("input-border");
+
+      &:focus {
+        border-color: t("button-primary");
+        box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.2);
+      }
+
+      &::placeholder {
+        color: t("text-secondary");
+      }
     }
 
-    &::placeholder {
-      color: $secondary-color;
+    &.error {
+      border-color: $error-color;
+      background-color: rgba($error-color, 0.05);
+
+      &:focus {
+        border-color: $error-color;
+        box-shadow: 0 0 0 2px rgba($error-color, 0.2);
+      }
     }
+  }
+
+  .error-message {
+    color: $error-color;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: block;
+    font-weight: 400;
   }
 
   .checkbox {
@@ -249,11 +264,16 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
       width: 1rem;
       height: 1rem;
       margin: 0;
+
+      @include themed() {
+        &:checked {
+          accent-color: t("button-primary");
+        }
+      }
     }
 
     span {
       font-size: 0.875rem;
-      color: $text-color;
     }
   }
 }
@@ -265,25 +285,52 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   border: 1px solid transparent;
 
-  &--primary {
-    background-color: $primary-color;
-    color: $white;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 
-    &:hover {
-      background-color: darken($primary-color, 10%);
+    @include themed() {
+      background-color: t("bg-disabled");
+      border-color: t("border-disabled");
+      color: t("text-disabled");
+    }
+  }
+
+  &--primary {
+    @include themed() {
+      background-color: t("button-primary");
+      color: t("text-primary");
+
+      &:hover {
+        background-color: t("button-hover");
+      }
+
+      &:disabled {
+        background-color: rgba(t("button-primary"), 0.5);
+        color: rgba(t("text-primary"), 0.7);
+      }
     }
   }
 
   &--secondary {
-    background-color: $white;
-    border-color: $border-color;
-    color: $text-color;
+    @include themed() {
+      background-color: t("input-bg");
+      border-color: t("border-color");
+      color: t("text-primary");
 
-    &:hover {
-      background-color: $background-color;
+      &:hover {
+        background-color: t("bg-hover");
+      }
+
+      &:disabled {
+        background-color: t("input-bg");
+        border-color: t("border-color");
+        color: t("text-secondary");
+      }
     }
   }
 
@@ -291,5 +338,30 @@ $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     @include flex-center;
     gap: 0.5rem;
+  }
+}
+
+// Responsive styles
+@media (max-width: 576px) {
+  .classification {
+    &__container {
+      padding: 16px;
+    }
+
+    &__header {
+      margin-bottom: 16px;
+
+      h2 {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .modal__content {
+    margin: 0.5rem;
   }
 }

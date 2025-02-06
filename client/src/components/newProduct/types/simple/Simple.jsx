@@ -2,6 +2,7 @@ import "./simple.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 // New Product Components
 import Details from "../../newProductComp/productGlobal/details/Details";
@@ -16,6 +17,7 @@ import toast from "react-hot-toast";
 
 function Simple() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   // Details
   const [productDetails, setProductDetails] = useState({
@@ -81,7 +83,7 @@ function Simple() {
   };
 
   return (
-    <div className="simple">
+    <div className={`simple ${theme}`}>
       {/* Product Details */}
       <Details
         productDetails={productDetails}

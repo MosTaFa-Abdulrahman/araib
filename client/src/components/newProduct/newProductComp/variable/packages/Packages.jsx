@@ -3,9 +3,11 @@ import { useState } from "react";
 import { RefreshCcw, X, Image as ImageIcon } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function Packages({ products, onPackagesChange }) {
   const { t, i18n } = useTranslation();
+  const { theme } = useTheme();
   const isRTL = i18n.dir() === "rtl";
 
   const [packSizes, setPackSizes] = useState([]);
@@ -94,7 +96,7 @@ function Packages({ products, onPackagesChange }) {
   };
 
   return (
-    <div className="packages-container" dir={isRTL ? "rtl" : "ltr"}>
+    <div className={`packages-container ${theme}`} dir={isRTL ? "rtl" : "ltr"}>
       <div className="packages-header">
         <h2>{t("Package Options")}</h2>
         <InfoTooltip

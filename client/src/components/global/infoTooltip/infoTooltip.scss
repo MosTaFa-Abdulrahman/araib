@@ -1,50 +1,54 @@
+@import "../../../styles/themes.scss";
+
 .info-tooltip {
-  position: relative;
-  display: inline-flex;
-  vertical-align: middle;
-  margin-left: 4px;
+  @include themed() {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: 4px;
 
-  .info-icon {
-    color: #4c0e5f;
-    cursor: help;
-    transition: color 0.2s ease;
+    .info-icon {
+      color: t("button-primary");
+      cursor: help;
+      transition: color 0.2s ease;
 
-    &:hover {
-      color: #722d87;
-      transition: 0.5s ease;
+      &:hover {
+        color: t("button-hover");
+        transition: 0.5s ease;
+      }
     }
-  }
 
-  .tooltip-content {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 8px;
-    padding: 12px 16px;
-    background-color: #1a1a1a;
-    color: white;
-    font-size: 14px;
-    line-height: 1.4;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    max-width: 280px;
-    width: max-content;
-    z-index: 5000;
-
-    // Fade in animation
-    // animation: fadeIn 0.15s ease-out;
-
-    .tooltip-arrow {
+    .tooltip-content {
       position: absolute;
-      top: 100%;
+      bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid #1a1a1a;
+      margin-bottom: 8px;
+      padding: 12px 16px;
+      background-color: t("bg-primary");
+      color: t("text-primary");
+      font-size: 14px;
+      line-height: 1.4;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      max-width: 280px;
+      width: max-content;
+      z-index: 5000;
+
+      // Fade in animation
+      // animation: fadeIn 0.15s ease-out;
+
+      .tooltip-arrow {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid t("bg-primary");
+      }
     }
   }
 }

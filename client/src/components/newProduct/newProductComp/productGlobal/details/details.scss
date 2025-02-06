@@ -1,8 +1,11 @@
+@import "../../../../../styles/themes.scss";
+
 .product-details {
   background: #fff;
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   .headerDetails {
     display: flex;
@@ -18,7 +21,6 @@
     }
   }
 
-  // Tooltip container and styles
   .tooltip-container {
     position: relative;
     display: inline-flex;
@@ -31,6 +33,9 @@
 
       &:hover {
         color: #333;
+        @include themed() {
+          color: t("text-primary");
+        }
       }
     }
 
@@ -51,14 +56,17 @@
       left: 50%;
       transform: translateX(-50%) translateY(-100%);
 
-      // RTL support
+      @include themed() {
+        background: t("bg-secondary");
+        color: t("text-primary");
+      }
+
       [dir="rtl"] & {
         left: auto;
         right: 50%;
         transform: translateX(50%) translateY(-100%);
       }
 
-      // Specific styling for SKU tooltip
       &.sku-tooltip {
         right: 0;
         left: auto;
@@ -132,9 +140,16 @@
               padding: 0;
               transition: all 0.2s;
 
+              // @include themed() {
+              //   background: rgba(t("card-bg"), 0.9);
+              // }
+
               &:hover {
                 background: #fff;
                 transform: scale(1.1);
+                // @include themed() {
+                //   background: t("card-bg");
+                // }
               }
 
               [dir="rtl"] & {
@@ -155,11 +170,22 @@
             cursor: pointer;
             transition: all 0.2s;
 
+            @include themed() {
+              border-color: t("border-color");
+            }
+
             &:hover {
               border-color: #40a9ff;
 
+              @include themed() {
+                border-color: t("button-primary");
+              }
+
               .upload-placeholder {
                 color: #40a9ff;
+                @include themed() {
+                  color: t("button-primary");
+                }
               }
             }
 
@@ -173,6 +199,10 @@
               align-items: center;
               gap: 4px;
               color: #999;
+
+              @include themed() {
+                color: t("text-secondary");
+              }
 
               span {
                 font-size: 12px;
@@ -212,10 +242,19 @@
         font-size: 14px;
         transition: all 0.2s;
 
+        @include themed() {
+          border-color: t("input-border");
+        }
+
         &:focus {
           outline: none;
           border-color: #40a9ff;
           box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+
+          @include themed() {
+            border-color: t("button-primary");
+            box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.2);
+          }
         }
 
         &::placeholder {
@@ -264,6 +303,10 @@
           cursor: pointer;
           color: #999;
 
+          @include themed() {
+            color: t("text-secondary");
+          }
+
           [dir="rtl"] & {
             right: auto;
             left: 8px;
@@ -271,6 +314,9 @@
 
           &:hover {
             color: #666;
+            @include themed() {
+              color: t("text-primary");
+            }
           }
         }
       }
@@ -292,8 +338,16 @@
           white-space: nowrap;
           transition: all 0.2s;
 
+          @include themed() {
+            background: rgba(t("button-primary"), 0.1);
+            color: t("button-primary");
+          }
+
           &:hover {
             background: #bae7ff;
+            @include themed() {
+              background: rgba(t("button-primary"), 0.2);
+            }
           }
 
           [dir="rtl"] & {
@@ -312,6 +366,10 @@
       margin-top: 4px;
       font-size: 12px;
       color: #666;
+
+      @include themed() {
+        color: t("text-secondary");
+      }
     }
 
     .checkbox-group {
@@ -330,6 +388,9 @@
 
           &:checked {
             accent-color: #1890ff;
+            @include themed() {
+              accent-color: t("button-primary");
+            }
           }
         }
 
@@ -350,12 +411,15 @@
           font-size: 12px;
           color: #666;
           font-weight: normal;
+
+          @include themed() {
+            color: t("text-secondary");
+          }
         }
       }
     }
   }
 
-  // Additional responsive styles
   @media (max-width: 576px) {
     padding: 16px;
 

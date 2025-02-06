@@ -4,6 +4,7 @@ import { ChevronDown, Copy } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function Price({
   variants,
@@ -12,8 +13,8 @@ function Price({
   stockDisabled,
   onStockDisabledChange,
 }) {
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === "rtl";
+  const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [activeTab, setActiveTab] = useState("all");
   const [locations] = useState(["default", "Elbasha"]);
@@ -132,7 +133,7 @@ function Price({
   };
 
   return (
-    <div className="price-container">
+    <div className={`price-container ${theme}`}>
       <div className="price-header">
         <h2>{t("Stock and Pricing Details")}</h2>
         <InfoTooltip

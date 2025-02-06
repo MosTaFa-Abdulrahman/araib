@@ -1,12 +1,14 @@
 import "./plusTooltip.scss";
-import { Plus } from "lucide-react";
 import { useState } from "react";
+import { Plus } from "lucide-react";
+import { useTheme } from "../../../context/ThemeContext";
 
 function PlusTooltip({ title, onClick }) {
+  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <span className="plus-tooltip">
+    <span className={`plus-tooltip ${theme}`}>
       <Plus
         className="plus-icon"
         onMouseEnter={() => setIsVisible(true)}

@@ -2,9 +2,12 @@ import "./track.scss";
 import { useState, useEffect } from "react";
 import { Info, FileText, Barcode } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function Track({ onTrackChange, stockDisabled }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [isChecked, setIsChecked] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [selectedTrackingType, setSelectedTrackingType] = useState("batch");
@@ -23,10 +26,10 @@ function Track({ onTrackChange, stockDisabled }) {
     if (stockDisabled && isChecked) {
       handleTrackingChange(false);
     }
-  }, [stockDisabled]);
+  }, [stockDisabled, isChecked]);
 
   return (
-    <div className="track-container">
+    <div className={`track-container ${theme}`}>
       <div className="track-header">
         <div className="track-title">
           <input

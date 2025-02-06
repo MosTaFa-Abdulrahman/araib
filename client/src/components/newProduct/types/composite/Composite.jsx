@@ -2,6 +2,7 @@ import "./composite.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 // New Product Components
 import Details from "../../newProductComp/productGlobal/details/Details";
@@ -15,6 +16,7 @@ import toast from "react-hot-toast";
 
 function Composite() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [productDetails, setProductDetails] = useState({
     productName: "",
@@ -47,7 +49,7 @@ function Composite() {
   };
 
   return (
-    <div className="composite">
+    <div className={`composite ${theme}`}>
       {/* Product Details */}
       <Details
         productDetails={productDetails}

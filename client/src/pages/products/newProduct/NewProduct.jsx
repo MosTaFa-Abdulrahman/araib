@@ -2,16 +2,17 @@ import "./newProduct.scss";
 import { useState } from "react";
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Components
 import Simple from "../../../components/newProduct/types/simple/Simple";
 import Variable from "../../../components/newProduct/types/variable/Variable";
 import Composite from "../../../components/newProduct/types/composite/Composite";
 import Digital from "../../../components/newProduct/types/digital/Digital";
-import InfoTooltip from "../../../components/global/infoTooltip/InfoTooltip";
 
 function NewProduct() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [selectedType, setSelectedType] = useState("simple");
 
   const productTypes = [
@@ -48,16 +49,13 @@ function NewProduct() {
   };
 
   return (
-    <div className="newProduct">
+    <div className={`newProduct ${theme}`}>
       <div className="productType">
         <div className="productType__header">
           <h3>
             <span className="required">*</span>
             {t("Product Type")}
             <Info size={16} />
-            {/* <InfoTooltip
-              title={t("select the type of product you are editing")}
-            /> */}
           </h3>
           <p>{t("You can't edit this choice after saving the product")}</p>
         </div>

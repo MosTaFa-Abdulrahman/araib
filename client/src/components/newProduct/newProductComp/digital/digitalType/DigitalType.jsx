@@ -2,9 +2,11 @@ import "./digitalType.scss";
 import { useState } from "react";
 import { Monitor, CreditCard, Trash2, HelpCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
 
 function DigitalType() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [selectedType, setSelectedType] = useState("e-card");
   const [codes, setCodes] = useState([]);
@@ -35,7 +37,7 @@ function DigitalType() {
   };
 
   return (
-    <div className="digital-product-selector">
+    <div className={`digital-product-selector ${theme}`}>
       <div className="product-card">
         <div className="product-header">
           <span className="required">*</span>

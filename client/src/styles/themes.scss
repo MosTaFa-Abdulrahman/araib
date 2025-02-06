@@ -1,0 +1,163 @@
+// Theme Variables
+$themes: (
+  theme-purple: (
+    bg-primary: #290534,
+    bg-secondary: #3c1b65,
+    bg-hover: #472a89,
+    bg-active: #6643b5,
+    bg-submenu: #3c1b65,
+    bg-submenu-hover: #5d317a,
+    border-color: #6643b5,
+    text-primary: #fff,
+    text-secondary: #ddd,
+    header-bg: #1a0323,
+    header-text: #fff,
+    card-bg: #341845,
+    input-bg: #2c1439,
+    input-border: #6643b5,
+    button-primary: #6643b5,
+    button-hover: #7a51d3,
+  ),
+  theme-green: (
+    bg-primary: #0d2222,
+    bg-secondary: #163535,
+    bg-hover: #1a3b3b,
+    bg-active: #2a5c5c,
+    bg-submenu: #163535,
+    bg-submenu-hover: #214d4d,
+    border-color: #2a5c5c,
+    text-primary: #fff,
+    text-secondary: #ddd,
+    header-bg: #081616,
+    header-text: #fff,
+    card-bg: #132e2e,
+    input-bg: #0f2626,
+    input-border: #2a5c5c,
+    button-primary: #2a5c5c,
+    button-hover: #377373,
+  ),
+  theme-dark: (
+    bg-primary: rgb(11, 11, 11),
+    bg-secondary: #1a1a1a,
+    bg-hover: #222222,
+    bg-active: #333333,
+    bg-submenu: #1a1a1a,
+    bg-submenu-hover: #2c2c2c,
+    border-color: #333333,
+    text-primary: #fff,
+    text-secondary: #ddd,
+    header-bg: #000000,
+    header-text: #fff,
+    card-bg: #1c1c1c,
+    input-bg: #151515,
+    input-border: #333333,
+    button-primary: #333333,
+    button-hover: #444444,
+  ),
+);
+
+// Theme Mixins
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $value in $map {
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
+
+// Theme Toggle Styles
+.theme-toggle {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+
+  .theme-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+    .theme-button {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      &.active {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+// Update sidebar styles to use themes
+.sidebar {
+  @include themed() {
+    background-color: t("bg-primary");
+    color: t("text-primary");
+
+    .sidebar-logo {
+      border-bottom: 1px solid t("border-color");
+
+      h2 {
+        color: t("text-primary");
+      }
+    }
+
+    .menu-item {
+      color: t("text-primary");
+
+      &:hover {
+        background-color: t("bg-hover");
+      }
+
+      svg {
+        color: t("text-primary");
+      }
+    }
+
+    .submenu {
+      background-color: t("bg-submenu");
+      border-left-color: t("border-color");
+
+      .submenu-item {
+        color: t("text-secondary");
+
+        &:hover {
+          background-color: t("bg-submenu-hover");
+        }
+
+        &.active {
+          background-color: t("bg-active");
+        }
+      }
+    }
+  }
+}

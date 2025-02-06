@@ -2,11 +2,15 @@ import "./price.scss";
 import { useState } from "react";
 import { Copy, ChevronDown } from "lucide-react";
 import InfoTooltip from "../../../../global/infoTooltip/InfoTooltip";
-import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../../context/ThemeContext";
+
+// RTKQ
+import toast from "react-hot-toast";
 
 function Price({ productDetails }) {
   const { t, i18n } = useTranslation();
+  const { theme } = useTheme();
   const isRTL = i18n.dir() === "rtl";
 
   const [initialCost, setInitialCost] = useState("0.00");
@@ -88,7 +92,7 @@ function Price({ productDetails }) {
   };
 
   return (
-    <div className={`price-container ${isRTL ? "rtl" : ""}`}>
+    <div className={`price-container ${isRTL ? "rtl" : ""} ${theme}`}>
       <div className="price-header">
         <h2>{t("Stock and Pricing")}</h2>
         <InfoTooltip title={t("Configure pricing details for your product")} />
