@@ -12,6 +12,7 @@ import {
 import InfoTooltip from "../../global/infoTooltip/InfoTooltip";
 import MinusTooltip from "../../global/minusTooltip/MinusTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Modal (Batch + Serial + E-Card)
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
@@ -22,6 +23,7 @@ import toast from "react-hot-toast";
 
 function Products({ selectedLocation }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   // Modal States
   const [specialModalOpen, setSpecialModalOpen] = useState(false);
@@ -584,7 +586,7 @@ function Products({ selectedLocation }) {
   };
 
   return (
-    <div className="productsContainer">
+    <div className={`productsContainer ${theme}`}>
       {/* Top */}
       <div className="topContainer">
         <h3>{t("Products")}</h3>

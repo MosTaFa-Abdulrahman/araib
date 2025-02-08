@@ -2,9 +2,12 @@ import "./specialProductModal.scss";
 import { useState, useEffect } from "react";
 import Modal from "../../../../components/global/modal/Modal";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 function SpecialProductModal({ isOpen, onClose, product, onSave }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [items, setItems] = useState([]);
   const [errors, setErrors] = useState({});
 
@@ -67,6 +70,7 @@ function SpecialProductModal({ isOpen, onClose, product, onSave }) {
     }
   };
 
+  // **************************** ((Actions-Buttons)) ***************************** //
   // Handle Save
   const handleSave = () => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -77,7 +81,7 @@ function SpecialProductModal({ isOpen, onClose, product, onSave }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="specialProductModal">
+      <div className={`specialProductModal ${theme}`}>
         <div className="modalHeader">
           <h2>
             {product?.trackType === "serial"

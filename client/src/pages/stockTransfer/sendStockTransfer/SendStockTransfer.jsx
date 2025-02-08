@@ -2,16 +2,19 @@ import "./sendStockTransfer.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useLocation, useParams } from "react-router";
-import { useTranslation } from "react-i18next";
 import Locations from "../../../components/sendStockTransfer/locations/Locations";
 import Products from "../../../components/sendStockTransfer/products/Products";
 import RejectionModal from "../../../components/sendStockTransfer/rejectionModal/RejectionModal";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // RTKQ
 import toast from "react-hot-toast";
 
 function SendStockTransfer() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { invoiceId } = useParams();
   // recieveType: {reject,some,all}
   const location = useLocation();
@@ -42,7 +45,7 @@ function SendStockTransfer() {
 
   return (
     <>
-      <div className="sendStockTransfer">
+      <div className={`sendStockTransfer ${theme}`}>
         <Locations
           selectedSource={selectedSource}
           setSelectedSource={setSelectedSource}

@@ -2,6 +2,7 @@ import "./newStockCount.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Components
 import Details from "../../../components/newStockCount/details/Details";
@@ -12,6 +13,8 @@ import toast from "react-hot-toast";
 
 function NewStockCount() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [detailsData, setDetailsData] = useState(null);
   const [productsData, setProductsData] = useState(null);
@@ -44,7 +47,7 @@ function NewStockCount() {
   };
 
   return (
-    <div className="newStockCount">
+    <div className={`newStockCount ${theme}`}>
       <Details
         onLocationSelect={handleLocationSelect}
         onDataChange={setDetailsData}

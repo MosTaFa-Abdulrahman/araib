@@ -10,11 +10,14 @@ import {
 import InfoTooltip from "../../../components/global/infoTooltip/InfoTooltip";
 import { useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { removeInvoiceById } from "../../../dummyData";
 
 function GetRemoveStockById() {
+  const { theme } = useTheme();
+
   const { invoiceNumber } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -51,7 +54,7 @@ function GetRemoveStockById() {
   };
 
   return (
-    <div className="getRemoveStockById">
+    <div className={`getRemoveStockById ${theme}`}>
       <div className="content-grid">
         {/* Left Column */}
         <div className="details-card">

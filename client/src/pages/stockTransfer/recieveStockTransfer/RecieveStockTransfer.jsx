@@ -2,10 +2,11 @@ import "./recieveStockTransfer.scss";
 import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, ChevronUp, Pen, Save } from "lucide-react";
 import { useLocation, useParams } from "react-router";
-import { useTranslation } from "react-i18next";
 import PlusTooltip from "../../../components/global/plusTooltip/PlusTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 import RejectionModal from "./rejectionModal/RejectionModal";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Date Time
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -18,6 +19,8 @@ import toast from "react-hot-toast";
 
 function RecieveStockTransfer() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { invoiceId } = useParams();
   // recieveType: {reject,some,all}
   const location = useLocation();
@@ -188,7 +191,7 @@ function RecieveStockTransfer() {
 
   return (
     <>
-      <div className="recieveStockTransfer">
+      <div className={`recieveStockTransfer ${theme}`}>
         {/* Transfer Info (Left) */}
         <div className="transfer-info">
           <div className="header-info">
@@ -412,7 +415,7 @@ function RecieveStockTransfer() {
         {recieveType === "reject" ? (
           <>
             <button
-              className="save-new-btn"
+              className="reject-btn"
               onClick={() => setRejectionModalOpen(true)}
             >
               {t("Reject")}

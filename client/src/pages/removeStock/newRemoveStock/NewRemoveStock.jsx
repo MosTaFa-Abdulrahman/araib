@@ -2,6 +2,7 @@ import "./newRemoveStock.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Components
 import Details from "../../../components/newRemoveStock/details/Details";
@@ -12,6 +13,7 @@ import toast from "react-hot-toast";
 
 function NewRemoveStock() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -28,11 +30,11 @@ function NewRemoveStock() {
   };
 
   return (
-    <div className="newRemoveStock">
+    <div className={`newRemoveStock ${theme}`}>
       <Details onLocationSelect={(location) => setSelectedLocation(location)} />
       <Products selectedLocation={selectedLocation} />
 
-      {/* Buttons */}
+      {/*  Actions-Buttons */}
       <div className="action-buttons">
         <button className="cancel-btn" onClick={handleCancel}>
           {t("Cancel")}

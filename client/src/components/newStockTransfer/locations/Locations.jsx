@@ -2,6 +2,7 @@ import "./locations.scss";
 import { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { locations } from "../../../dummyData";
@@ -14,6 +15,8 @@ function Locations({
   setLocationsData,
 }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const dropdownRef = useRef(null);
 
   const [isDestinationOpen, setIsDestinationOpen] = useState(false);
@@ -93,7 +96,7 @@ function Locations({
   };
 
   return (
-    <div className="locations">
+    <div className={`locations ${theme}`}>
       <div className="locations__container">
         {/* Source Section */}
         <div className="locations__section">

@@ -2,9 +2,11 @@ import "./attachments.scss";
 import { useState, useCallback, useEffect } from "react";
 import { Paperclip, Download, Trash2, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 function Attachments({ onFilesChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -75,7 +77,7 @@ function Attachments({ onFilesChange }) {
   }, [files, onFilesChange]);
 
   return (
-    <div className="attachments">
+    <div className={`attachments ${theme}`}>
       <h2 className="attachments__title">{t("Attachments")}</h2>
 
       <div

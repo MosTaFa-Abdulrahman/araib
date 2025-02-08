@@ -1,247 +1,151 @@
 @import "../../../../styles/responsive.scss";
+@import "../../../../styles/themes.scss";
 
 .specialProductModal {
-  width: 600px;
-  max-width: 95vw;
-  padding: 24px;
+  @include themed() {
+    width: 600px;
+    max-width: 95vw;
+    padding: 24px;
 
-  .modalHeader {
-    margin-bottom: 24px;
-
-    h2 {
-      font-size: 1.125rem;
-      color: #333;
-      margin: 0;
-      font-weight: 500;
-    }
-  }
-
-  .modalBody {
-    .productInfo {
-      background: #f8f9fa;
-      padding: 16px;
+    .modalHeader {
       margin-bottom: 24px;
-      border-radius: 6px;
 
-      .info {
-        .name {
-          font-size: 0.875rem;
-          color: #333;
-          margin-bottom: 4px;
-        }
-
-        .sku {
-          font-size: 0.875rem;
-          color: #6c757d;
-        }
-      }
-
-      .quantity {
-        margin-top: 8px;
-        font-size: 0.875rem;
+      h2 {
+        font-size: 1.125rem;
         color: #333;
+        margin: 0;
+        font-weight: 500;
       }
     }
 
-    // Shared form styles
-    .formGrid,
-    .serialForm,
-    .batchForm {
-      .inputRow,
-      .serialRow {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 16px;
-        align-items: flex-start;
-
-        @include sm {
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        .inputGroup {
-          flex: 1;
-          min-width: 0;
-
-          label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.875rem;
-            color: #333;
-
-            .required {
-              color: #dc3545;
-              margin-right: 2px;
-            }
-          }
-
-          select {
-            width: 100%;
-            height: 38px;
-            padding: 8px 12px;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            background-color: white;
-            font-size: 0.875rem;
-            color: #333;
-            outline: none;
-            transition: all 0.2s ease;
-
-            &:focus {
-              border-color: #0ea5e9;
-              box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
-            }
-
-            &.error {
-              border-color: #dc3545;
-            }
-          }
-
-          input {
-            width: 100%;
-            height: 38px;
-            padding: 8px 12px;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            color: #333;
-            outline: none;
-            transition: all 0.2s ease;
-
-            &:focus {
-              border-color: #0ea5e9;
-              box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
-            }
-
-            &:disabled {
-              background-color: #f8f9fa;
-              cursor: not-allowed;
-            }
-
-            &.error {
-              border-color: #dc3545;
-            }
-          }
-
-          .selectedCard {
-            display: block;
-            margin-top: 8px;
-            font-size: 0.875rem;
-            color: #333;
-          }
-
-          .errorText {
-            color: #dc3545;
-            font-size: 0.75rem;
-            margin-top: 4px;
-          }
-        }
-
-        .deleteButton {
-          padding: 8px;
-          border: none;
-          background: none;
-          color: #dc3545;
-          cursor: pointer;
-          margin-top: 32px;
-
-          svg {
-            width: 16px;
-            height: 16px;
-          }
-
-          &:hover {
-            color: darken(#dc3545, 10%);
-          }
-        }
-      }
-    }
-
-    // E-Card specific styles
-    .formGrid {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 8px;
-
-      .inputRow {
+    .modalBody {
+      .productInfo {
         background: #f8f9fa;
         padding: 16px;
-        border-radius: 6px;
-      }
-    }
-
-    // Serial form specific styles
-    .serialForm {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 8px;
-
-      .serialRow {
-        background: #f8f9fa;
-        padding: 16px;
-        border-radius: 6px;
-      }
-    }
-
-    // Batch form specific styles
-    .batchForm {
-      .inputRow {
-        background: #f8f9fa;
-        padding: 16px;
+        margin-bottom: 24px;
         border-radius: 6px;
 
-        .addButton {
-          margin-top: 32px;
-          padding: 8px;
-          border: none;
-          background: #f1f5f9;
-          border-radius: 4px;
-          color: #64748b;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          &:hover {
-            background: #e2e8f0;
-            color: #475569;
+        .info {
+          .name {
+            font-size: 0.875rem;
+            color: #333;
+            margin-bottom: 4px;
           }
 
-          svg {
-            width: 16px;
-            height: 16px;
+          .sku {
+            font-size: 0.875rem;
+            color: #6c757d;
           }
         }
-      }
 
-      .itemsList {
-        margin-top: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        max-height: 300px;
-        overflow-y: auto;
-
-        .itemRow {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 12px;
-          background: #f8f9fa;
-          border-radius: 6px;
+        .quantity {
+          margin-top: 8px;
           font-size: 0.875rem;
           color: #333;
+        }
+      }
 
-          span {
-            flex: 1;
+      // Shared form styles
+      .formGrid,
+      .serialForm,
+      .batchForm {
+        .inputRow,
+        .serialRow {
+          display: flex;
+          gap: 16px;
+          margin-bottom: 16px;
+          align-items: flex-start;
+
+          @include sm {
+            flex-direction: column;
+            gap: 12px;
           }
 
-          button {
+          .inputGroup {
+            flex: 1;
+            min-width: 0;
+
+            label {
+              display: block;
+              margin-bottom: 8px;
+              font-size: 0.875rem;
+              color: #333;
+
+              .required {
+                color: #dc3545;
+                margin-right: 2px;
+              }
+            }
+
+            select {
+              width: 100%;
+              height: 38px;
+              padding: 8px 12px;
+              border: 1px solid t("input-border");
+              border-radius: 4px;
+              background-color: white;
+              font-size: 0.875rem;
+              color: #333;
+              outline: none;
+              transition: all 0.2s ease;
+
+              &:focus {
+                border-color: t("button-primary");
+                box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.1);
+              }
+
+              &.error {
+                border-color: #dc3545;
+              }
+            }
+
+            input {
+              width: 100%;
+              height: 38px;
+              padding: 8px 12px;
+              border: 1px solid t("input-border");
+              border-radius: 4px;
+              font-size: 0.875rem;
+              color: #333;
+              outline: none;
+              transition: all 0.2s ease;
+
+              &:focus {
+                border-color: t("button-primary");
+                box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.1);
+              }
+
+              &:disabled {
+                background-color: #f8f9fa;
+                cursor: not-allowed;
+              }
+
+              &.error {
+                border-color: #dc3545;
+              }
+            }
+
+            .selectedCard {
+              display: block;
+              margin-top: 8px;
+              font-size: 0.875rem;
+              color: #333;
+            }
+
+            .errorText {
+              color: #dc3545;
+              font-size: 0.75rem;
+              margin-top: 4px;
+            }
+          }
+
+          .deleteButton {
             padding: 8px;
             border: none;
             background: none;
             color: #dc3545;
             cursor: pointer;
+            margin-top: 32px;
 
             svg {
               width: 16px;
@@ -254,51 +158,150 @@
           }
         }
       }
-    }
-  }
 
-  .modalFooter {
-    margin-top: 24px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding-top: 16px;
-    border-top: 1px solid #dee2e6;
+      // E-Card specific styles
+      .formGrid {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 8px;
 
-    button {
-      height: 38px;
-      padding: 0 16px;
-      border-radius: 4px;
-      font-size: 0.875rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 80px;
-
-      &.cancelBtn {
-        background: white;
-        border: 1px solid #dee2e6;
-        color: #333;
-
-        &:hover {
+        .inputRow {
           background: #f8f9fa;
+          padding: 16px;
+          border-radius: 6px;
         }
       }
 
-      &.saveButton {
-        background: #0ea5e9;
-        border: none;
-        color: white;
+      // Serial form specific styles
+      .serialForm {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 8px;
 
-        &:hover:not(:disabled) {
-          background: #0284c7;
+        .serialRow {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: 6px;
+        }
+      }
+
+      // Batch form specific styles
+      .batchForm {
+        .inputRow {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: 6px;
+
+          .addButton {
+            margin-top: 32px;
+            padding: 8px;
+            border: none;
+            background: #f1f5f9;
+            border-radius: 4px;
+            color: #64748b;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+              background: #e2e8f0;
+              color: #475569;
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
         }
 
-        &:disabled {
-          background: #e2e8f0;
-          color: #94a3b8;
-          cursor: not-allowed;
+        .itemsList {
+          margin-top: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          max-height: 300px;
+          overflow-y: auto;
+
+          .itemRow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #333;
+
+            span {
+              flex: 1;
+            }
+
+            button {
+              padding: 8px;
+              border: none;
+              background: none;
+              color: #dc3545;
+              cursor: pointer;
+
+              svg {
+                width: 16px;
+                height: 16px;
+              }
+
+              &:hover {
+                color: darken(#dc3545, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .modalFooter {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid t("border-color");
+
+      button {
+        height: 38px;
+        padding: 0 16px;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 80px;
+
+        &.cancelBtn {
+          background: white;
+          border: 1px solid #dee2e6;
+          color: #333;
+
+          &:hover {
+            background: #f8f9fa;
+          }
+        }
+
+        &.saveButton {
+          background: t("button-primary");
+          border: none;
+          color: t("text-primary");
+
+          &:hover:not(:disabled) {
+            background: t("button-hover");
+          }
+
+          &:disabled {
+            background: t("bg-secondary");
+            color: t("text-secondary");
+            cursor: not-allowed;
+          }
         }
       }
     }

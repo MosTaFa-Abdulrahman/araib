@@ -7,10 +7,11 @@ import {
   Printer,
   UndoDot,
 } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import EyeTooltip from "../../../components/global/eyeTooltip/EyeTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "@emotion/react";
 import { formatDate } from "../../../components/global/formatDate";
 
 // Mock Data
@@ -18,6 +19,8 @@ import { transferInvoiceById } from "../../../dummyData";
 
 function GetStockTransferById() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { invoiceNumber } = useParams();
   const navigate = useNavigate();
 
@@ -92,7 +95,7 @@ function GetStockTransferById() {
   };
 
   return (
-    <div className="getStockTransferById">
+    <div className={`getStockTransferById ${theme}`}>
       {/* Transfer Info */}
       <div className="transfer-info">
         <div className="header-info">

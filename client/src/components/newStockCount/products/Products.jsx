@@ -6,11 +6,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import PlusTooltip from "../../global/plusTooltip/PlusTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 import ScanModal from "./scanModal/ScanModal";
+import { useTheme } from "../../../context/ThemeContext";
 
 // RTKQ
 import { mockSearchProductss } from "../../../dummyData";
 
 function Products({ selectedLocation, onDataChange }) {
+  const { theme } = useTheme();
+
   const [rows, setRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -297,7 +300,7 @@ function Products({ selectedLocation, onDataChange }) {
   ];
 
   return (
-    <div className="products-container">
+    <div className={`products-container ${theme}`}>
       {/* Search */}
       <div className="search-bar">
         <div className="search-container">

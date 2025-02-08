@@ -2,8 +2,11 @@ import "./specialProductModal.scss";
 import { useState, useEffect } from "react";
 import Modal from "../../../global/modal/Modal";
 import InfoTooltip from "../../../global/infoTooltip/InfoTooltip";
+import { useTheme } from "../../../../context/ThemeContext";
 
 function SpecialProductModal({ isOpen, onClose, product, onSave }) {
+  const { theme } = useTheme();
+
   const [selectedItems, setSelectedItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [errors, setErrors] = useState({});
@@ -325,7 +328,7 @@ function SpecialProductModal({ isOpen, onClose, product, onSave }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="special-product-modal">
+      <div className={`special-product-modal ${theme}`}>
         <div className="modal-header">
           <h2>{getModalTitle()}</h2>
         </div>

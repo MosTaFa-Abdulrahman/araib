@@ -1,15 +1,17 @@
 import "./specialProductModal.scss";
 import Modal from "../../../../components/global/modal/Modal";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@emotion/react";
 
 function SpecialProductModal({ isOpen, onClose, product }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   if (!isOpen) return null;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="special-product-modal">
+      <div className={`special-product-modal ${theme}`}>
         <div className="modal-header">
           <h2>
             {product?.trackType === "serial"

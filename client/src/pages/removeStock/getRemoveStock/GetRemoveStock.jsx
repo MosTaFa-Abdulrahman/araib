@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 import moment from "moment";
 
 // DummyData
@@ -13,6 +14,7 @@ import { Remove_Invoices } from "../../../dummyData";
 function GetRemoveStock() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const { theme } = useTheme();
 
   const [searchText, setSearchText] = useState("");
 
@@ -26,6 +28,7 @@ function GetRemoveStock() {
     );
   };
 
+  // Columns
   const columns = [
     {
       field: "invoiceNumber",
@@ -177,7 +180,7 @@ function GetRemoveStock() {
   };
 
   return (
-    <div className={`remove-stock ${isRTL ? "rtl" : ""}`}>
+    <div className={`remove-stock ${isRTL ? "rtl" : ""} ${theme}`}>
       {/* Header */}
       <div className="header-section">
         <div className="search-box">

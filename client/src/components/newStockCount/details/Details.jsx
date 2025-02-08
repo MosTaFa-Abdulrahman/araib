@@ -1,8 +1,9 @@
 import "./details.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // DateTime
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -14,6 +15,8 @@ import { locations } from "../../../dummyData";
 
 function Details({ onLocationSelect, onDataChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [selectedLocation, setSelectedLocation] = useState("");
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -43,7 +46,7 @@ function Details({ onLocationSelect, onDataChange }) {
   };
 
   return (
-    <div className="purchase-invoice-details">
+    <div className={`purchase-invoice-details ${theme}`}>
       <h2>{t("Stock Count Details")}</h2>
 
       <div className="form-grid">

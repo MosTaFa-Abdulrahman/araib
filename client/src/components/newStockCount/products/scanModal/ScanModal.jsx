@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Pen, ScanQrCode } from "lucide-react";
 import Modal from "../../../global/modal/Modal";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 function ScanModal({ isOpen, onClose, onAddToCount, mockSearchProductss }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [barcode, setBarcode] = useState("");
   const [scannedProducts, setScannedProducts] = useState([]);
   const [error, setError] = useState("");
@@ -71,7 +74,7 @@ function ScanModal({ isOpen, onClose, onAddToCount, mockSearchProductss }) {
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
-      <div className="scan-container">
+      <div className={`scan-container ${theme}`}>
         <h2 className="scan-title">{t("Barcode Scanning")}</h2>
 
         <form onSubmit={handleBarcodeSubmit} className="scan-form">

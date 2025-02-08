@@ -17,6 +17,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { Transfers_Invoices } from "../../../dummyData";
@@ -24,6 +25,7 @@ import { Transfers_Invoices } from "../../../dummyData";
 function GetStockTransfer() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const { theme } = useTheme();
 
   const [searchText, setSearchText] = useState("");
 
@@ -285,7 +287,7 @@ function GetStockTransfer() {
     return (
       row.invoiceNumber.toLowerCase().includes(searchStr) ||
       row.destinationStockLocationName.toLowerCase().includes(searchStr) ||
-      row.sourceStockLocationName.toLowerCase().includes(searchStr)
+      row?.sourceStockLocationName?.toLowerCase().includes(searchStr)
     );
   });
 
@@ -352,7 +354,7 @@ function GetStockTransfer() {
   };
 
   return (
-    <div className={`getStockTransfer ${isRTL ? "rtl" : ""}`}>
+    <div className={`getStockTransfer ${isRTL ? "rtl" : ""} ${theme}`}>
       {Transfers_Invoices ? (
         <>
           {/* Header */}

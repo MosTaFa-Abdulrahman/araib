@@ -16,6 +16,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // invoices/suppliers/56063/payments/pay-credit
 
@@ -25,6 +26,7 @@ import { Purchase_Invoices } from "../../../dummyData";
 function GetPurchaseOrder() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const { theme } = useTheme();
 
   const [searchText, setSearchText] = useState("");
 
@@ -376,7 +378,7 @@ function GetPurchaseOrder() {
   };
 
   return (
-    <div className={`purchase-order-container ${isRTL ? "rtl" : ""}`}>
+    <div className={`purchase-order-container ${isRTL ? "rtl" : ""} ${theme}`}>
       {Purchase_Invoices ? (
         <>
           {/* Header */}

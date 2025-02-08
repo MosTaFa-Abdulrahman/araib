@@ -2,6 +2,7 @@ import "./newPurchaseOrder.scss";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Components
 import Details from "../../../components/newPurchaseOrder/details/Details";
@@ -13,6 +14,7 @@ import toast from "react-hot-toast";
 
 function NewPurchaseOrder() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   // Core state
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -155,6 +157,7 @@ function NewPurchaseOrder() {
     };
   };
 
+  // ******************************* ((Actions-Buttons)) ************************************** //
   // Handle Save
   const handleSave = () => {
     if (!selectedLocation) {
@@ -199,7 +202,7 @@ function NewPurchaseOrder() {
   };
 
   return (
-    <div className="newPurchaseOrder">
+    <div className={`newPurchaseOrder ${theme}`}>
       <Details
         onLocationSelect={setSelectedLocation}
         onDataChange={setDetailsData}

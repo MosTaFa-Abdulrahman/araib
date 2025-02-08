@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import Modal from "../../../global/modal/Modal";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 // DateTime
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -18,6 +19,8 @@ function SpecialProductModal({
   transferQty = 0,
 }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [items, setItems] = useState([]);
   const [errors, setErrors] = useState({});
   const [selectedCards, setSelectedCards] = useState(new Set());
@@ -492,7 +495,7 @@ function SpecialProductModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="specialProductModal">
+      <div className={`specialProductModal ${theme}`}>
         <div className="modalHeader">
           <h2>
             {product?.Product?.type === "ecard"
@@ -523,7 +526,10 @@ function SpecialProductModal({
           </button>
           <button
             className="saveButton"
-            onClick={() => onSave(items.filter((item) => item.serialNumber))}
+            onClick={() => {
+              onSave(items.filter((item) => item.serialNumber));
+              onClose();
+            }}
             type="button"
             disabled={
               product?.Product?.type === "ecard"

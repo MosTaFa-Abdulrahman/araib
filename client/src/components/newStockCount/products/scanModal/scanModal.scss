@@ -1,189 +1,197 @@
 @import "../../../../styles/responsive.scss";
+@import "../../../../styles/themes.scss";
 
 .scan-container {
-  .scan-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    padding-right: 2rem;
-  }
+  @include themed() {
+    .scan-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-right: 2rem;
+    }
 
-  .scan-form {
-    margin-bottom: 1.5rem;
+    .scan-form {
+      margin-bottom: 1.5rem;
 
-    .form-group {
-      label {
-        display: block;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
+      .form-group {
+        label {
+          display: block;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        input {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid t("input-border");
+          border-radius: 0.375rem;
+          font-size: 0.875rem;
+          transition: border-color 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: t("button-primary");
+          }
+        }
+
+        .helper-text {
+          display: block;
+          font-size: 0.75rem;
+          color: #64748b;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+
+    .error-message {
+      background-color: #fee2e2;
+      color: #dc2626;
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .scan-content {
+      margin-bottom: 1.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+
+      .products-table {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        border: 1px solid t("border-color");
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          th,
+          td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid t("border-color");
+
+            &:last-child {
+              text-align: center;
+            }
+          }
+
+          th {
+            // background-color: t("bg-secondary");
+            background-color: #f8fafc;
+            // color: t("text-primary");
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.875rem;
+          }
+
+          tr {
+            // background-color: t("card-bg");
+            background-color: #f0f9ff;
+
+            td {
+              font-size: 0.875rem;
+
+              input {
+                width: 4rem;
+                padding: 0.25rem;
+                border: 1px solid t("input-border");
+                border-radius: 0.25rem;
+                text-align: center;
+
+                &:focus {
+                  outline: none;
+                  border-color: t("button-primary");
+                }
+              }
+
+              .edit-button {
+                color: t("button-primary");
+                padding: 0.25rem;
+                border: none;
+                background: none;
+                cursor: pointer;
+                transition: color 0.2s ease;
+
+                &:hover {
+                  color: t("button-hover");
+                }
+              }
+            }
+          }
+        }
       }
 
-      input {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #e2e8f0;
+      .empty-state {
+        text-align: center;
+        padding: 2rem 1rem;
+        border-radius: 0.5rem;
+
+        .icon-container {
+          width: 6rem;
+          height: 6rem;
+          margin: 0 auto 1rem;
+
+          .scanQrCodeIcon {
+            color: t("text-secondary");
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: #1e293b;
+        }
+
+        p {
+          color: #64748b;
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+
+      button {
+        padding: 0.5rem 1rem;
         border-radius: 0.375rem;
         font-size: 0.875rem;
-        transition: border-color 0.2s ease;
+        font-weight: 500;
+        transition: all 0.2s ease;
 
-        &:focus {
-          outline: none;
-          border-color: #4c0e5f;
-        }
-      }
+        &.cancel-button {
+          color: #64748b;
+          background: none;
+          border: none;
 
-      .helper-text {
-        display: block;
-        font-size: 0.75rem;
-        color: #64748b;
-        margin-top: 0.25rem;
-      }
-    }
-  }
-
-  .error-message {
-    background-color: #fee2e2;
-    color: #dc2626;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-  }
-
-  .scan-content {
-    margin-bottom: 1.5rem;
-    max-height: 400px;
-    overflow-y: auto;
-
-    .products-table {
-      width: 100%;
-      border-radius: 0.5rem;
-      overflow: hidden;
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-
-        th,
-        td {
-          padding: 0.75rem;
-          text-align: left;
-          border-bottom: 1px solid #e2e8f0;
-
-          &:last-child {
-            text-align: center;
+          &:hover {
+            color: #475569;
           }
         }
 
-        th {
-          background-color: #f8fafc;
-          font-weight: 600;
-          font-size: 0.875rem;
-          color: #475569;
-        }
+        &.add-button {
+          background-color: t("button-primary");
+          color: t("text-primary");
+          border: none;
 
-        tr {
-          background-color: #f0f9ff;
-
-          td {
-            font-size: 0.875rem;
-
-            input {
-              width: 4rem;
-              padding: 0.25rem;
-              border: 1px solid #e2e8f0;
-              border-radius: 0.25rem;
-              text-align: center;
-
-              &:focus {
-                outline: none;
-                border-color: #461156;
-              }
-            }
-
-            .edit-button {
-              color: #4c0e5f;
-              padding: 0.25rem;
-              border: none;
-              background: none;
-              cursor: pointer;
-              transition: color 0.2s ease;
-
-              &:hover {
-                color: #71188b;
-              }
-            }
+          &:hover {
+            background-color: t("button-hover");
           }
-        }
-      }
-    }
 
-    .empty-state {
-      text-align: center;
-      padding: 2rem 1rem;
-
-      .icon-container {
-        width: 6rem;
-        height: 6rem;
-        margin: 0 auto 1rem;
-
-        .scanQrCodeIcon {
-          color: #d0a9dc;
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-      }
-
-      h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #1e293b;
-      }
-
-      p {
-        color: #64748b;
-        font-size: 0.875rem;
-      }
-    }
-  }
-
-  .action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-
-      &.cancel-button {
-        color: #64748b;
-        background: none;
-        border: none;
-
-        &:hover {
-          color: #475569;
-        }
-      }
-
-      &.add-button {
-        background-color: #4c0e5f;
-        color: white;
-        border: none;
-
-        &:hover {
-          background-color: #681581;
-        }
-
-        &:disabled {
-          background-color: #e2e8f0;
-          cursor: not-allowed;
+          &:disabled {
+            background-color: #e2e8f0;
+            cursor: not-allowed;
+          }
         }
       }
     }

@@ -12,12 +12,14 @@ import {
 import PlusTooltip from "../../global/plusTooltip/PlusTooltip";
 import SpecialProductModal from "./specialProductModal/SpecialProductModal";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { mockSearchProductss } from "../../../dummyData";
 
 function Products({ selectedSource, selectedDestinations, locationsData }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [productsByDestination, setProductsByDestination] = useState({});
   const [searchTerms, setSearchTerms] = useState({});
@@ -665,7 +667,7 @@ function Products({ selectedSource, selectedDestinations, locationsData }) {
   }
 
   return (
-    <div className="products">
+    <div className={`products ${theme}`}>
       {selectedDestinations?.map((destination) => (
         <div key={destination} className="products__location">
           <div

@@ -1,17 +1,22 @@
 import "./rejectionModal.scss";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../../context/ThemeContext";
 
 function RejectionModal({ isOpen, onClose, onReject }) {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const [selectedReason, setSelectedReason] = useState("");
   const [customReason, setCustomReason] = useState("");
 
   const reasons = [
-    "Missing products",
-    "Additional products",
-    "Different products",
-    "Damaged products",
-    "Other",
+    t("Missing products"),
+    t("Additional products"),
+    t("Different products"),
+    t("Damaged products"),
+    t("Other"),
   ];
 
   const handleSubmit = () => {
@@ -24,7 +29,7 @@ function RejectionModal({ isOpen, onClose, onReject }) {
   if (!isOpen) return null;
 
   return (
-    <div className="rejection-modal-overlay">
+    <div className={`rejection-modal-overlay ${theme}`}>
       <div className="rejection-modal">
         <div className="rejection-modal-header">
           <h2>Add Rejection Reason</h2>

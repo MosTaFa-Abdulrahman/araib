@@ -12,14 +12,17 @@ import {
 import InfoTooltip from "../../../components/global/infoTooltip/InfoTooltip";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { singlePurchaseOrder } from "../../../dummyData";
 import toast from "react-hot-toast";
 
 function GetPurchaseById() {
-  const { id } = useParams();
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
+  const { id } = useParams();
 
   const [expandedProduct, setExpandedProduct] = useState(null);
   const [showTotals, setShowTotals] = useState(true);
@@ -129,7 +132,7 @@ function GetPurchaseById() {
   const handleCancel = () => {};
 
   return (
-    <div className="getPurchaseById">
+    <div className={`getPurchaseById ${theme}`}>
       <div className="content-grid">
         {/* Left Column */}
         <div className="details-card">
@@ -438,7 +441,7 @@ function GetPurchaseById() {
           <div className="paidContainer">
             <div className="paidContent">
               <div className="paidTitle">{t("Paid Amount")}</div>
-              <div style={{ color: "#4c0e5f" }}>
+              <div className="paidValue">
                 {formatCurrency(singlePurchaseOrder?.paidAmount)}
               </div>
             </div>
