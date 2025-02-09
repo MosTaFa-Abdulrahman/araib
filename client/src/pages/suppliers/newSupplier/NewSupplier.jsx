@@ -2,6 +2,7 @@ import "./newSupplier.scss";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Save, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Country list - you can expand this
 const countries = [
@@ -70,6 +71,7 @@ import toast from "react-hot-toast";
 
 function NewSupplier() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [countrySearch, setCountrySearch] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
@@ -144,6 +146,7 @@ function NewSupplier() {
     country.toLowerCase().includes(countrySearch.toLowerCase())
   );
 
+  //  *********************************** ((Actions-Buttons)) *********************************** //
   // Handle Save
   const handleSave = () => {
     try {
@@ -183,7 +186,7 @@ function NewSupplier() {
   };
 
   return (
-    <div className="newSupplier">
+    <div className={`newSupplier ${theme}`}>
       <div className="form-container">
         <h2 className="section-title">Personal Information</h2>
 

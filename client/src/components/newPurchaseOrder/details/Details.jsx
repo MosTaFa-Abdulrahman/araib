@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Search, X } from "lucide-react";
 import PlusTooltip from "../../global/plusTooltip/PlusTooltip";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // DateTime
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -19,6 +20,7 @@ const countries = ["Saudi Arabia", "Canada", "Egypt", "England"];
 
 function Details({ onLocationSelect, onDataChange }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMoreDetails, setShowMoreDetails] = useState(false);
@@ -101,7 +103,7 @@ function Details({ onLocationSelect, onDataChange }) {
   ]);
 
   return (
-    <div className="purchase-invoice-details">
+    <div className={`purchase-invoice-details ${theme}`}>
       <h2>{t("Purchase Invoice Details")}</h2>
 
       <div className="form-grid">

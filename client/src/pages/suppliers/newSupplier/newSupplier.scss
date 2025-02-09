@@ -1,279 +1,283 @@
 @import "../../../styles/responsive.scss";
+@import "../../../styles/themes";
 
 .newSupplier {
-  padding: 20px;
-  min-height: calc(100vh - 60px);
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-top: 60px;
-  background-color: #fff;
+  @include themed() {
+    padding: 20px;
+    min-height: calc(100vh - 60px);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 60px;
+    background-color: #fff;
 
-  .form-container {
-    background: #fff;
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    .form-container {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 24px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
-    }
+      .section-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 24px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid t("border-color");
+      }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-bottom: 32px;
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-bottom: 32px;
 
-      @include md {
-        grid-template-columns: 1fr;
+        @include md {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-column {
+        .form-group {
+          margin-bottom: 20px;
+
+          label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+
+            .required {
+              color: #ff4d4f;
+              margin-left: 4px;
+            }
+          }
+
+          input,
+          .selected-country {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid t("border-color");
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #fff;
+
+            &:focus {
+              outline: none;
+              border-color: t("button-primary");
+              box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.1);
+            }
+
+            &.error {
+              border-color: #ff4d4f;
+
+              &:focus {
+                box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.1);
+              }
+            }
+
+            &::placeholder {
+              color: #bfbfbf;
+            }
+          }
+
+          .error-message {
+            display: block;
+            color: #ff4d4f;
+            font-size: 12px;
+            margin-top: 4px;
+          }
+
+          // Country Select Styles
+          .country-select {
+            position: relative;
+
+            .selected-country {
+              cursor: pointer;
+              user-select: none;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background-color: #fff;
+
+              &:hover {
+                border-color: t("button-primary");
+              }
+            }
+
+            .country-dropdown {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              right: 0;
+              background: #fff;
+              border: 1px solid t("border-color");
+              border-radius: 4px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+              z-index: 1000;
+              max-height: 300px;
+              overflow-y: auto;
+              margin-top: 4px;
+
+              .search-box {
+                padding: 8px;
+                border-bottom: 1px solid t("border-color");
+                position: sticky;
+                top: 0;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                svg {
+                  color: #666;
+                  min-width: 16px;
+                }
+
+                input {
+                  border: none;
+                  outline: none;
+                  width: 100%;
+                  padding: 4px;
+                  font-size: 14px;
+                  background: transparent;
+
+                  &:focus {
+                    box-shadow: none;
+                  }
+
+                  &:focus-visible {
+                    outline: none;
+                    background-color: rgba(76, 14, 95, 0.03);
+                  }
+                }
+              }
+
+              .country-list {
+                .country-option {
+                  padding: 8px 12px;
+                  cursor: pointer;
+                  transition: background-color 0.2s;
+
+                  &:hover {
+                    background-color: #f5f5f5;
+                  }
+
+                  &.selected {
+                    background-color: t("bg-active");
+                    color: t("button-primary");
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
 
-    .form-column {
-      .form-group {
-        margin-bottom: 20px;
+    // Action Buttons
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 16px;
+      border-top: 1px solid t("border-color");
+      margin-top: 24px;
+      background: #fff;
 
-        label {
-          display: block;
-          font-size: 14px;
-          font-weight: 500;
-          color: #333;
-          margin-bottom: 8px;
+      button {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 16px;
+        transition: all 0.2s;
+        cursor: pointer;
+        border-radius: 4px;
 
-          .required {
-            color: #ff4d4f;
-            margin-left: 4px;
+        &.cancel-btn {
+          color: #666;
+          background: transparent;
+          border: none;
+
+          &:hover {
+            color: #333;
+            background-color: #f5f5f5;
           }
         }
 
-        input,
-        .selected-country {
-          width: 100%;
-          padding: 11px 12px;
-          border: 1px solid #d9d9d9;
-          border-radius: 4px;
-          font-size: 14px;
-          transition: all 0.3s;
-          background: #fff;
+        &.save-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background-color: t("button-primary");
+          color: t("text-primary");
+          border: 1px solid t("button-primary");
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          &:hover {
+            background-color: t("button-hover");
+            border-color: t("button-hover");
+          }
 
           &:focus {
             outline: none;
-            border-color: #4c0e5f;
-            box-shadow: 0 0 0 2px rgba(76, 14, 95, 0.1);
-          }
-
-          &.error {
-            border-color: #ff4d4f;
-
-            &:focus {
-              box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1);
-            }
-          }
-
-          &::placeholder {
-            color: #bfbfbf;
-          }
-        }
-
-        .error-message {
-          display: block;
-          color: #ff4d4f;
-          font-size: 12px;
-          margin-top: 4px;
-        }
-
-        // Country Select Styles
-        .country-select {
-          position: relative;
-
-          .selected-country {
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #fff;
-
-            &:hover {
-              border-color: #4c0e5f;
-            }
-          }
-
-          .country-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #fff;
-            border: 1px solid #d9d9d9;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            max-height: 300px;
-            overflow-y: auto;
-            margin-top: 4px;
-
-            .search-box {
-              padding: 8px;
-              border-bottom: 1px solid #eee;
-              position: sticky;
-              top: 0;
-              background: #fff;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-
-              svg {
-                color: #666;
-                min-width: 16px;
-              }
-
-              input {
-                border: none;
-                outline: none;
-                width: 100%;
-                padding: 4px;
-                font-size: 14px;
-
-                &:focus {
-                  box-shadow: none;
-                }
-                // Auto-focus styles
-                &:focus-visible {
-                  outline: none;
-                  background-color: rgba(76, 14, 95, 0.03);
-                }
-              }
-            }
-
-            .country-list {
-              .country-option {
-                padding: 8px 12px;
-                cursor: pointer;
-                transition: background-color 0.2s;
-
-                &:hover {
-                  background-color: #f5f5f5;
-                }
-
-                &.selected {
-                  background-color: rgba(76, 14, 95, 0.1);
-                  color: #4c0e5f;
-                }
-              }
-            }
+            box-shadow: 0 0 0 2px rgba(t("button-primary"), 0.2);
           }
         }
       }
     }
-  }
 
-  // Action Buttons
-  .action-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 16px;
-    border-top: 1px solid #d9d9d9;
-    margin-top: 24px;
-    background: #fff;
-
-    button {
-      font-size: 14px;
-      font-weight: 500;
-      padding: 8px 16px;
-      transition: all 0.2s;
-      cursor: pointer;
-      border-radius: 4px;
-
-      &.cancel-btn {
-        color: #666;
-        background: transparent;
-        border: none;
-
-        &:hover {
-          color: #333;
-          background-color: #f5f5f5;
-        }
-      }
-
-      &.save-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background-color: #4c0e5f;
-        color: white;
-        border: 1px solid #4c0e5f;
-
-        svg {
-          width: 16px;
-          height: 16px;
-        }
-
-        &:hover {
-          background-color: #621779;
-          border-color: #7f3496;
-        }
-
-        &:focus {
-          outline: none;
-          box-shadow: 0 0 0 2px rgba(76, 14, 95, 0.2);
-        }
-      }
-    }
-  }
-
-  // Responsive Styles
-  @include lg {
-    padding: 16px;
-    margin-top: 40px;
-  }
-
-  @include md {
-    .form-container {
-      padding: 20px;
-
-      .form-grid {
-        gap: 20px;
-      }
-    }
-  }
-
-  @include sm {
-    padding: 12px;
-    margin-top: 32px;
-
-    .form-container {
+    // Responsive Styles
+    @include lg {
       padding: 16px;
+      margin-top: 40px;
+    }
 
-      .section-title {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
+    @include md {
+      .form-container {
+        padding: 20px;
 
-      .form-grid {
-        gap: 16px;
-      }
-
-      .form-group {
-        margin-bottom: 16px;
+        .form-grid {
+          gap: 20px;
+        }
       }
     }
 
-    .action-buttons {
+    @include sm {
       padding: 12px;
-      gap: 8px;
+      margin-top: 32px;
 
-      button {
-        padding: 6px 12px;
-        font-size: 13px;
+      .form-container {
+        padding: 16px;
+
+        .section-title {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+
+        .form-grid {
+          gap: 16px;
+        }
+
+        .form-group {
+          margin-bottom: 16px;
+        }
+      }
+
+      .action-buttons {
+        padding: 12px;
+        gap: 8px;
+
+        button {
+          padding: 6px 12px;
+          font-size: 13px;
+        }
       }
     }
   }

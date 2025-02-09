@@ -1,449 +1,338 @@
 @import "../../../styles/responsive.scss";
+@import "../../../styles/themes";
 
 .payments {
-  padding: 20px 40px;
-  background-color: #f8fafc;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  margin-top: 60px;
+  @include themed() {
+    padding: 20px 40px;
+    background-color: #f8fafc;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
 
-  &[dir="rtl"] {
-    .search-box {
-      .search-icon {
-        left: auto;
-        right: 12px;
+    &[dir="rtl"] {
+      .search-box {
+        .search-icon {
+          left: auto;
+          right: 12px;
+        }
+
+        input {
+          padding: 12px 40px 12px 12px;
+          text-align: right;
+        }
       }
 
-      input {
-        padding: 12px 40px 12px 12px;
-        text-align: right;
-      }
-    }
-
-    .action-buttons {
-      &.rtl {
-        justify-content: flex-start;
-        flex-direction: row-reverse;
-      }
-    }
-
-    .MuiDataGrid-root {
-      .MuiDataGrid-cell {
-        text-align: right !important;
+      .action-buttons {
+        &.rtl {
+          justify-content: flex-start;
+          flex-direction: row-reverse;
+        }
       }
 
-      .MuiDataGrid-columnHeader {
-        text-align: right !important;
-
-        .MuiDataGrid-columnHeaderTitle {
+      .MuiDataGrid-root {
+        .MuiDataGrid-cell {
           text-align: right !important;
         }
-      }
-    }
-  }
 
-  .header-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
+        .MuiDataGrid-columnHeader {
+          text-align: right !important;
 
-    .search-box {
-      flex: 1;
-      max-width: 600px;
-      position: relative;
-
-      .search-icon {
-        position: absolute;
-        left: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #6b7280;
-      }
-
-      input {
-        width: 100%;
-        padding: 12px 12px 12px 40px;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        font-size: 14px;
-        outline: none;
-        background: white;
-
-        &:focus {
-          border-color: #0ea5e9;
-          box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.2);
-        }
-
-        &::placeholder {
-          color: #9ca3af;
+          .MuiDataGrid-columnHeaderTitle {
+            text-align: right !important;
+          }
         }
       }
     }
 
-    .action-section {
+    .header-section {
       display: flex;
-      gap: 12px;
+      justify-content: space-between;
       align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
 
-      .new-invoice-btn {
-        background-color: #4c0e5f;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 40px;
+      .search-box {
+        flex: 1;
+        max-width: 600px;
+        position: relative;
 
-        &:hover {
-          background-color: #621779;
+        .search-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6b7280;
+        }
+
+        input {
+          width: 100%;
+          padding: 12px 12px 12px 40px;
+          border: 1px solid t("input-border");
+          border-radius: 8px;
+          font-size: 14px;
+          outline: none;
+          background: white;
+
+          &:focus {
+            border-color: t("button-primary");
+            box-shadow: 0 0 0 1px rgba(t("button-primary"), 0.2);
+          }
+
+          &::placeholder {
+            color: #9ca3af;
+          }
         }
       }
 
-      .export-btn {
+      .action-section {
         display: flex;
+        gap: 12px;
         align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        border: 1px solid #621779;
-        border-radius: 6px;
-        background: white;
-        color: #374151;
-        font-size: 14px;
-        font-weight: 500;
-        cursor: pointer;
-        min-height: 40px;
-        color: #621779;
 
-        &:hover {
-          background-color: #f9fafb;
+        .export-btn {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 16px;
+          border: 1px solid t("button-primary");
+          border-radius: 6px;
+          background: white;
+          color: t("button-primary");
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          min-height: 40px;
+
+          &:hover {
+            background-color: #f9fafb;
+          }
         }
       }
     }
-  }
 
-  // .data-grid-paper {
-  //   flex: 1;
-  //   min-height: 0;
-  //   background: white;
-  //   border-radius: 8px;
-  //   overflow: hidden;
-  //   --DataGrid-pinnedZIndex: 3;
+    .data-grid-paper {
+      flex: 1;
+      min-height: 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      --DataGrid-pinnedZIndex: 3;
 
-  //   .MuiDataGrid-root {
-  //     .MuiDataGrid-columnHeader--pinned,
-  //     .MuiDataGrid-cell--pinned {
-  //       background-color: #fff;
-  //       z-index: 2;
-  //     }
+      .MuiDataGrid-root {
+        --unstable_ViewportCrossSize: 1px;
 
-  //     .MuiDataGrid-columnHeader--pinned {
-  //       background-color: #f5f5f5;
-  //     }
-
-  //     .MuiDataGrid-cell--pinned {
-  //       box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1);
-  //     }
-
-  //     .MuiDataGrid-virtualScroller {
-  //       &::-webkit-scrollbar {
-  //         width: 8px;
-  //         height: 8px;
-  //       }
-
-  //       &::-webkit-scrollbar-track {
-  //         background: #f1f1f1;
-  //       }
-
-  //       &::-webkit-scrollbar-thumb {
-  //         background: #888;
-  //         border-radius: 4px;
-
-  //         &:hover {
-  //           background: #555;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  .data-grid-paper {
-    flex: 1;
-    min-height: 0;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    --DataGrid-pinnedZIndex: 3;
-
-    .MuiDataGrid-root {
-      --unstable_ViewportCrossSize: 1px;
-      // Make headers bold
-      .MuiDataGrid-columnHeaders {
-        background-color: #f5f5f5;
-        min-height: 48px !important;
-        max-height: 48px !important;
-        line-height: 48px !important;
-        font-weight: 600 !important;
-      }
-
-      .MuiDataGrid-columnHeader {
-        height: 48px !important;
-        max-height: 48px !important;
-        line-height: 48px !important;
-
-        .MuiDataGrid-columnHeaderTitle {
-          font-weight: 700 !important;
-          color: #111827;
+        .MuiDataGrid-columnHeaders {
+          background-color: #f5f5f5;
+          min-height: 48px !important;
+          max-height: 48px !important;
+          line-height: 48px !important;
+          font-weight: 600 !important;
         }
-      }
 
-      // .MuiDataGrid-virtualScrollerRenderZone {
-      //   transform: none !important;
-      // }
-      // .MuiDataGrid-virtualScrollerContent {
-      //   transform: none !important;
-      // }
-      .data-grid-paper {
-        .MuiDataGrid-root {
-          .MuiDataGrid-virtualScroller {
-            overflow-x: auto;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch; // For smooth scrolling on iOS
+        .MuiDataGrid-columnHeader {
+          height: 48px !important;
+          max-height: 48px !important;
+          line-height: 48px !important;
 
-            &::-webkit-scrollbar {
-              width: 8px;
-              height: 8px;
-            }
+          .MuiDataGrid-columnHeaderTitle {
+            font-weight: 700 !important;
+            color: #111827;
+          }
+        }
 
-            &::-webkit-scrollbar-track {
-              background: #f1f1f1;
-              border-radius: 4px;
-            }
+        .data-grid-paper {
+          .MuiDataGrid-root {
+            .MuiDataGrid-virtualScroller {
+              overflow-x: auto;
+              overflow-y: auto;
+              -webkit-overflow-scrolling: touch;
 
-            &::-webkit-scrollbar-thumb {
-              background: #888;
-              border-radius: 4px;
+              &::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+              }
 
-              &:hover {
-                background: #555;
+              &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 4px;
+
+                &:hover {
+                  background: #555;
+                }
               }
             }
           }
         }
-      }
 
-      .MuiDataGrid-columnHeaders {
-        background-color: #f5f5f5;
-        min-height: 48px !important;
-        max-height: 48px !important;
-        line-height: 48px !important;
-      }
-
-      .MuiDataGrid-columnHeader {
-        height: 48px !important;
-        max-height: 48px !important;
-        line-height: 48px !important;
-      }
-
-      .MuiDataGrid-row {
-        min-height: 52px !important;
-        max-height: none !important;
-
-        &:hover {
-          background-color: #f9fafb;
-        }
-      }
-
-      .MuiDataGrid-cell {
-        padding: 12px 16px;
-        overflow: visible;
-        white-space: normal;
-        min-height: 52px !important;
-        max-height: none !important;
-        border-bottom: 1px solid #f3f4f6;
-      }
-
-      .MuiDataGrid-cell--pinned,
-      .MuiDataGrid-columnHeader--pinned {
-        background-color: inherit;
-      }
-
-      .MuiDataGrid-cell--pinned {
-        &[data-field="invoiceNumber"],
-        &[data-field="actions"] {
-          background-color: #fff;
-          z-index: var(--DataGrid-pinnedZIndex);
-
-          &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            pointer-events: none;
-          }
-        }
-
-        &[data-field="invoiceNumber"] {
-          &::after {
-            right: -4px;
-            box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.2);
-          }
-        }
-
-        &[data-field="actions"] {
-          &::after {
-            left: -4px;
-            box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.2);
-          }
-        }
-      }
-
-      .MuiDataGrid-columnHeader--pinned {
-        &[data-field="invoiceNumber"],
-        &[data-field="actions"] {
+        .MuiDataGrid-columnHeaders {
           background-color: #f5f5f5;
-          z-index: calc(var(--DataGrid-pinnedZIndex) + 1);
-
-          &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            pointer-events: none;
-          }
+          min-height: 48px !important;
+          max-height: 48px !important;
+          line-height: 48px !important;
         }
 
-        &[data-field="invoiceNumber"] {
-          &::after {
-            right: -4px;
-            box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.2);
-          }
-        }
-
-        &[data-field="actions"] {
-          &::after {
-            left: -4px;
-            box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.2);
-          }
-        }
-      }
-
-      .MuiDataGrid-virtualScroller {
-        &::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 4px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: #888;
-          border-radius: 4px;
+        .MuiDataGrid-row {
+          min-height: 52px !important;
+          max-height: none !important;
 
           &:hover {
-            background: #555;
+            background-color: #f9fafb;
+          }
+        }
+
+        .MuiDataGrid-cell {
+          padding: 12px 16px;
+          overflow: visible;
+          white-space: normal;
+          min-height: 52px !important;
+          max-height: none !important;
+          border-bottom: 1px solid t("border-color");
+        }
+
+        .MuiDataGrid-cell--pinned,
+        .MuiDataGrid-columnHeader--pinned {
+          background-color: inherit;
+        }
+
+        .MuiDataGrid-cell--pinned {
+          &[data-field="invoiceNumber"],
+          &[data-field="actions"] {
+            background-color: #fff;
+            z-index: var(--DataGrid-pinnedZIndex);
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              width: 4px;
+              pointer-events: none;
+            }
+          }
+
+          &[data-field="invoiceNumber"] {
+            &::after {
+              right: -4px;
+              box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.2);
+            }
+          }
+
+          &[data-field="actions"] {
+            &::after {
+              left: -4px;
+              box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+
+        .MuiDataGrid-columnHeader--pinned {
+          &[data-field="invoiceNumber"],
+          &[data-field="actions"] {
+            background-color: #f5f5f5;
+            z-index: calc(var(--DataGrid-pinnedZIndex) + 1);
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              width: 4px;
+              pointer-events: none;
+            }
+          }
+
+          &[data-field="invoiceNumber"] {
+            &::after {
+              right: -4px;
+              box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.2);
+            }
+          }
+
+          &[data-field="actions"] {
+            &::after {
+              left: -4px;
+              box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+
+        .MuiDataGrid-virtualScroller {
+          &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+
+            &:hover {
+              background: #555;
+            }
           }
         }
       }
     }
-  }
 
-  .invoice-link {
-    color: #0ea5e9;
-    text-decoration: none;
-    font-weight: 500;
+    .invoice-link {
+      color: t("button-primary");
+      text-decoration: none;
+      font-weight: 500;
 
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .status-chip {
-    margin: 5px 0px;
-    border-radius: 16px;
-    font-size: 11px;
-    font-weight: 500;
-    text-align: center;
-    min-width: 80px;
-    display: inline-block;
-    padding: 4px 12px;
-
-    &.fully-paid {
-      background-color: #dcfce7;
-      color: #166534;
-    }
-
-    &.partially-paid {
-      background-color: #fef9c3;
-      color: #854d0e;
-    }
-
-    &.not-paid {
-      background-color: #fee2e2;
-      color: #991b1b;
-    }
-
-    &.draft {
-      background-color: #f3f4f6;
-      color: #4b5563;
-    }
-
-    &.completed {
-      background-color: #dcfce7;
-      color: #166534;
-    }
-  }
-
-  .action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-    width: 100%;
-    padding: 0 4px;
-
-    .icon {
-      cursor: pointer;
-      color: #6b7280;
-      padding: 4px;
-      border-radius: 4px;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 28px;
-      width: 28px;
-
-      &:hover:not(.disabled) {
-        color: #374151;
-        background-color: #f3f4f6;
+      &:hover {
+        text-decoration: underline;
       }
+    }
 
-      &.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        &:hover {
-          background-color: transparent;
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      width: 100%;
+      padding: 0 4px;
+
+      .icon {
+        cursor: pointer;
+        color: #6b7280;
+        padding: 4px;
+        border-radius: 4px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 28px;
+        width: 28px;
+
+        &:hover:not(.disabled) {
+          color: t("text-primary");
+          background-color: t("bg-hover");
+        }
+
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          &:hover {
+            background-color: transparent;
+          }
         }
       }
     }
   }
 }
-
 // Responsive Design
 @include respond-to(md) {
   .payments {

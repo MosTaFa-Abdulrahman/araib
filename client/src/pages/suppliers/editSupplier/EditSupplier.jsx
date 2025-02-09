@@ -1,7 +1,9 @@
 import "./editSupplier.scss";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Save, Search } from "lucide-react";
+import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 import moment from "moment";
 
 const countries = [
@@ -68,10 +70,11 @@ const countries = [
 // RTKQ
 import { singleSupplier } from "../../../dummyData";
 import toast from "react-hot-toast";
-import { useParams } from "react-router";
 
 function EditSupplier() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { id } = useParams();
 
   const [countrySearch, setCountrySearch] = useState("");
@@ -168,7 +171,7 @@ function EditSupplier() {
     country.toLowerCase().includes(countrySearch.toLowerCase())
   );
 
-  // ************************* //
+  // ********************* ((Actions-Buttons)) ***************************** //
   // Handle Save
   const handleSave = () => {
     try {
@@ -214,7 +217,7 @@ function EditSupplier() {
   };
 
   return (
-    <div className="editSupplier">
+    <div className={`editSupplier ${theme}`}>
       <div className="form-container">
         <h2 className="section-title">Personal Information</h2>
         <div className="form-grid">

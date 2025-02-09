@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // /invoices/suppliers/5566/payments/receive-debit
 
@@ -18,6 +19,8 @@ import toast from "react-hot-toast";
 
 function RecieveDebitAmount() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { supplierId } = useParams();
 
   const [selectedPayment, setSelectedPayment] = useState("");
@@ -126,7 +129,7 @@ function RecieveDebitAmount() {
   };
 
   return (
-    <div className="recieveDebitAmount">
+    <div className={`recieveDebitAmount ${theme}`}>
       <div className="content-wrapper">
         {/* Payment Select */}
         <div className="payment-section">

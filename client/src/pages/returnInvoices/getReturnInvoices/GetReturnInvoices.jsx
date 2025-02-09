@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 import moment from "moment";
 
 // /invoices/suppliers/56062/payments/receive-debit
@@ -24,6 +25,7 @@ import { Return_Invoices } from "../../../dummyData";
 function GetReturnInvoices() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const { theme } = useTheme();
 
   const [searchText, setSearchText] = useState("");
 
@@ -299,7 +301,7 @@ function GetReturnInvoices() {
   };
 
   return (
-    <div className={`return-order-container ${isRTL ? "rtl" : ""}`}>
+    <div className={`return-order-container ${isRTL ? "rtl" : ""} ${theme}`}>
       {/* Header */}
       <div className="header-section">
         <div className="search-box">

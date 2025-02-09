@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../../context/ThemeContext";
 
 // Mock Data
 import { payCreditPurchaseData } from "../../../dummyData";
@@ -16,6 +17,8 @@ import toast from "react-hot-toast";
 
 function PayCreditAmount() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+
   const { supplierId } = useParams();
 
   const [selectedPayment, setSelectedPayment] = useState("Debit");
@@ -91,7 +94,7 @@ function PayCreditAmount() {
     return (value || 0).toFixed(2);
   };
 
-  // ************************* //
+  // *********************** ((Actions-Buttons)) ******************************* //
   // Handle Pay
   const handlePay = () => {
     try {
@@ -124,7 +127,7 @@ function PayCreditAmount() {
   };
 
   return (
-    <div className="payCreditAmount">
+    <div className={`payCreditAmount ${theme}`}>
       <div className="content-wrapper">
         {/* Payment Select */}
         <div className="payment-section">
