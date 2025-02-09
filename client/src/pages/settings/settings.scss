@@ -1,0 +1,81 @@
+@import "../../styles/responsive.scss";
+@import "../../styles/themes";
+
+.settings {
+  @include themed() {
+    width: 100%;
+    margin-top: 55px;
+
+    &__nav {
+      width: 100%;
+      border-bottom: 1px solid t("border-color");
+      overflow-x: auto;
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE/Edge
+
+      &::-webkit-scrollbar {
+        display: none; // Chrome/Safari/Opera
+      }
+    }
+
+    &__nav-container {
+      display: flex;
+      min-width: min-content;
+      padding: 0 1rem;
+
+      @include respond-from(lg) {
+        justify-content: center;
+      }
+    }
+
+    &__nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.25rem;
+      color: #6b7280;
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: t("button-primary");
+      }
+
+      &--active {
+        color: t("button-primary");
+        border-bottom-color: t("button-primary");
+      }
+
+      @include respond-to(md) {
+        padding: 0.75rem 1rem;
+      }
+
+      @include respond-to(sm) {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+    &__nav-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+
+      @include respond-to(sm) {
+        font-size: 0.75rem;
+      }
+    }
+
+    &__content {
+      padding: 2rem;
+
+      @include respond-to(md) {
+        padding: 1.5rem;
+      }
+
+      @include respond-to(sm) {
+        padding: 1rem;
+      }
+    }
+  }
+}

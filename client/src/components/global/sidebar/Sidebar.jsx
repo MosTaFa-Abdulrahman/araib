@@ -81,7 +81,7 @@ const Sidebar = ({ isOpen }) => {
     {
       icon: <Settings />,
       label: t("Settings"),
-      path: "/settings",
+      path: "/users-settings",
     },
   ];
 

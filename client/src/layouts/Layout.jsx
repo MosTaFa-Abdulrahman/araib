@@ -41,6 +41,10 @@ import GetRemoveStockById from "../pages/removeStock/getRemoveStockById/GetRemov
 import GetStockCount from "../pages/stockCount/getStockCount/GetStockCount";
 import NewStockCount from "../pages/stockCount/newStockCount/NewStockCount";
 import GetStockCountById from "../pages/stockCount/getStockCountById/GetStockCountById";
+// Settings
+import Settings from "../pages/settings/Settings";
+import NewUser from "../components/settings/users/newUser/NewUser";
+import NewLocation from "../components/settings/locations/newLocation/NewLocation";
 
 function Layout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -138,6 +142,51 @@ function Layout() {
     {
       path: "/invoices/stock-count/:invoiceId/view",
       title: "Stock Count Details",
+    },
+    // Settings
+    {
+      path: "/users-settings/company",
+      title: "Company Overview",
+    },
+    {
+      path: "/users-settings/users",
+      title: "Users",
+    },
+    {
+      path: "/users-settings/users/new",
+      title: "New User",
+    },
+    {
+      path: "/users-settings/locations",
+      title: "Locations",
+    },
+    {
+      path: "/users-settings/locations/new",
+      title: "New Location",
+    },
+    {
+      path: "/users-settings/taxes",
+      title: "Taxes",
+    },
+    {
+      path: "/users-settings/configuration",
+      title: "Configuration",
+    },
+    {
+      path: "/users-settings/payment-methods",
+      title: "Payment Methods",
+    },
+    {
+      path: "/users-settings/custom-fields",
+      title: "Custom Fields",
+    },
+    {
+      path: "/users-settings/finance",
+      title: "Finance",
+    },
+    {
+      path: "/users-settings/my-subscription",
+      title: "My Subscription",
     },
   ];
 
@@ -253,6 +302,13 @@ function Layout() {
           <Route
             path="/invoices/stock-count/:invoiceId/view"
             element={<GetStockCountById />}
+          />
+          {/* Settings */}
+          <Route path="/users-settings/*" element={<Settings />} />
+          <Route path="/users-settings/users/new" element={<NewUser />} />
+          <Route
+            path="/users-settings/locations/new"
+            element={<NewLocation />}
           />
 
           {/* NotFound Page */}
