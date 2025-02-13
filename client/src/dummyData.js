@@ -339,7 +339,80 @@ export const mockUsers = [
 ];
 
 // Taxes
-export const mockTaxes = [];
+export const mockTaxes = [
+  {
+    name: "Not Subject to Tax",
+    code: "VATEX-SA-OOS",
+    isPredefined: true,
+    id: 1,
+    createdAt: null,
+    updatedAt: null,
+    deletedAt: null,
+    rate: 0,
+  },
+  {
+    name: "VAT",
+    code: "S",
+    isPredefined: true,
+    id: 2,
+    createdAt: null,
+    updatedAt: null,
+    deletedAt: null,
+    rate: 15,
+  },
+  {
+    name: "mostafaElbasha",
+    code: "mostafa999",
+    isPredefined: false,
+    id: 3,
+    createdAt: "2025-02-09T14:18:10.000Z",
+    updatedAt: "2025-02-09T14:18:10.000Z",
+    deletedAt: null,
+    rate: 15,
+  },
+];
+
+// single Custome Data for Payment (Recieve Payments)
+export const singleCustomer = {
+  id: 1355491,
+  code: "4444448",
+  name: "fouad",
+  mobileNumber: "0115033618898",
+  email: "fouad555@gmail.com",
+  vatNumber: "301121971500003",
+  birthDate: "2025-02-08T22:00:00.000Z",
+  nationalId: "0104598745",
+  gender: null,
+  commercialRegisterNumber: "9874563210",
+  debitAmount: 55,
+  totalPaid: 50,
+  notes: null,
+  customFieldsData: [],
+  address: {
+    additionalNumber: null,
+    buildingNumber: null,
+    streetName: "Dokki Street, Ad Doqi, Dokki, Egypt",
+    city: "Dokki",
+    countryKey: "EG",
+    district: "Dokki",
+    zip: null,
+    source: "POS",
+  },
+};
+export const UnPaid_Invoices = [
+  {
+    id: 63688943,
+    debitAmount: 25.000000030000002,
+    total: 45.00000003,
+    invoiceNumber: "S20250211-1",
+  },
+  {
+    id: 63689755,
+    debitAmount: 30.00000001,
+    total: 60.00000001,
+    invoiceNumber: "S20250211-2",
+  },
+];
 
 // Suppliers
 export const suppliers = [

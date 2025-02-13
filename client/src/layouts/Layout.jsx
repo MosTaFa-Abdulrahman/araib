@@ -45,6 +45,9 @@ import GetStockCountById from "../pages/stockCount/getStockCountById/GetStockCou
 import Settings from "../pages/settings/Settings";
 import NewUser from "../components/settings/users/newUser/NewUser";
 import NewLocation from "../components/settings/locations/newLocation/NewLocation";
+// Customer
+import NewCustomer from "../pages/customers/newCustomer/NewCustomer";
+import RecieveDebitAmountCustomer from "../pages/customers/recieveDebitAmount/RecieveDebitAmountCustomer";
 
 function Layout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -188,6 +191,15 @@ function Layout() {
       path: "/users-settings/my-subscription",
       title: "My Subscription",
     },
+    // Customers
+    {
+      path: "/order-management/customers/customer/create",
+      title: "New Customer",
+    },
+    {
+      path: "/order-management/customers/receive-debit/:customerId",
+      title: "Recive Debit Amount",
+    },
   ];
 
   // Get page title based on current route
@@ -309,6 +321,15 @@ function Layout() {
           <Route
             path="/users-settings/locations/new"
             element={<NewLocation />}
+          />
+          {/* Customer */}
+          <Route
+            path="/order-management/customers/customer/create"
+            element={<NewCustomer />}
+          />
+          <Route
+            path="/order-management/customers/receive-debit/:customerId"
+            element={<RecieveDebitAmountCustomer />}
           />
 
           {/* NotFound Page */}
